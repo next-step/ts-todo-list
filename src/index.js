@@ -26,9 +26,20 @@ function addTodo(todo) {}
 
 /**
  * @function deleteTodo
- * @param {number} id - 삭제할 Todo id
+ * @param {number | string} id - 삭제할 Todo id
  * @description TodoList에서 해당 id를 가진 Todo를 삭제한다.
  * @returns {boolean} 삭제 성공 여부
  */
 
 function deleteTodo(id) {}
+
+/**
+ * @function editTodo
+ * @param {Object} todo - Todo Object
+ * @param {number | string} todo.id - Todo id
+ * @param {string} todo.title - Todo title
+ * @param {boolean} todo.completed - ToDo completed
+ * @description TodoList에서 해당 id를 가진 Todo를 새로 받은 Todo 객체의 title과 completed로 수정한다.
+ */
+
+function editTodo(todo) {}
