@@ -6,9 +6,22 @@
 //TODO 할일 목록을 삭제할 수 있다.
 
 /**
- * @function getTodoList
+ * @function getTodos
  * @description 모든 TodoList를 반환한다.
  * @return - {Todo[]} TodoList 목록
  */
 
-function getTodoList() {}
+function getTodos() {}
+// * @param {string} n2 - Second number
+// * @param {number} n2 - Second number
+
+/**
+ * @function addTodo
+ * @param {Object} todo - Todo Object
+ * @param {number | string} todo.id - Todo id
+ * @param {string} todo.title - Todo title
+ * @param {boolean} todo.completed - ToDo completed
+ * @description 새로운 Todo를 TodoList에 추가한다.
+ */
+
+function addTodo() {}
