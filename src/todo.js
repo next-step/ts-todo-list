@@ -1,4 +1,9 @@
 /**
+ * @file todo.js 실제 TodoList 구현에 쓰일 member와 method를 정의한 파일입니다.
+ * @author yujo11(조윤호)
+ */
+
+/**
  * @module Todo Module
  */
 
