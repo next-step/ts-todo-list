@@ -8,12 +8,10 @@
 /**
  * @function getTodos
  * @description 모든 TodoList를 반환한다.
- * @return - {Todo[]} TodoList 목록
+ * @returns - {Todo[]} TodoList 목록
  */
 
 function getTodos() {}
-// * @param {string} n2 - Second number
-// * @param {number} n2 - Second number
 
 /**
  * @function addTodo
@@ -24,4 +22,13 @@ function getTodos() {}
  * @description 새로운 Todo를 TodoList에 추가한다.
  */
 
-function addTodo() {}
+function addTodo(todo) {}
+
+/**
+ * @function deleteTodo
+ * @param {number} id - 삭제할 Todo id
+ * @description TodoList에서 해당 id를 가진 Todo를 삭제한다.
+ * @returns {boolean} 삭제 성공 여부
+ */
+
+function deleteTodo(id) {}
