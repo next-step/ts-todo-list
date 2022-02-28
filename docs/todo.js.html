@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: types.js</title>
+    <title>JSDoc: Source: todo.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: types.js</h1>
+    <h1 class="page-title">Source: todo.js</h1>
 
     
 
@@ -27,16 +27,53 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Todo Object
- * @type {{id: number|string, title: string, completed: boolean}}
+ * @module todo
  */
-// const Todo = {}
-//
+
 /**
- * Todos Array
+ * Array of Todo
  * @type {Todo[]}
  */
-const Todos = []
+const todos = []
+
+/**
+ * @function getTodos
+ * @description 모든 TodoList를 반환한다.
+ * @returns - {Todo[]} TodoList 목록
+ */
+
+function getTodos() {}
+
+/**
+ * @function addTodo
+ * @param {Object} todo - Todo Object
+ * @param {number | string} todo.id - Todo id
+ * @param {string} todo.title - Todo title
+ * @param {boolean} todo.completed - ToDo completed
+ * @description 새로운 Todo를 TodoList에 추가한다.
+ */
+
+function addTodo(todo) {}
+
+/**
+ * @function deleteTodo
+ * @param {number | string} id - 삭제할 Todo id
+ * @description TodoList에서 해당 id를 가진 Todo를 삭제한다.
+ * @returns {boolean} 삭제 성공 여부
+ */
+
+function deleteTodo(id) {}
+
+/**
+ * @function editTodo
+ * @param {Object} todo - Todo Object
+ * @param {number | string} todo.id - Todo id
+ * @param {string} todo.title - Todo title
+ * @param {boolean} todo.completed - ToDo completed
+ * @description TodoList에서 해당 id를 가진 Todo를 새로 받은 Todo 객체의 title과 completed로 수정한다.
+ */
+
+function editTodo(todo) {}
 </code></pre>
         </article>
     </section>
