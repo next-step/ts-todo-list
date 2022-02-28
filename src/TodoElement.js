@@ -36,7 +36,6 @@ class TodoElement{
 
     /**
      * optional 로 인자를 받아 할일을 수정합니다. 받은 인자에 대해서만 수정합니다.
-     * @param {number} todoElementId - 할 일 아이디.
      * @param {string=} content - 할 일의 내용.
      * @param {('TODO'|'DONE')=} status - 상태.
      * @param {string=} category - 카테고리.
