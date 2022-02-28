@@ -1,4 +1,7 @@
 class TodoApp{
+    /**
+     * @constructor
+     */
     constructor() {
         /**
          * @type{TodoElement[]}
