@@ -1,5 +1,5 @@
 /**
- * @module todo
+ * @module Todo Module
  */
 
 /**
