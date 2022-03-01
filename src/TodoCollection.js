@@ -10,6 +10,13 @@
  * @public
  */
 class TodoCollection {
+
+    /** @member {TodoListType} */
+    todoList
+  
+    /** @member {number} */
+    nextId
+
   /**
    * @constructs
    * @param {void}

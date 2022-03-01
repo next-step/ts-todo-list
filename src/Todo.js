@@ -10,6 +10,18 @@
  * @public
  */
 class TodoItem {
+  /** @member {string} */
+  content
+  
+  /** @member {boolean} */
+  complete
+  
+  /** @member {string} */
+  category
+  
+  /** @member {string[]} */
+  tags
+
   /**
    * @constructs 
    * @param {string} content 할 일의 내용
