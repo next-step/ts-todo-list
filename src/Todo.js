@@ -1,4 +1,9 @@
 /**
+ * @file Todo 클래스 파일
+ * @author jeonyeonkyu(전연규)
+ */
+
+/**
  * @typedef {object} Task - 하나의 할일 객체
  * @property {number} taskId - 유니크한 아이디 (태스크 생성시 1씩 증가)
  * @property {string} task - 할일
