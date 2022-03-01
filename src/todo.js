@@ -15,6 +15,7 @@ const todos = [];
  * @description 할일의 id를 +1 증가 시킨다.
  * @return - +1 증가시킨 id 값
  */
+function increaseId() {}
 
 /**create Todo
  * @function createTodo
@@ -23,12 +24,14 @@ const todos = [];
  * @todo 내용이 없다면 할 일을 추가할 수 없다.
  * @todo 할 일을 추가하면 할 일의 id를 증가시킨다.
  */
+function createTodo(todo) {}
 
 /**read Todos
  * @function getTodos
  * @description 모든 할 일을 조회할 수 있다.
  * @return - 전체 Todo[] 목록
  */
+function getTodos() {}
 
 /**
  * @function getTodos
@@ -36,6 +39,7 @@ const todos = [];
  * @param {number} id - 조회할 특정 할 일 id
  * @return - 조회한 Todo[]
  */
+function getTodo(id) {}
 
 /**update Todo
  * @function updateTodo
@@ -43,6 +47,7 @@ const todos = [];
  * @param {number} id - 수정할 할 일 id
  * @return - 수정 후 Todo[] 목록
  */
+function updateTodo(id) {}
 
 /**
  * @function updateTag
@@ -50,23 +55,27 @@ const todos = [];
  * @param {number} id - 수정할 태그의 특정 할 일 id
  * @param {string} tag - 수정할 태그
  */
+function updateTag(id, tag) {}
 
 /**delete Todo
  * @function deleteAll
  * @description 모든 할 일을 제거할 수 있다.
  */
+function deleteAll() {}
 
 /**
  * @function deleteTodo
  * @description ID를 기반으로 특정 할 일을 삭제할 수 있다.
  * @param {number} id - 삭제할 할 일 id
  */
+function deleteTodo(id) {}
 
 /**
  * @function deleteTags
  * @description 특정 할 일의 모든 태그를 제거할 수 있다.
  * @param {number} id - 삭제할 태그의 특정 할 일 id
  */
+function deleteTags(id) {}
 
 /**
  * @function deleteTag
@@ -75,3 +84,4 @@ const todos = [];
  * @param {string} tag - 삭제할 태그
  *
  */
+function deleteTag(id, tag) {}
