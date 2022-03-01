@@ -4,17 +4,22 @@
  */
 
 /**
- * TodoCollection 클래스
+ * TodoCollection TodoItem 을 Map 형태로 관리하는 클래스
  * @class
  * @constructor
  * @public
  */
 class TodoCollection {
 
-    /** @member {TodoListType} */
+    /** 
+     * @member {TodoListType} 
+     * */
     todoList
   
-    /** @member {number} */
+    /**
+     * @member {number} 
+     * @default 1
+    */
     nextId
 
   /**
@@ -30,7 +35,7 @@ class TodoCollection {
 
   /**
    * 할 일을 추가할 수 있다.
-   * @param {string} content TodoItem 의 내용
+   * @param {TodoItem} todoItem TodoItem 객체
    * @returns {number} 추가된 TodoItem 아이디값, 실패시 -1 을 리턴
    
    * @todo TodoItem을 생성해서 nextId 를 키 값으로 todoList 에 set한다.
@@ -38,7 +43,7 @@ class TodoCollection {
    * @todo 내용이 없는 경우 실패
    * @see {@link TodoItem} 참고
    */
-  createTodo(content) {}
+  createTodo(todoItem) {}
 
   /**
    * 모든 할 일을 조회 할 수 있다.
@@ -51,7 +56,7 @@ class TodoCollection {
   readTodos() {}
 
   /**
-   * ID를 기반으로 특정 할 일을 조회할 수 있다.
+   * 특정 할 일을 조회할 수 있다.
    * @param {number} id TodoItem 아이디
    * @returns {void}
    * 
@@ -63,7 +68,7 @@ class TodoCollection {
   /**
    * TodoItem을 수정할 수 있다.
    * @param {number} id TodoItem 아이디
-   * @param {TodoItem} TodoItem 업데이트 할 새로운 상태의 TodoItem
+   * @param {TodoItem} todoItem 업데이트 할 새로운 TodoItem 객체
    * @return {TodoItem | null} 업데이트 된 TodoItem, 실패인 경우 null 을 리턴
    * 
    * @todo 해당 아이디가 없는 경우 실패
@@ -90,7 +95,7 @@ class TodoCollection {
   deleteTodos() {}
   
   /**
-   * ID를 기반으로 특정 할 일을 삭제할 수 있다.
+   * 특정 할 일을 삭제할 수 있다.
    * @param {number} id TodoItem 아이디
    * @return {number} 성공시 삭제한 TodoItem 아이디를 리턴, 실패시 -1 을 리턴
    */

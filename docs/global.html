@@ -102,10 +102,239 @@
 
         
                 
+<h4 class="name" id="initTodoItemType">initTodoItemType</h4>
+
+
+
+
+<div class="description">
+    <p>TodoItem</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>내용</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>complete</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>완료여부</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>카테고리</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tags</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>태그들</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="type.js.html">type.js</a>, <a href="type.js.html#line6">line 6</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
 <h4 class="name" id="TodoCollectionType">TodoCollectionType</h4>
 
 
 
+
+<div class="description">
+    <p>TodoItem 을 Map 형태로 관리하는 클래스</p>
+</div>
 
 
 
@@ -171,7 +400,7 @@
                 </td>
             
 
-            <td class="description last"><p>todo 목록</p></td>
+            <td class="description last"><p>TodoItem 목록</p></td>
         </tr>
 
     
@@ -281,7 +510,7 @@
                 </td>
             
 
-            <td class="description last"><p>ID를 기반으로 특정 할 일을 조회할 수 있다.</p></td>
+            <td class="description last"><p>특정 할 일을 조회할 수 있다.</p></td>
         </tr>
 
     
@@ -389,7 +618,7 @@
                 </td>
             
 
-            <td class="description last"><p>ID를 기반으로 특정 할 일을 삭제할 수 있다.</p></td>
+            <td class="description last"><p>특정 할 일을 삭제할 수 있다.</p></td>
         </tr>
 
     
@@ -482,7 +711,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="type.js.html">type.js</a>, <a href="type.js.html#line22">line 22</a>
+        <a href="type.js.html">type.js</a>, <a href="type.js.html#line30">line 30</a>
     </li></ul></dd>
     
 
@@ -506,7 +735,7 @@
 
 
 <div class="description">
-    <p>todo 타입</p>
+    <p>TodoItem 클래스</p>
 </div>
 
 
@@ -539,8 +768,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
         <th>Default</th>
@@ -568,12 +795,6 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
                 <td class="default">
@@ -600,12 +821,6 @@
             
             </td>
 
-            
-                <td class="attributes">
-                
-
-                
-                </td>
             
 
             
@@ -636,17 +851,11 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
                 <td class="default">
                 
-                    "범용"
+                    "etc"
                 
                 </td>
             
@@ -671,19 +880,11 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-                </td>
-            
 
             
                 <td class="default">
                 
-                    [ ]
+                    []
                 
                 </td>
             
@@ -708,12 +909,6 @@
             </td>
 
             
-                <td class="attributes">
-                
-
-                
-                </td>
-            
 
             
                 <td class="default">
@@ -721,7 +916,7 @@
                 </td>
             
 
-            <td class="description last"><p>ID를 기반으로 특정 할 일을 조회할 수 있다.</p></td>
+            <td class="description last"><p>콘솔에 TodoItem 의 정보를 출력한다.</p></td>
         </tr>
 
     
@@ -760,7 +955,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="type.js.html">type.js</a>, <a href="type.js.html#line6">line 6</a>
+        <a href="type.js.html">type.js</a>, <a href="type.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -784,7 +979,7 @@
 
 
 <div class="description">
-    <p>todo 를 Map 형태로 저장하는 타입</p>
+    <p>숫자 key와 TodoItem 을 value로 가지는 Map 클래스</p>
 </div>
 
 
@@ -832,7 +1027,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="type.js.html">type.js</a>, <a href="type.js.html#line18">line 18</a>
+        <a href="type.js.html">type.js</a>, <a href="type.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -868,7 +1063,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Mar 01 2022 12:25:58 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Mar 01 2022 19:04:41 GMT+0900 (대한민국 표준시)
 </footer>
 
 <script> prettyPrint(); </script>

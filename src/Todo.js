@@ -1,10 +1,10 @@
 /**
- * @file Todo 클래스 파일
+ * @file TodoItem 클래스 파일
  * @author tiaz0128(주환석)
  */
 
 /**
- * Todo 클래스
+ * TodoItem 클래스
  * @class
  * @constructor
  * @public
@@ -13,27 +13,37 @@ class TodoItem {
   /** @member {string} */
   content
   
-  /** @member {boolean} */
+  /** 
+   * @member {boolean} 
+   * @default false
+   * */
   complete
   
-  /** @member {string} */
+  /** 
+   * @member {string} 
+   * @default "etc"
+   * */
   category
   
-  /** @member {string[]} */
+  /** 
+   * @member {string[]} 
+   * @default [ ]
+   * */
   tags
 
   /**
    * @constructs 
-   * @param {string} content 할 일의 내용
+   * @param {initTodoItemType} initState 할 일의 내용
    * @todo TodoItemType 을 보고 필요한 속성값으로 생성자를 정의
    * 
-   * @see {@link TodoItemType} 참고
+   * @see {@link initTodoItemType} 참고
    */
-  constructor(content){
+  constructor(initState){
 
   }
 
   /** 
+   * 콘솔에 TodoItem 의 정보를 출력한다.
    * @param {void}
    * @returns {void}
    * @todo  콘솔에 TodoItem 의 정보를 출력한다.
