@@ -21,6 +21,13 @@
  * @typedef {TodoItem[]} TodoList - 할일 목록 전체
  */
 
+
+/**
+ * Todo 클래스
+ * @class
+ * @constructor
+ * @public
+ */
 class Todo {
   /**
    * @member {TodoList}
