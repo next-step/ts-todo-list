@@ -2,7 +2,7 @@
  * @description Tag 생성자입니다.
  * @constructor
  * @param {Tag} Tag
- * @param {string} Tag.id Tag 아이디
+ * @param {number} Tag.id Tag 아이디
  * @param {string} Tag.name Tag 명
  */
 function Tag() {}

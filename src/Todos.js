@@ -20,7 +20,7 @@ Todos.prototype.findAllTodos = function () {};
 
 /**
  * @description Id에 해당하는 Todo를 찾습니다.
- * @param {string} todoId 찾는 todo id
+ * @param {number} todoId 찾는 todo id
  * @returns {Todo} 찾은 결과
  */
 Todos.prototype.findTodoById = function () {};
@@ -34,7 +34,7 @@ Todos.prototype.updateTodoById = function () {};
 
 /**
  * @description 해당하는 todId의 Todo에서, tagId에 해당하는 Tag name을 수정합니다.
- * @param {string} todoId 수정하는 Tag의 Todo
+ * @param {number} todoId 수정하는 Tag의 Todo
  * @param {string} tagId 수정하고자 하는 Todo Id
  * @returns {Tag} 수정 된 Tag
  */
@@ -42,7 +42,7 @@ Todos.prototype.updateTagById = function () {};
 
 /**
  * @description Todo Id 기준으로 Todo를 삭제합니다.
- * @param {string} todoId 삭제 대상 Todo id
+ * @param {number} todoId 삭제 대상 Todo id
  * @returns {Array.<Todo>} 삭제 결과
  */
 Todos.prototype.removeTodoById = function () {};
@@ -55,15 +55,15 @@ Todos.prototype.removeAllTodo = function () {};
 
 /**
  * @description Todo id 해당하는 Tag를 전체 삭제합니다.
- * @param {string} todoId 삭제 대상 Todo id
+ * @param {number} todoId 삭제 대상 Todo id
  * @return {Todo} 삭제 결과
  */
 Todos.prototype.removeAllTagByTodoId = function () {};
 
 /**
  * @description Todo id에 해당하는 Todo를 찾고, Tag id 해당하는 Tag를 삭제합니다.
- * @param {string} todoId 삭제 대상 Todo id
- * @param {string} tagId 삭제 대상 Tag id
+ * @param {number} todoId 삭제 대상 Todo id
+ * @param {number} tagId 삭제 대상 Tag id
  * @returns {Todo} 삭제 결과
  */
 Todos.prototype.removeTagByTodoIdAndTagId = function () {};
