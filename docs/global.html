@@ -94,30 +94,30 @@
     
 
     
-
-    
-        <h3 class="subsection-title">Methods</h3>
+        <h3 class="subsection-title">Members</h3>
 
         
             
-
-    
-
-    
-    <h4 class="name" id="bar"><span class="type-signature"></span>bar<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
+<h4 class="name" id="todos"><span class="type-signature">(constant) </span>todos<span class="type-signature"> :Array.&lt;<a href="global.html#Todo">Todo</a>></span></h4>
 
 
 
 
+<div class="description">
+    <p>투두 목록 배열</p>
+</div>
 
 
 
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Array.&lt;<a href="global.html#Todo">Todo</a>></span>
 
 
-
+        </li>
+    </ul>
 
 
 
@@ -152,21 +152,12 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line21">line 21</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line5">line 5</a>
     </li></ul></dd>
     
 
     
 
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="global.html#foo"><code>foo</code></a> for further information.</li>
-        
-            <li><a href="http://github.com">GitHub</a></li>
-        </ul>
-    </dd>
     
 
     
@@ -177,19 +168,11 @@
 
 
 
+        
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
+    
+        <h3 class="subsection-title">Methods</h3>
 
         
             
@@ -197,7 +180,7 @@
     
 
     
-    <h4 class="name" id="foo"><span class="type-signature"></span>foo<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addTodo"><span class="type-signature"></span>addTodo<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -205,7 +188,7 @@
 
 
 <div class="description">
-    <p>Both of these will link to the bar function.</p>
+    <p>투두 항목 추가 함수</p>
 </div>
 
 
@@ -249,23 +232,416 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line14">line 14</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line24">line 24</a>
     </li></ul></dd>
     
 
     
 
     
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
         <ul>
-            <li><a href="global.html#bar"><code>bar</code></a></li>
+            <li>할 일을 추가할 수 있다.</li>
         
-            <li><a href="global.html#bar">bar</a></li>
+            <li>내용없이 추가할 수 없다.</li>
         </ul>
     </dd>
     
+</dl>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="deleteTodo"><span class="type-signature"></span>deleteTodo<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>투두 항목 삭제 함수</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>삭제할 Todo의 id</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>ID를 기반으로 특정 할 일을 삭제할 수 있다.</li>
+        
+            <li>모든 할 일을 제거할 수 있다.</li>
+        
+            <li>특정 할 일의 특정 태그를 삭제할 수 있다.</li>
+        
+            <li>특정 할 일의 모든 태그를 제거할 수 있다.</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getTodos"><span class="type-signature"></span>getTodos<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>투두 목록 조회 함수</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line17">line 17</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>모든 할 일을 조회할 수 있다.</li>
+        
+            <li>ID를 기반으로 특정 할 일을 조회할 수 있다.</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="updateTodo"><span class="type-signature"></span>updateTodo<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>투두 항목 수정 함수</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>수정할 Todo의 id</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>ID를 제외한 모든 속성을 수정할 수 있다.</li>
+        
+            <li>특정 할 일의 특정 태그를 수정할 수 있다.</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -291,6 +667,226 @@
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="Todo">Todo</h4>
+
+
+
+
+<div class="description">
+    <p>투두 항목에 들어가야 할 내용</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>아이디(필수)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>내용(필수)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isDone</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>완료여부(필수)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>category</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>카테고리(필수)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tags</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>태그들(선택)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
     
 
     
@@ -304,13 +900,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Book.html">Book</a></li><li><a href="DairyProduct.html">DairyProduct</a></li><li><a href="Milk.html">Milk</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bar">bar</a></li><li><a href="global.html#foo">foo</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addTodo">addTodo</a></li><li><a href="global.html#deleteTodo">deleteTodo</a></li><li><a href="global.html#getTodos">getTodos</a></li><li><a href="global.html#todos">todos</a></li><li><a href="global.html#updateTodo">updateTodo</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Sun Feb 27 2022 09:50:31 GMT+0900 (대한민국 표준시)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Mar 01 2022 15:38:45 GMT+0900 (대한민국 표준시)
 </footer>
 
 <script> prettyPrint(); </script>
