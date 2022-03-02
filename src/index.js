@@ -83,4 +83,4 @@ function updateTodo(todo) {}
  * @returns {boolean} 수정 결과
  */
 
-function updateTodo(tag) {}
+function updateTag(tag) {}
