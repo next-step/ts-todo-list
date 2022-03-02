@@ -1,51 +1,55 @@
 /**
- * Represents a book.
- * @constructor
- * @param {string} title - The title of the book.
- * @param {string} author - The author of the book.
+ * 하나의 Todo가 들고 있는 데이터
+ * @typedef {Object} TodoType
+ * @property {number} id
+ * @property {string} task
+ * @property {boolean} done
  */
-function Book(title, author) {}
 
 /**
- * Both of these will link to the bar function.
- * @see {@link bar}
- * @see bar
+ * Todo 클래스에서 사용되는 상태
+ * @typedef {Object} StateType
+ * @property {number} newId - todo를 생성할 때 필요한 unique id
+ * @property {string} task - todo를 생성할 때 필요한 할일
+ * @property {TodoType[]} todos - 생성된 todo를 관리하는 배열
  */
-function foo() {}
 
-// Use the inline {@link} tag to include a link within a free-form description.
-/**
- * @see {@link foo} for further information.
- * @see {@link http://github.com|GitHub}
- */
-function bar() {}
+class Todo {
+  /**
+   * @member {StateType}
+   */
+  state;
 
-/**
- * Generic dairy product.
- * @constructor
- */
-function DairyProduct() {}
+  /**
+   * @param {StateType} initialState - Todo 상태의 초기값
+   */
+  constructor(initialState) {}
 
-/**
- * Check whether the dairy product is solid at room temperature.
- * @abstract
- * @return {boolean}
- */
-DairyProduct.prototype.isSolid = function () {
-	throw new Error('must be implemented by subclass!');
-};
+  /**
+   * @returns {TodoType[]}
+   */
+  get todos() {}
 
-/**
- * Cool, refreshing milk.
- * @constructor
- * @augments DairyProduct
- */
-function Milk() {}
+  /**
+   * @param {string} newTask - 뱐경할 task 값
+   */
+  changeTask(newTask) {}
 
-/**
- * Check whether milk is solid at room temperature.
- * @return {boolean} Always returns false.
- */
-Milk.prototype.isSolid = function () {
-	return false;
-};
+  addTodo() {}
+
+  /**
+   * @param {number} id - 삭제할 todo id 값
+   */
+  deleteToto(id) {}
+
+  /**
+   * @param {number} id - 변경할 todo id 값
+   * @param {string} changedTask - 변경할 todo task 값
+   */
+  changeTodo({ id, changedTask }) {}
+
+  /**
+   * @param {number} id - 변경할 todo id 값
+   */
+  checkTodo(id) {}
+}
