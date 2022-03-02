@@ -25,8 +25,7 @@ class Todo {
   }
 
   /**
-   * @function createTodoUniqueId
-   * @description (getter) 할 일의 unique한 id를 만듭니다
+   * (getter) 할 일의 unique한 id를 만듭니다
    * @return {object} TodoDescription
    */
   get data() {
@@ -34,38 +33,26 @@ class Todo {
   }
 
   /**
-   * @function content
-   * @description (setter) 할 일의 content(내용) 값을 갱신합니다.
+   * (setter) 할 일의 content(내용) 값을 갱신합니다.
    * @param {string} value
    */
-  set content(value) {
-    this.#data.content = value;
-  }
+  set content(value) {}
 
   /**
-   * @function isDone
-   * @description (setter) 할 일의 isDone(완료 여부) 값을 갱신합니다.
+   * (setter) 할 일의 isDone(완료 여부) 값을 갱신합니다.
    * @param {boolean} value
    */
-  set isDone(value) {
-    this.#data.isDone = value;
-  }
+  set isDone(value) {}
 
   /**
-   * @function priority
-   * @description (setter) 할 일의 ㅎ(중요도) 값을 갱신합니다.
+   * (setter) 할 일의 ㅎ(중요도) 값을 갱신합니다.
    * @param {('LOW' | 'MIDDLE' | 'HIGH')} value
    */
-  set priority(value) {
-    this.#data.priority = value;
-  }
+  set priority(value) {}
 
   /**
-   * @function labels
-   * @description (setter) 할 일의 labels 값을 갱신합니다.
+   * (setter) 할 일의 labels 값을 갱신합니다.
    * @param {Label[]} value
    */
-  set labels(value) {
-    this.#data.labels = value;
-  }
+  set labels(value) {}
 }
