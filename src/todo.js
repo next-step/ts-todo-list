@@ -33,7 +33,7 @@ function getTodo(id) {}
 /**
  * @function addTodo
  * @param {Object} todo - 할일 Object
- * @param {string} todo.id - 할일의 id
+ * @param {string} todo.id - 할일의 id, 이때 id는 무한히 1씩 증가한다.
  * @param {string} todo.contents -  할일의 contents
  * @param {boolean} todo.isComplete - 할일의 완료 여부
  * @description 할 일을 추가한다.
@@ -50,6 +50,14 @@ function addTodo(todo) {}
  */
 
 function deleteTodo(id) {}
+
+/**
+ * @function deleteTodos
+ * @description 모든 할일 삭제
+ * @returns {boolean} 삭제 결과
+ */
+
+function deleteTodos() {}
 
 /**
  * @function editTodo
