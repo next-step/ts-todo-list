@@ -22,7 +22,7 @@ class Label {
   constructor(id, content) {}
 
   /**
-   * label의 data를 get
+   * (getter)label의 data를 get
    * @return {{id: number, content: string}}
    */
   get data() {
@@ -30,7 +30,7 @@ class Label {
   }
 
   /**
-   * label의 data를 set
+   * (setter)label의 data를 set
    * @param {string} value
    */
   set content(value) {
