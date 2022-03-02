@@ -1,51 +1,136 @@
 /**
- * Represents a book.
- * @constructor
- * @param {string} title - The title of the book.
- * @param {string} author - The author of the book.
+ * @typedef TodoItem
+ * @type {object}
+ * @property {!number} id - 아이템 아이디
+ * @property {!string} content - 아이템 할 일
+ * @property {!boolean} finished - 아이템 완료 여부
+ * @property {!string} category - 아이템이 포함된 카테고리
+ * @property {?Array.<string>} tags - 아이템이 가지고 있는 태크들
  */
-function Book(title, author) {}
 
 /**
- * Both of these will link to the bar function.
- * @see {@link bar}
- * @see bar
+ * 스토어
+ * @constant {Array.<TodoItem>}
  */
-function foo() {}
-
-// Use the inline {@link} tag to include a link within a free-form description.
-/**
- * @see {@link foo} for further information.
- * @see {@link http://github.com|GitHub}
- */
-function bar() {}
+const todoList = [];
 
 /**
- * Generic dairy product.
- * @constructor
+ * 카테고리
+ * @constant {Array.<string>}
+ * @default
  */
-function DairyProduct() {}
+const category = ["오늘 할 일", "내일 할 일", "다음 주 할 일"];
 
 /**
- * Check whether the dairy product is solid at room temperature.
- * @abstract
- * @return {boolean}
+ * 입력 받은 아이디
+ * @member {number}
  */
-DairyProduct.prototype.isSolid = function () {
-	throw new Error('must be implemented by subclass!');
-};
+let id = 0;
 
 /**
- * Cool, refreshing milk.
- * @constructor
- * @augments DairyProduct
+ * 입력 받은 할 일
+ * @member {string}
  */
-function Milk() {}
+let content = "";
 
 /**
- * Check whether milk is solid at room temperature.
- * @return {boolean} Always returns false.
+ * 입력 받은 완료 여부
+ * @member {boolean}
  */
-Milk.prototype.isSolid = function () {
-	return false;
-};
+let finished = false;
+
+/**
+ * 선택된 카테고리
+ * @member {string}
+ */
+let selectedCategory = category[0];
+
+/**
+ * 입력 받은 태그 리스트
+ * @member {Array.<string>}
+ */
+let tags = [];
+
+/**
+ * 수정 대상 태그
+ * @member {string}
+ */
+let selectedTag = "";
+
+/**
+ * 새로 입력되는 태그 값
+ * @member {string}
+ */
+let tagValue = "";
+
+/**
+ * 할 일 추가
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ * @param {!string} content - 입력 받은 할 일
+ * @param {!boolean} finished - 입력 받은 완료 여부
+ * @param {!string} selectedCategory - 선택된 카테고리
+ * @param {?Array.<string>} tags - 입력 받은 태그 리스트
+ */
+function createTodo(id, content, finished, selectedCategory, tags) {}
+
+/**
+ * 전체 할 일 가져오기
+ * @function
+ */
+function readTodoList() {}
+
+/**
+ * 특정 할 일 가져오기
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ */
+function readTodoDetail(id) {}
+
+/**
+ * 할 일 수정
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ * @param {?string} content - 입력 받은 할 일
+ * @param {?boolean} finished - 입력 받은 완료 여부
+ * @param {?string} selectedCategory - 선택된 카테고리
+ * @param {?Array.<string>} tags - 입력 받은 태그 리스트
+ */
+function updateTodo(id, content, finished, selectedCategory, tags) {}
+
+/**
+ * 특정 할 일의 특정 태그 수정
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ * @param {!string} selectedTag - 수정 대상 태그
+ * @param {?string} tagValue - 새로 입력되는 태그 값
+ */
+function updateTodoTag(id, selectedTag, tagValue) {}
+
+/**
+ * 특정 할 일 제거
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ */
+function deleteTodoDetail(id) {}
+
+/**
+ * 전체 할 일 제거
+ * @function
+ */
+function deleteTodoList() {}
+
+/**
+ * 특정 할 일의 특정 태그 제거
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ * @param {!string} selectedTag - 수정 대상 태그
+ */
+function deleteTodoTag(id, selectedTag) {}
+
+/**
+ * 특정 할 일의 모든 태그 제거
+ * @function
+ * @param {!number} id - 입력 받은 아이디
+ */
+function deleteTodoTagAll(id) {}
