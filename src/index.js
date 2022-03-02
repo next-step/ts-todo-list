@@ -38,7 +38,7 @@ function getTodo(id) {}
  * @param {number} todo.id - 할일의 id, 이때 id는 무한히 1씩 증가한다.
  * @param {string} todo.contents -  할일의 contents
  * @param {boolean} todo.isComplete - 할일의 완료 여부
- * @param {string[]} todo.tags - 지정된 태그
+ * @param {Tag[]} todo.tags - 지정된 태그
  * @description 할 일을 추가한다.
  * @returns {boolean} 추가 결과
  */
