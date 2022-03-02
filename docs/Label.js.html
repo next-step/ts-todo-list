@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: index.js</title>
+    <title>JSDoc: Source: Label.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: index.js</h1>
+    <h1 class="page-title">Source: Label.js</h1>
 
     
 
@@ -27,10 +27,44 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- @file
- @author guymoon
- @see {@link https://github.com/guymoon/ts-todo-list}
+ * @file 라벨을 생성하는 Label 클래스
+ * @author guymoon(조기문)
  */
+
+/**
+ * Create a new label
+ * @class
+ * @classdesc 라벨을 생성하는 Label 클래스
+ */
+class Label {
+  /**
+   * @type {{id: number, content: string}}
+   */
+  #data = {};
+
+  /**
+   * @constructor
+   * @param {number} id
+   * @param {string} content
+   */
+  constructor(id, content) {}
+
+  /**
+   * (getter)label의 data를 get
+   * @return {{id: number, content: string}}
+   */
+  get data() {
+    return this.#data;
+  }
+
+  /**
+   * (setter)label의 data를 set
+   * @param {string} value
+   */
+  set content(value) {
+    this.#data.content = value;
+  }
+}
 </code></pre>
         </article>
     </section>
