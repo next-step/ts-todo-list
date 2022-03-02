@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>Todo.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">Todo.js</h1>
     
 
     
@@ -43,10 +43,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Todo를 구현하기 위한 문서입니다.
- * @author Dahye Shin
- * @see {@link https://github.com/dahye1013/ts-todo-list}
+ * @description Todo를 생성합니다. Id는 생성자 내에서 유일키로 생성됩니다.
+ * @constructor
+ * @param {object} Todo Todo
+ * @param {number} Todo.id Todo 아이디
+ * @param {string} Todo.content Todo 내용
+ * @param {boolean} Todo.complete Todo 완료여부
+ * @param {string} Todo.category Todo 카테고리
+ * @param {Array.&lt;Tag>} [Todo.tags=[]] Todo 태그들
  */
+function Todo() {}
+
+/**
+ * @description Todo를 수정합니다. id는 수정 할 수 없습니다.
+ * @param {object} Todo Todo
+ * @param {string} Todo.content Todo 내용
+ * @param {boolean} Todo.complete Todo 완료여부
+ * @param {string} Todo.category Todo 카테고리
+ * @param {Array.&lt;Tag>} [Todo.tags=[]] Todo 태그들
+ * @return {void}
+ */
+Todo.prototype.updateTodo = function () {};
 </code></pre>
         </article>
     </section>

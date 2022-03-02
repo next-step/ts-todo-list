@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>index.js - Documentation</title>
+    <title>Tag.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">index.js</h1>
+    <h1 class="page-title">Tag.js</h1>
     
 
     
@@ -43,10 +43,20 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * @file Todo를 구현하기 위한 문서입니다.
- * @author Dahye Shin
- * @see {@link https://github.com/dahye1013/ts-todo-list}
+ * @description Tag 생성자입니다.
+ * @constructor
+ * @param {Tag} Tag
+ * @param {number} Tag.id Tag 아이디
+ * @param {string} Tag.name Tag 명
  */
+function Tag() {}
+
+/**
+ * @description Tag 명을 수정합니다. id는 수정 할 수 없습니다.
+ * @param {string} name Tag 명
+ * @return {void}
+ */
+Tag.prototype.updateTag = function () {};
 </code></pre>
         </article>
     </section>
