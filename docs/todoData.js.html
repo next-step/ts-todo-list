@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: todoData.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,36 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: todoData.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Todo item
+ * @typedef {Object} Todo
+ * @property {number} id Todo id
+ * @property {string} content Todo 내용
+ * @property {boolean} isCompleted Todo 완료 여부
+ * @property {string} category 카테고리
+ * @property {string[]} [tags] 태그들
+ */
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Todo list
+ * @type {Todo[]}
+ * */
+export const todoList = [
+  { id: 1, content: '할 일 1번', isCompleted: false, category: '카테고리1' },
+  { id: 2, content: '할 일 2번', isCompleted: true, category: '카테고리1' },
+  { id: 3, content: '할 일 3번', isCompleted: false, category: '카테고리2', tags: ['긴급'] },
+];</code></pre>
+        </article>
+    </section>
 
 
 
