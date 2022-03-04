@@ -171,7 +171,7 @@ function getTodo(todoId) {
 
 // UPDATE
 /**
- * yet
+ * done
  * @function updateTodo
  * @param {string} todoId
  * @param {Object} updateProperty
@@ -179,16 +179,20 @@ function getTodo(todoId) {
  * @description ID를 제외한 모든 속성을 수정할 수 있다.
  */
 function updateTodo(todoId, updateProperty) {
-  todoList.find((todo, index) => {
-    if (todo.id !== todoId) return;
+  if (todoId === updateProperty.id) return false;
 
-    // id가 다르면 -> 무시
-    if (todo.id !== updateProperty.id) return false;
+  const targetIndex = todoList.findIndex((todo) => todo.id === updateProperty.id);
+  if (targetIndex === 1) return false;
 
-    // 업데이트
-    todoList[index] = updateProperty;
+  try {
+    addTodo(updateProperty);
+    todoList[targetIndex] = updateProperty;
+
+    getTodoList();
     return true;
-  });
+  } catch (error) {
+    return false;
+  }
 }
 
 /**
