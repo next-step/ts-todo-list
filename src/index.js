@@ -1,10 +1,9 @@
-// import Todo from './Todo'
-const {Todo} = require('./Todo')
+const { Todo } = require('./Todo');
 
 const todoApp = new Todo();
 todoApp.readAllTodo('todo 객체 생성');
 
-todoApp.createCategory('TS')
+todoApp.createCategory('TS');
 todoApp.readAllTodo('TS 카테고리 추가');
 
 todoApp.createTask(1, "step 1: JSDoc 추상화하기");
