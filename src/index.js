@@ -72,16 +72,24 @@ function createTodo(content) {
  * @param {string} id - 업데이트할 Todo id
  * @param {string} content - 업데이트할 Todo 내용
  */
-function updateTodo({id, content}) {
-    
+function updateTodo({ id, content }) {
+  todos = todos.map((todo) =>
+    todo.id === id ? { ...todo, content: content } : todo
+  );
+  console.log(`id:${id} todo 수정 완료`);
+  console.table(todos);
 }
 
 /**
  * @param {string} id - 업데이트할 Todo id
  * @param {string} content - 업데이트할 Todo 내용
  */
- function updateTodoContent({id, content}) {
-    
+function updateTodoContent({ id, content }) {
+  todos = todos.map((todo) =>
+    todo.id === id ? { ...todo, content: content } : todo
+  );
+  console.log(`id:${id} todo 수정 완료`);
+  console.table(todos);
 }
 
 /**
@@ -89,8 +97,17 @@ function updateTodo({id, content}) {
  * @param {number} tagId - 업데이트할 Tag id
  * @param {string} name - 업데이트할 Tag 내용
  */
- function updateTodoTag({todoId, tagId, name}) {
-    
+function updateTodoTag({ todoId, tagId, name }) {
+  const tag = todos
+    .find((todo) => todo.id === todoId)
+    .tags.map((tag) => (tag.id === tagId ? { ...tag, name: name } : tag));
+
+  todos = todos.map((todo) =>
+    todo.id === todoId && todo.tags.id === tagId ? { ...todo, tags: tag } : todo
+  );
+
+  console.log(`id:${todoId} tag 수정 완료`);
+  console.table(todos);
 }
 
 /**
@@ -126,6 +143,12 @@ function deleteAllTodo() {
 function completeTodo(id) {
     
 }createTodo("저거 해야지");
+updateTodo({ id: todos[0].id, content: "todo 수정 했음" });
+updateTodoTag({
+  todoId: todos[0].id,
+  tagId: todos[0].tags[0].id,
+  name: "tag수정 했음",
+});
 getTodos();
 getTodo(todos[0].id);
 
