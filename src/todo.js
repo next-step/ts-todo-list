@@ -6,12 +6,12 @@
 /**
  * @module Todo Module
  */
-
 /**
  * Array of Todo
  * @type {Todo[]}
  */
 const todos = []
+exports.todos = todos
 
 /**
  * @function getTodos
@@ -19,7 +19,9 @@ const todos = []
  * @returns - {Todo[]} TodoList 목록
  */
 
-function getTodos() {}
+exports.getTodos = function getTodos() {
+  return todos.slice()
+}
 
 /**
  * @function addTodo
@@ -30,7 +32,16 @@ function getTodos() {}
  * @description 새로운 Todo를 TodoList에 추가한다.
  */
 
-function addTodo(todo) {}
+function addTodo(todo) {
+  try {
+    if (!todo.content) throw new Error('⚠️ 내용 없이 추가 할 수 없습니다. ⚠️')
+    todos.push(todo)
+  } catch (e) {
+    console.error(e.message)
+  }
+}
+
+exports.addTodo = addTodo
 
 /**
  * @function deleteTodo
@@ -39,7 +50,17 @@ function addTodo(todo) {}
  * @returns {boolean} 삭제 성공 여부
  */
 
-function deleteTodo(id) {}
+function deleteTodo(id) {
+  try {
+    const index = todos.findIndex((todo) => todo.id !== id)
+    todos.splice(index, 1)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
+exports.deleteTodo = deleteTodo
 
 /**
  * @function editTodo
@@ -50,4 +71,13 @@ function deleteTodo(id) {}
  * @description TodoList에서 해당 id를 가진 Todo를 새로 받은 Todo 객체의 title과 completed로 수정한다.
  */
 
-function editTodo(todo) {}
+function editTodo(todo) {
+  const { id } = todo
+  const index = todos.findIndex((t) => t.id === id)
+  todos[index] = {
+    ...todos[index],
+    ...todo,
+  }
+}
+
+exports.editTodo = editTodo
