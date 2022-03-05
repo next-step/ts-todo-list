@@ -15,11 +15,11 @@
  * @property {Tag[]} tags - 태그들.
  */
 
-/** 
- * @type {Todo[]} 
+/**
+ * @type {Todo[]}
  * @default []
-* */
-let todos;
+ */
+let todos = [];
 
 /**
  * @returns {Todo[]}
@@ -40,7 +40,28 @@ let todos;
  * @param {string} content - 생성할 Todo 내용
  */
 function createTodo(content) {
-    
+  const tag = [
+    {
+      id: Math.floor(Math.random() * 1000),
+      name: `tag${Math.floor(Math.random() * 10)}`,
+    },
+    {
+      id: Math.floor(Math.random() * 1000),
+      name: `tag${Math.floor(Math.random() * 10)}`,
+    },
+  ];
+  const todo = {
+    id: Math.floor(Math.random() * 1000),
+    content: content,
+    check: false,
+    category: `category${Math.floor(Math.random() * 10)}`,
+    tags: tag,
+  };
+
+  todos.push(todo);
+
+  console.log("새로운 todo 추가 완료");
+  console.table(todos);
 }
 
 /**
@@ -100,4 +121,5 @@ function deleteAllTodo() {
  */
 function completeTodo(id) {
     
-}
+}createTodo("저거 해야지");
+
