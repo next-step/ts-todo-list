@@ -35,17 +35,24 @@ class Todo {
     this.tags = todo.tags;
     return true;
   }
+  //수정에 실패하는 경우가 존재하는지
 
   /**
    * @param {string} tagId - 삭제할 태그의 id
    * @description 태그id값을 받아서 지정된 태그를 삭제한다.
    * @returns {boolean} 태그 삭제 결과
    */
-  removeTag(tagId) {}
+  removeTag(tagId) {
+    if(this.tags.find(tag => tag.id !== tagId) === undefined)
+      return false;
+    this.tags = this.tags.filter(tag => tag.id !== tagId)
+  }
 
   /**
    * @description 지정된 태그 전체를 삭제한다.
    * @returns {boolean} 태그 전체의 삭제 결과
    */
-  removeTags() {}
+  removeTags() {
+    return delete this.tags;
+  }
 }
