@@ -4,7 +4,7 @@
  * @param {Array.<Todo>} [todos=[]] todos
  */
 export default function Todos() {
-  this.todos = this.findAllTodos() || [];
+  this.todos = [];
 }
 
 /**

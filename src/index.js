@@ -10,7 +10,7 @@ import Todos from "./Todos.js";
 
 const todos = new Todos();
 
-console.log("in");
+console.log("🚀🚀🚀 TODO 동작 테스트 🚀🚀🚀");
 
 todos.addTodo(
   new Todo({
