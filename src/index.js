@@ -24,16 +24,20 @@ let todos = [];
 /**
  * @returns {Todo[]}
  */
- function getTodos() {
-    
+function getTodos() {
+  console.log("현재 모든 todo 출력");
+  console.table(todos);
 }
 
 /**
  * @param {id} id - 가져올 Todo id
  * @returns {Todo}
  */
- function getTodo(id) {
-    
+function getTodo(id) {
+  const todo = todos.filter((todo) => todo.id === id);
+
+  console.log(`id:${id} todo 출력 완료`);
+  console.table(todo);
 }
 
 /**
@@ -122,4 +126,6 @@ function deleteAllTodo() {
 function completeTodo(id) {
     
 }createTodo("저거 해야지");
+getTodos();
+getTodo(todos[0].id);
 
