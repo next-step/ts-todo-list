@@ -64,19 +64,14 @@ class TodoApp {
    * @param {number} idToMutateTodo
    * @return {number} mutatedTodoId - mutate된 todo의 id 값
    */
-  mutateTodoContentById(idToMutateTodo) {
-    // 해당 todoId의 내용을 어떻게 바꿔야 할까?
-    // 수정된 내용content을 어떻게 가져오지?
-  }
+  mutateTodoContentById(idToMutateTodo) {}
 
   /**
    * todoList에 todo의 id 값을 이용해 todo의 isDone 값을 변경(true or false)
    * @param {boolean} todoStatus
    * @return {number} idToMutatedTodo - isDone 값이 변경된 todo의 id 값
    */
-  mutateTodoStatus(todoStatus) {
-    // todoId 를 어디서 가져와야 할까?
-  }
+  mutateTodoStatus(todoStatus) {}
 
   /**
    * todo의 id 값을 이용해 todo에 label을 추가
