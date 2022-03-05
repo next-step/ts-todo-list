@@ -15,7 +15,7 @@
 /**
  * @property {Todo[]} todoList - Todo 객체 배열
  */
-const todoList = [];
+const todoList = [tmpTodo];
 
 // CREATE
 /**
@@ -24,8 +24,8 @@ const todoList = [];
  * @description 속성 검사 후 Todo 타입 객체 반환
  * @returns {Todo}
  */
-function createTodo(properties) {
-  addTodo(properties);
+export function createTodo(properties) {
+  if (!addTodo(properties)) throw new Error('wrong todo');
 
   return properties;
 }
@@ -36,12 +36,8 @@ function createTodo(properties) {
  * @param {Todo} todo
  * @description 할 일을 추가할 수 있다.
  */
-function addTodo(todo) {
-  const isObject = () => {
-    if (!todo.constructor === Object) throw new Error('obj아님');
-
-    return true;
-  };
+export function addTodo(todo) {
+  const isObject = (todo) => todo.constructor === Object;
 
   const hasValidKeys = () => {
     const requiredKeys = ['id', 'content', 'category', 'isClear'];
@@ -50,20 +46,16 @@ function addTodo(todo) {
     const keysOfTarget = Object.keys(todo);
     if (keysOfTarget.length === 4) {
       const hasAllRequiredKeys = keysOfTarget.every((key) => requiredKeys.includes(key));
-      if (!hasAllRequiredKeys) throw new Error('필수키를 가지고 있지 않음');
-
-      return true;
+      if (!hasAllRequiredKeys) return false;
     }
 
     if (keysOfTarget.length === 5) {
       const validKeys = [...requiredKeys, ...optionalKey];
       const hasAllValidKeys = keysOfTarget.every((key) => validKeys.includes(key));
-      if (!hasAllValidKeys) throw new Error('올바른 키 정보가 아님');
-
-      return true;
+      if (!hasAllValidKeys) return false;
     }
 
-    return false;
+    return true;
   };
 
   const hasValidValueType = () => {
@@ -73,39 +65,45 @@ function addTodo(todo) {
     const isPureStringArray = (target) => target.every((item) => isString(item));
     const hasInformation = (target) => target.length > 0;
 
-    const stringKeys = ['id', 'content', 'category'];
-    const booleanKeys = ['isClear'];
-    const arrayKeys = ['tags'];
+    const stringPropertyList = ['id', 'content', 'category'];
+    const booleanProperty = ['isClear'];
+    const arrayProperty = ['tags'];
 
-    const haveValidStringValues = stringKeys.every(
-      (stringKey) => isString(todo[stringKey]) && hasInformation(todo[stringKey])
-    );
-    const haveValidBooleanValues = booleanKeys.every((stringKey) => isBoolean(todo[stringKey]));
-    const haveValidArrayValues = arrayKeys.every(
-      (stringKey) => isArray(todo[stringKey]) && hasInformation(todo[stringKey])
-    );
-    const isPureStringTags = isPureStringArray(todo.tags);
+    const haveValidStringValues = stringPropertyList.every((key) => isString(todo[key]) && hasInformation(todo[key]));
+    const haveValidBooleanValues = booleanProperty.every((key) => isBoolean(todo[key]));
 
-    switch (true) {
-      case !haveValidStringValues:
-        throw new Error(`${stringKeys} 중 잘못된 정보가 있어요ㅜ`);
+    const hasTagsProperty = Object.keys(todo).includes('tags');
+    if (hasTagsProperty) {
+      const haveValidArrayValues = arrayProperty.every((key) => isArray(todo[key]));
+      const isPureStringTags = isPureStringArray(todo.tags);
+      const allTagHasInformation = todo['tags'].every((tag) => hasInformation(tag));
 
-      case !haveValidBooleanValues:
-        throw new Error(`${booleanKeys} 중 잘못된 정보가 있어요ㅜㅜ`);
-
-      case !haveValidArrayValues:
-        throw new Error(`${arrayKeys} 중 잘못된 정보가 있어요ㅜ`);
-
-      case !isPureStringTags:
-        throw new Error('tag중 잘못된 정보가 있어요');
-
-      default:
-        return true;
+      if (!haveValidArrayValues) return false;
+      if (!isPureStringTags) return false;
+      if (!allTagHasInformation) return false;
     }
+
+    if (!haveValidStringValues) return false;
+    if (!haveValidBooleanValues) return false;
+
+    return true;
   };
 
   return isObject(todo) && hasValidKeys(todo) && hasValidValueType(todo);
 }
+
+/**
+ - [] 검사 받는(더해질 에정인) 값이 object가 아니라면 실패
+ - [] key 값중 id, content, isClear, category 중 하나라도 없으면 실패
+ - [] tags 속성은 없어도 통과
+ - [] id, content, isClear, category, tags 외 다른 프로퍼티 있으면 실패
+ - [] id, content, category 값이 문자가 아닌 경우 실패(boolean, array, objcet, number인 경우 실패)
+ - [] isClear 값이 boolean 이 아닌경우 실패
+ - [] tags가 array가 아닌 경우 실패
+ - [] 모든 key들의 value의 길이 0이라면 실패
+ - [] tags 배열의 tag값 중 하나라도 문자열이 아니면 실패
+ - [] tags 배열의 tag값 중 하나라도 길이가 0이면 실패('')
+ */
 
 /**
  * done
@@ -114,9 +112,12 @@ function addTodo(todo) {
  * @returns {boolean} - content 존재 여부
  * @description todo 객체에 content 내용 있는지 확인하는 함수
  */
-function hasContent(todo) {
-  return todo.content.length > 0;
+export function hasContent(todo) {
+  return addTodo(todo);
 }
+
+// [] todo가 Todo validation(addTodo)에 실패한다면 실패
+// [] todo의 content 길이가 0이면 실패
 
 /**
  * done
@@ -127,16 +128,9 @@ function hasContent(todo) {
  * @description 내용없이 추가할 수 없다.
  */
 function addTodoAfterValidation(todo, validationFn) {
-  try {
-    validationFn(todo);
-    todoList.push(todo);
-
-    getTodoList();
-
-    return true;
-  } catch (error) {
-    return false;
-  }
+  if (!validationFn(todo)) return false;
+  todoList.push(todo);
+  getTodoList();
 }
 
 // READ
@@ -164,10 +158,17 @@ function getTodoList() {
  * @description ID를 기반으로 특정 할 일을 조회할 수 있다.
  */
 function getTodo(todoId) {
-  const res = todoList.find((todo) => todo.id === todoId);
+  if (typeof todoId !== 'string') throw new Error('wrong');
 
-  console.log(res || '잘못된 ID 입니다ㅜㅜ');
+  const res = todoList.find((todo) => todo.id === todoId);
+  if (res) return res;
+
+  throw new Error('wrong');
 }
+
+// [] todoId가 string이 아니면 실패(에러)
+// [] todoList에 todoId와 일치하는 정보가 없으면 실패(에러)
+// [] todoId와 일치하는 값이 todoList에 있으면 -> 그 todo 리턴
 
 // UPDATE
 /**
@@ -179,21 +180,25 @@ function getTodo(todoId) {
  * @description ID를 제외한 모든 속성을 수정할 수 있다.
  */
 function updateTodo(todoId, updateProperty) {
-  if (todoId === updateProperty.id) return false;
+  if (typeof todoId !== 'string') return false;
+  if (todoId !== updateProperty.id) return false;
+  if (!addTodo(updateProperty)) return false;
 
   const targetIndex = todoList.findIndex((todo) => todo.id === updateProperty.id);
-  if (targetIndex === 1) return false;
+  if (targetIndex === -1) return false;
 
-  try {
-    addTodo(updateProperty);
-    todoList[targetIndex] = updateProperty;
+  todoList[targetIndex] = updateProperty;
 
-    getTodoList();
-    return true;
-  } catch (error) {
-    return false;
-  }
+  getTodoList();
+  return true;
 }
+
+// [] todoId가 문자열이 아니라면 false 리턴
+// [] updateProperty가 올바른 정보가 아니라면 return false
+// [] todoList에 일치하는 todoId가 없는 경우 return false
+// [] todoId와 updateProperty의 id의 정보가 다르면 return false
+// [] todoList에 일치하는 todoId가 있다면 updateProperty로 업데이트
+// [] 업데이트 완료하면 list출력하고, return false
 
 /**
  * done
@@ -205,6 +210,8 @@ function updateTodo(todoId, updateProperty) {
  * @description 특정 할 일의 특정 태그를 수정할 수 있다.
  */
 function updateTag(todoId, targetTag, updateTag) {
+  const isValidParameter = [todoId, targetTag, updateTag].every((i) => typeof i === 'string');
+  if (!isValidParameter) return false;
   if (updateTag.length === 0) return false;
 
   const targetTodoIndex = todoList.findIndex((todo) => todo.id === todoId);
@@ -222,6 +229,14 @@ function updateTag(todoId, targetTag, updateTag) {
 }
 
 /**
+ * [] 파라미터중에 문자열이 아닌 값이 있으면 false 리턴
+ * [] 새로 입력 할 값의 길이가 0이면 false 리턴
+ * [] 일치하는 id값이 없다면 false 리턴
+ * [] 일치하는 태그가 없다면 false 리턴
+ * [] 태그의 값을 변경하면 true 리턴
+ * */
+
+/**
  * done
  * @function deleteTodo
  * @param {string} todoId
@@ -229,6 +244,9 @@ function updateTag(todoId, targetTag, updateTag) {
  * @description ID를 기반으로 특정 할 일을 삭제할 수 있다.
  */
 function deleteTodo(todoId) {
+  if (typeof todoId !== 'string') return false;
+  if (todoList.length === 0) return false;
+
   const targetIndex = todoList.findIndex((todo) => todo.id === todoId);
   if (targetIndex === -1) return false;
 
@@ -237,6 +255,13 @@ function deleteTodo(todoId) {
   getTodoList();
   return true;
 }
+
+/**
+ * [] todoList가 빈 배열일 경우에는 false를 리턴한다
+ * [] todoList에 입력받은 todoId가 있을경우 삭제하고 true를 리턴한다
+ * [] todoId와 일치하는 정보가 없으면 false를 리턴한다
+ * [] 삭제를 성공하고 todoList를 출력한다
+ * */
 
 /**
  * done
@@ -249,6 +274,10 @@ function deleteTodoAll() {
 }
 
 /**
+ * [] 모든 todoList를 삭제한다.
+ */
+
+/**
  * done
  * @function deleteTag
  * @param {string} todoId
@@ -257,6 +286,9 @@ function deleteTodoAll() {
  * @description 특정 할 일의 특정 태그를 삭제할 수 있다.
  */
 function deleteTag(todoId, targetTag) {
+  const isStringParams = [todoId, targetTag].every((param) => typeof param === 'string');
+  if (!isStringParams) return false;
+
   const targetTodoIndex = todoList.findIndex((todo) => todo.id === todoId);
   if (targetTodoIndex === -1) return false;
 
@@ -273,6 +305,14 @@ function deleteTag(todoId, targetTag) {
 }
 
 /**
+ * [] todoId가, targetTag가 문자열이 아니라면 return false
+ * [] todoList에 todoId와 일치하는 정보가 없으면 return false
+ * [] target tags에 targetTag와 같은 tag가 없다면 return false
+ * [] 일치하는 태그 정보가 있다면 삭제
+ * [] 삭제하고 true를 리턴하고 todoList를 출력
+ * */
+
+/**
  * done
  * @function deleteTags
  * @param {string} todoId
@@ -280,6 +320,8 @@ function deleteTag(todoId, targetTag) {
  * @description 특정 할 일의 모든 태그를 제거할 수 있다.
  */
 function deleteTags(todoId) {
+  if (typeof todoId !== 'string') return false;
+
   const targetIndex = todoList.findIndex(({ id }) => id === todoId);
   if (targetIndex === -1) return false;
 
@@ -288,3 +330,10 @@ function deleteTags(todoId) {
   getTodoList();
   return true;
 }
+
+/**
+ * [] todoId가 문자열이 아니라면 return false
+ * [] todoList가 빈 배열이라면 return false
+ * [] todoList에 tags가 있다면 모두 삭제
+ * [] 삭제를 성공했으면 todoList출력하고 return true
+ */
