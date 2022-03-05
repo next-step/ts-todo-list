@@ -20,8 +20,9 @@ const tags = [];
  * @description 모든 할일을 반환한다.
  * @returns - {Todo[]} 모든 할일
  */
-
-function getTodos() {}
+function getTodos() {
+    return todos;
+}
 
 /**
  * @function getTodo
@@ -30,7 +31,9 @@ function getTodos() {}
  * @returns - {Todo | null} id값과 매칭되는 할일 혹은 null
  */
 
-function getTodo(id) {}
+function getTodo(id) {
+    return todos.find(todo => todo.id === id) || null;
+}
 
 /**
  * @function addTodo
@@ -43,7 +46,9 @@ function getTodo(id) {}
  * @returns {boolean} 추가 결과
  */
 
-function addTodo(todo) {}
+function addTodo(todo) {
+    todos.push(todo);
+}
 
 /**
  * @function deleteTodo
@@ -52,7 +57,13 @@ function addTodo(todo) {}
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodo(id) {}
+function deleteTodo(id) {
+    const idx = todos.findIndex(todo => todo.id === id);
+    if(idx > -1) {
+        todos.splice(idx, 1);
+        return true;
+    }else return false;
+}
 
 /**
  * @function deleteTodos
@@ -60,7 +71,9 @@ function deleteTodo(id) {}
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodos() {}
+function deleteTodos() {
+    todos.splice(0, todos.length);
+}
 
 /**
  * @function updateTodo
@@ -72,7 +85,11 @@ function deleteTodos() {}
  * @returns {boolean} 수정 결과
  */
 
-function updateTodo(todo) {}
+function updateTodo(todo) {
+    const idx = todos.findIndex(todo => todo.id === id);
+    todos[idx].isComplete = todo.isComplete;
+    todos[idx].contents = todo.contents;
+}
 
 /**
  * @function updateTag
@@ -83,4 +100,7 @@ function updateTodo(todo) {}
  * @returns {boolean} 수정 결과
  */
 
-function updateTag(tag) {}
+function updateTag(tag) {
+    const idx = tags.findIndex(tag => tag.id === id);
+    tags[idx].name = tag.name;
+}
