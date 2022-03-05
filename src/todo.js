@@ -19,9 +19,11 @@ exports.todos = todos
  * @returns - {Todo[]} TodoList 목록
  */
 
-exports.getTodos = function getTodos() {
+function getTodos() {
   return todos.slice()
 }
+
+exports.getTodos = getTodos
 
 /**
  * @function addTodo
