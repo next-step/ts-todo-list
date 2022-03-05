@@ -114,28 +114,45 @@ function updateTodoTag({ todoId, tagId, name }) {
  * @param {number} id - 삭제할 Todo id
  */
 function deleteTodo(id) {
-    
+  todos = todos.filter((todo) => todo.id !== id);
+
+  console.log(`id:${id} todo 삭제 완료`);
+  console.table(todos);
 }
 
 function deleteAllTodo() {
-    
+  todos = [];
+
+  console.log(`모든 todo 삭제 완료`);
+  console.table(todos);
 }
 
 /**
  * @param {number} todoId - 삭제할 Tag가 속한 Todo id
  * @param {number} tagId - 삭제할 Todo id
  */
- function deleteTodoTag({todoId, tagId}) {
-    
+function deleteTodoTag({ todoId, tagId }) {
+  todos.forEach((todo) => {
+    if (todo.id === todoId) {
+      todo.tags = todo.tags.filter((tag) => tag.id !== tagId);
+    }
+  });
+  console.log(`id:${todoId}인 tag:${tagId} 삭제 완료`);
+  console.table(todos);
 }
 
 /**
  * @param {number} todoId - 삭제할 모든 Tag가 속한 Todo id
  */
- function deleteAllTag(todoId) {
-    
+function deleteAllTag(todoId) {
+  todos.forEach((todo) => {
+    if (todo.id === todoId) {
+      todo.tags = [];
+    }
+  });
+  console.log(`id:${todoId}인 모든 tag 삭제 완료`);
+  console.table(todos);
 }
-
 
 /**
  * @param {string} id - 완료할 Todo id
@@ -162,3 +179,8 @@ completeTodo(todos[0].id);
 getTodos();
 getTodo(todos[0].id);
 
+deleteTodoTag({ todoId: todos[0].id, tagId: todos[0].tags[0].id });
+deleteAllTag(todos[0].id);
+
+deleteTodo(todos[0].id);
+deleteAllTodo();
