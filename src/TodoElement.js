@@ -1,78 +1,99 @@
-class TodoElement{
+import Tag from "./Tag";
+
+class TodoElement {
+  /**
+   * @constructor
+   * @param {number} id - 할 일의 아이디.
+   * @param {string} content - 할 일의 내용.
+   * @param {('TODO'|'DONE')} status - 상태.
+   * @param {string} category - 카테고리.
+   */
+  constructor(id, content, status, category) {
+    this.id = id;
+    this.content = content;
+    this.statue = status;
+    this.category = category;
     /**
-     * @constructor
-     * @param {number} id - 할 일의 아이디.
-     * @param {string} content - 할 일의 내용.
-     * @param {('TODO'|'DONE')} status - 상태.
-     * @param {string} category - 카테고리.
+     * @type{Tag[]}
      */
-    constructor(id,content,status,category) {
-        /**
-         * @type{Tag[]}
-         */
-        this.tags = []
-        /**
-         *
-         * @type {number}
-         */
-        this.nextTagId = 0
+    this.tags = [];
+    /**
+     *
+     * @type {number}
+     */
+    this.nextTagId = 0;
+  }
+
+  /**
+   * addTag 할때 고유한 nextTagId 를 만들어주는 함수.
+   * @private
+   * @return {number} nextTagId 태그 아이디.
+   */
+  idGenerator() {
+    const tagIds = this.tags?.map((tag) => tag.id);
+
+    let newId = Math.floor(Math.random() + 9999);
+    while (tagIds.find((id) => id === newId)) {
+      newId = Math.floor(Math.random() + 9999);
     }
 
-    /**
-     * addTag 할때 고유한 nextTagId 를 만들어주는 함수.
-     * @private
-     * @return {number} nextTagId 태그 아이디.
-     */
-    idGenerator(){
+    return newId;
+  }
 
-    }
+  /**
+   * @return {string} 할 일 의 정보를 문자열로 잘 정리해서 반환합니다.
+   */
+  get info() {
+    return JSON.stringify(this);
+  }
 
-    /**
-     * @return {string} 할 일 의 정보를 문자열로 잘 정리해서 반환합니다.
-     */
-    get info(){
+  /**
+   * optional 로 인자를 받아 할일을 수정합니다. 받은 인자에 대해서만 수정합니다.
+   * @param {string=} content - 할 일의 내용.
+   * @param {('TODO'|'DONE')=} status - 상태.
+   * @param {string=} category - 카테고리.
+   */
+  update(content, status, category) {
+    this.content = content;
+    this.status = status;
+    this.category = category;
+  }
 
-    }
+  /**
+   * 태그를 추가합니다.
+   * @param {Tag} tag
+   */
+  addTag(tag) {
+    //memo: Tag의 content만 받는게 더 자연스럽게 느껴집니다. id를 todoElmeent에서 생성하는데, 어떻게 밖에서 Tag 인스턴스를 받을 수 있을까요?
+    //memo: TodoApp에서도 content만 받고 있음
+  }
 
-    /**
-     * optional 로 인자를 받아 할일을 수정합니다. 받은 인자에 대해서만 수정합니다.
-     * @param {string=} content - 할 일의 내용.
-     * @param {('TODO'|'DONE')=} status - 상태.
-     * @param {string=} category - 카테고리.
-     */
-    update(content,status,category){
+  /**
+   * tags 배열에서 태그를 찾아 요소.updateContent 를 호출합니다
+   * @param {number} tagId - 태그 아이디.
+   * @param {string} tagContent - 태그 내용.
+   */
+  updateTagById(tagId, tagContent) {
+    const targetTag = this.tag.find((tag) => tag.id === tagId);
+    targetTag.updateContent(tagContent);
+  }
 
-    }
+  /**
+   * tags 배열에서 태그를 찾아 삭제합니다.
+   * @param {number} tagId - 태그 아이디.
+   */
+  deleteTagById(tagId) {
+    const targetTagIndex = this.tag.findIndex((tag) => tag.id === tagId);
+    if (!targetTagIndex) return;
 
-    /**
-     * 태그를 추가합니다.
-     * @param {Tag} tag
-     */
-    addTag(tag){
+    const updatedTags = [...this.tag.slice(0, targetTagIndex), ...this.tag.slice(targetTagIndex + 1)];
+    this.tags = updatedTags;
+  }
 
-    }
-
-    /**
-     * tags 배열에서 태그를 찾아 요소.updateContent 를 호출합니다
-     * @param {number} tagId - 태그 아이디.
-     * @param {string} tagContent - 태그 내용.
-     */
-    updateTagById(tagId,tagContent){
-
-    }
-
-    /**
-     * tags 배열에서 태그를 찾아 삭제합니다.
-     * @param {number} tagId - 태그 아이디.
-     */
-    deleteTagById(tagId){
-
-    }
-
-    /**
-     * 모든 태그를 삭제합니다.
-     */
-    deleteTagAll(){
-
-    }
+  /**
+   * 모든 태그를 삭제합니다.
+   */
+  deleteTagAll() {
+    this.tags = [];
+  }
 }
