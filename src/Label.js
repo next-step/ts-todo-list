@@ -19,7 +19,10 @@ class Label {
    * @param {number} id
    * @param {string} content
    */
-  constructor(id, content) {}
+  constructor(id, content) {
+    this.#data.id = id;
+    this.#data.content = content;
+  }
 
   /**
    * (getter)label의 data를 get
