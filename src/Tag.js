@@ -5,7 +5,7 @@
  * @param {number} Tag.id Tag 아이디
  * @param {string} Tag.name Tag 명
  */
-function Tag({ id, name }) {
+export default function Tag({ id, name }) {
   this.id = id;
   this.name = name;
 }

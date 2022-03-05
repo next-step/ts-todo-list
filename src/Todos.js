@@ -3,7 +3,7 @@
  * @constructor
  * @param {Array.<Todo>} [todos=[]] todos
  */
-function Todos() {
+export default function Todos() {
   this.todos = this.findAllTodos() || [];
 }
 
@@ -121,3 +121,7 @@ Todos.prototype.removeTagByTodoIdAndTagId = function () {
   console.log(`ID: ${todoId}, Tag 삭제 완료`);
   console.table(this.todos);
 };
+
+/*
+ ** 실행 테스트 ----------------------------------------------------------------------------------------------------
+ */

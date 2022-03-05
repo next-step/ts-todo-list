@@ -8,7 +8,13 @@
  * @param {string} Todo.category Todo 카테고리
  * @param {Array.<Tag>} [Todo.tags=[]] Todo 태그들
  */
-function Todo({ id = Date.now(), content, complete, category, tags = [] }) {
+export default function Todo({
+  id = Date.now(),
+  content,
+  complete,
+  category,
+  tags = [],
+}) {
   this.id = id;
   this.content = content;
   this.complete = complete;
