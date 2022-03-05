@@ -19,7 +19,7 @@ const todoList = [];
  * @constant {Array.<string>}
  * @default
  */
-const category = ["오늘 할 일", "내일 할 일", "다음 주 할 일"];
+export const category = ["오늘 할 일", "내일 할 일", "다음 주 할 일"];
 
 /**
  * 입력 받은 아이디
@@ -72,20 +72,29 @@ let tagValue = "";
  * @param {!string} selectedCategory - 선택된 카테고리
  * @param {?Array.<string>} tags - 입력 받은 태그 리스트
  */
-function createTodo(id, content, finished, selectedCategory, tags) {}
+export function createTodo(id, content, finished, selectedCategory, tags) {
+	const todoItem = {id, content, finished, selectedCategory, tags}
+	todoList.push(todoItem)
+}
 
 /**
  * 전체 할 일 가져오기
  * @function
  */
-function readTodoList() {}
+export function readTodoList() {
+	console.table(todoList)
+}
 
 /**
  * 특정 할 일 가져오기
  * @function
  * @param {!number} id - 입력 받은 아이디
  */
-function readTodoDetail(id) {}
+export function readTodoDetail(id) {
+	const targetItem = todoList.find(item => item.id === id)
+
+	console.table([targetItem])
+}
 
 /**
  * 할 일 수정
@@ -96,7 +105,14 @@ function readTodoDetail(id) {}
  * @param {?string} selectedCategory - 선택된 카테고리
  * @param {?Array.<string>} tags - 입력 받은 태그 리스트
  */
-function updateTodo(id, content, finished, selectedCategory, tags) {}
+export function updateTodo(id, content, finished, selectedCategory, tags) {
+	const targetItem = todoList.find(item => item.id === id)
+
+	if (content) targetItem.content = content
+	if (finished) targetItem.finished = finished
+	if (selectedCategory) targetItem.selectedCategory = selectedCategory
+	if (tags) targetItem.tags = tags
+}
 
 /**
  * 특정 할 일의 특정 태그 수정
@@ -105,20 +121,31 @@ function updateTodo(id, content, finished, selectedCategory, tags) {}
  * @param {!string} selectedTag - 수정 대상 태그
  * @param {?string} tagValue - 새로 입력되는 태그 값
  */
-function updateTodoTag(id, selectedTag, tagValue) {}
+export function updateTodoTag(id, selectedTag, tagValue) {
+	const targetItem = todoList.find(item => item.id === id)
+	const targetTagIndex = targetItem.tags.findIndex(tag => tag === selectedTag)
+
+	targetItem.tags.splice(targetTagIndex, 1, tagValue)
+}
 
 /**
  * 특정 할 일 제거
  * @function
  * @param {!number} id - 입력 받은 아이디
  */
-function deleteTodoDetail(id) {}
+export function deleteTodoDetail(id) {
+	const targetItemIndex = todoList.findIndex(item => item.id === id)
+
+	todoList.splice(targetItemIndex, 1)
+}
 
 /**
  * 전체 할 일 제거
  * @function
  */
-function deleteTodoList() {}
+export function deleteTodoList() {
+	todoList.splice(0, todoList.length);
+}
 
 /**
  * 특정 할 일의 특정 태그 제거
@@ -126,11 +153,20 @@ function deleteTodoList() {}
  * @param {!number} id - 입력 받은 아이디
  * @param {!string} selectedTag - 수정 대상 태그
  */
-function deleteTodoTag(id, selectedTag) {}
+export function deleteTodoTag(id, selectedTag) {
+	const targetItem = todoList.find(item => item.id === id)
+	const targetTagIndex = targetItem.tags.findIndex(tag => tag === selectedTag)
+
+	targetItem.tags.splice(targetTagIndex, 1)
+}
 
 /**
  * 특정 할 일의 모든 태그 제거
  * @function
  * @param {!number} id - 입력 받은 아이디
  */
-function deleteTodoTagAll(id) {}
+export function deleteTodoTagAll(id) {
+	const targetItem = todoList.find(item => item.id === id)
+
+	targetItem.tags.splice(0, todoList.length);
+}
