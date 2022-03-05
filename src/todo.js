@@ -14,7 +14,12 @@ class Todo {
    * @param {boolean} todo.isComplete - 할일의 완료 여부
    * @param {Tag[]} todo.tags - 지정된 태그
    */
-  constructor(todo) {}
+  constructor(todo) {
+    this.id = todo.id;
+    this.contents = todo.contents;
+    this.isComplete = todo.isComplete;
+    this.tags = todo.tags;
+  }
 
   /**
    * @param {Object} todo - 할일 Object
@@ -24,7 +29,12 @@ class Todo {
    * @description todo객체를 받아 update처리를 한다. 완료여부와 내용, 태그를 수정할 수 있다.
    * @returns {boolean} 수정 결과
    */
-  update(todo) {}
+  update(todo) {
+    this.contents = todo.contents;
+    this.isComplete = todo.isComplete;
+    this.tags = todo.tags;
+    return true;
+  }
 
   /**
    * @param {string} tagId - 삭제할 태그의 id
