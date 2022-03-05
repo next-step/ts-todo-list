@@ -12,41 +12,49 @@
 class TodoItem {
   /** @member {string} */
   content
-  
-  /** 
-   * @member {boolean} 
+
+  /**
+   * @member {boolean}
    * @default false
    * */
   complete
-  
-  /** 
-   * @member {string} 
+
+  /**
+   * @member {string}
    * @default "etc"
    * */
   category
-  
-  /** 
-   * @member {string[]} 
+
+  /**
+   * @member {string[]}
    * @default [ ]
    * */
   tags
 
   /**
-   * @constructs 
+   * @constructs
    * @param {initTodoItemType} initState 할 일의 내용
    * @todo TodoItemType 을 보고 필요한 속성값으로 생성자를 정의
-   * 
+   *
    * @see {@link initTodoItemType} 참고
    */
-  constructor(initState){
-
+  constructor(initState) {
+    const { content, complete, category, tags } = initState
+    this.content = content
+    this.complete = complete || false
+    this.category = category || 'etc'
+    this.tags = tags || []
   }
 
-  /** 
+  /**
    * 콘솔에 TodoItem 의 정보를 출력한다.
    * @param {void}
    * @returns {void}
    * @todo  콘솔에 TodoItem 의 정보를 출력한다.
    */
-  printTodo() {}
+  printTodo() {
+    console.dir(this)
+  }
 }
+
+module.exports = TodoItem
