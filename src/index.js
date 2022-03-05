@@ -64,25 +64,17 @@ class Todo {
    * @param {string} changedTask - 변경할 todo task 값
    */
   changeTodo({ id, changedTask }) {
-    this.todos = this.todos.map((todo) => {
-      if (todo.id !== id) {
-        return todo;
-      }
-
-      return { ...todo, task: changedTask };
-    });
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { ...todo, task: changedTask } : todo
+    );
   }
 
   /**
    * @param {number} id - 변경할 todo id 값
    */
   checkTodo(id) {
-    this.todos = this.todos.map((todo) => {
-      if (todo.id !== id) {
-        return todo;
-      }
-
-      return { ...todo, done: !todo.done };
-    });
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { ...todo, done: !todo.done } : todo
+    );
   }
 }
