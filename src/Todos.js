@@ -88,6 +88,7 @@ Todos.prototype.removeTodoById = function (todoId) {
 Todos.prototype.removeAllTodo = function () {
   this.todos = [];
 
+  console.log("Todo 전체 삭제 완료");
   console.table(this.todos);
 };
 
@@ -97,8 +98,10 @@ Todos.prototype.removeAllTodo = function () {
  * @return {void}
  */
 Todos.prototype.removeAllTagByTodoId = function (todoId) {
-  this.todos = this.todos.map((todo) => {
-    return todo.id === todoId ? (todo.tags = []) : todo;
+  this.todos.forEach((todo) => {
+    if (todo.id === todoId) {
+      todo.tags = [];
+    }
   });
 
   console.log(`ID: ${todoId}, Tag 전체 삭제 완료`);
@@ -111,17 +114,13 @@ Todos.prototype.removeAllTagByTodoId = function (todoId) {
  * @param {number} tagId 삭제 대상 Tag id
  * @return {void}
  */
-Todos.prototype.removeTagByTodoIdAndTagId = function () {
-  this.todos = this.todos.map((todo) =>
-    todo.id === todoId
-      ? (todo.tags = todo.tags.filter((tag) => tag.id !== tagId))
-      : todo
-  );
+Todos.prototype.removeTagByTodoIdAndTagId = function (todoId, tagId) {
+  this.todos.forEach((todo) => {
+    if (todo.id === todoId) {
+      todo.tags = todo.tags.filter((tag) => tag.id !== tagId);
+    }
+  });
 
-  console.log(`ID: ${todoId}, Tag 삭제 완료`);
+  console.log(`ID: ${todoId} TagID: ${tagId}, Tag 삭제 완료`);
   console.table(this.todos);
 };
-
-/*
- ** 실행 테스트 ----------------------------------------------------------------------------------------------------
- */
