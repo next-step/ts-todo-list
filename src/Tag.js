@@ -13,7 +13,6 @@ export default class Tag {
    * @return {string} 태그 정보를 반환합니다
    */
   get info() {
-    //memo: 태그정보를 반환하라는 게 id, content 모두를 의미하는 걸까요?
     return this;
   }
 

@@ -34,7 +34,6 @@ class TodoApp {
    * @param {TodoElement} todoElement
    */
   addTodoElement(todoElement) {
-    //memo: todo의 content만 받는게 더 자연스러운 흐름인 것 같음 (id, status, category는 어떻게 받을 것인지)
     const curentElement = this.todoElements;
 
     this.todoElements = [...curentElement, todoElement];
@@ -54,7 +53,6 @@ class TodoApp {
    * todoElements 의 모든 요소의 요소.info 를 출력합니다.
    */
   getTodoElementInfoAll() {
-    //memo : return 이 조건에 빠진게 아닐까요?
     this.todoElements?.forEach((todoElement) => {
       console.log(todoElement.info());
     });

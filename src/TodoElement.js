@@ -63,10 +63,7 @@ class TodoElement {
    * 태그를 추가합니다.
    * @param {Tag} tag
    */
-  addTag(tag) {
-    //memo: Tag의 content만 받는게 더 자연스럽게 느껴집니다. id를 todoElmeent에서 생성하는데, 어떻게 밖에서 Tag 인스턴스를 받을 수 있을까요?
-    //memo: TodoApp에서도 content만 받고 있음
-  }
+  addTag(tag) {}
 
   /**
    * tags 배열에서 태그를 찾아 요소.updateContent 를 호출합니다
