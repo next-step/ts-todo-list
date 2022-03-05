@@ -141,14 +141,24 @@ function deleteAllTodo() {
  * @param {string} id - 완료할 Todo id
  */
 function completeTodo(id) {
-    
-}createTodo("저거 해야지");
+  todos = todos.map((todo) =>
+    todo.id === id ? { ...todo, check: true } : todo
+  );
+  console.log(`id:${id} todo 완료`);
+  console.table(todos);
+}
+
+createTodo("이거 해야지");
+createTodo("저거 해야지");
+
 updateTodo({ id: todos[0].id, content: "todo 수정 했음" });
 updateTodoTag({
   todoId: todos[0].id,
   tagId: todos[0].tags[0].id,
   name: "tag수정 했음",
 });
+completeTodo(todos[0].id);
+
 getTodos();
 getTodo(todos[0].id);
 
