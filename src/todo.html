@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoTest</title>
+    <script src="TodoApp.js"></script>
+    <script src="Todo.js"></script>
+    <script src="Label.js"></script>
+    <script>
+      // CRUD 발생 시 TODO List 콘솔 출력
+      console.log("=== TodoApp 생성 ===");
+      const todoApp = new TodoApp;
+      console.log(todoApp.todoList);
+
+      // CREATE
+      // 할 일을 추가할 수 있다. - OK
+      console.log("=== CREATE ===");
+      console.log("=== 할 일을 추가할 수 있다. (addTodo 테스트) ===");
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), '테스트할일내용1'));
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), '테스트할일내용2'));
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), '테스트할일내용3'));
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), '테스트할일내용4'));
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), '테스트할일내용5'));
+      todoApp.addTodo(new Todo(todoApp.createUniqueId(), ''));  // 내용없이 추가할 수 없다. - OK
+      const [firstTodo, secondTodo, thirdTodo, ...todos] = todoApp.todoList;
+      console.log(todoApp.todoList);
+
+      // 라벨 등록 테스트
+      console.log("=== 라벨 등록 테스트 (addTodoLabelByTodoId) ===");
+      console.log(todoApp.addTodoLabelByTodoId(secondTodo.data.id, '두번째 테스트라벨내용1'));
+      console.log(todoApp.addTodoLabelByTodoId(secondTodo.data.id, '두번째 테스트라벨내용2'));
+      console.log(todoApp.addTodoLabelByTodoId(firstTodo.data.id, '첫번째 테스트라벨내용1'));
+      console.log(todoApp.addTodoLabelByTodoId(-1, '첫번째 테스트라벨내용1'));
+      console.log(todoApp.todoList);
+
+
+      // UPDATE
+      console.log("=== UPDATE ===");
+      // ID를 제외한 모든 속성을 수정할 수 있다.
+      // 특정 할 일의 특정 태그를 수정할 수 있다.
+
+      // DELETE
+      console.log("=== DELETE ===");
+      console.log("=== 특정 할 일의 특정 라벨를 삭제할 수 있다. ===");
+      console.log(todoApp.deleteTodoLabelByLabelId(secondTodo.data.id, 2));
+      console.log(todoApp.deleteTodoLabelByLabelId(secondTodo.data.id, 1));
+      console.log(todoApp.deleteTodoLabelByLabelId(-1, 2));
+      console.log(todoApp.todoList);
+
+      console.log("=== ID를 기반으로 특정 할 일을 삭제할 수 있다. - OK === ");
+      console.log(todoApp.deleteTodoById(secondTodo.data.id));
+      console.log(todoApp.deleteTodoById(secondTodo.data.id));
+      console.log(todoApp.todoList);
+
+      console.log("=== 모든 할 일을 제거할 수 있다. ===");
+      todoApp.clearTodoList();
+      console.log(todoApp.todoList);
+
+      // 특정 할 일의 모든 태그를 제거할 수 있다.
+
+    </script>
+  </head>
+  <body>
+    <div>    
+      <h1>Todo CRUD Test Page</h1>
+    </div>
+    <div id="create">
+    </div>
+    <div id="read">
+    </div>
+    <div id="update">
+    </div>
+    <div id="delete">
+    </div>
+    <div id="todolist">
+    </div>
+  </body>
+</html>
