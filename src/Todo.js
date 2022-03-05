@@ -8,7 +8,13 @@
  * @param {string} Todo.category Todo 카테고리
  * @param {Array.<Tag>} [Todo.tags=[]] Todo 태그들
  */
-function Todo() {}
+function Todo({ id = Date.now(), content, complete, category, tags = [] }) {
+  this.id = id;
+  this.content = content;
+  this.complete = complete;
+  this.category = category;
+  this.tags = tags;
+}
 
 /**
  * @description Todo를 수정합니다. id는 수정 할 수 없습니다.
@@ -19,4 +25,9 @@ function Todo() {}
  * @param {Array.<Tag>} [Todo.tags=[]] Todo 태그들
  * @return {void}
  */
-Todo.prototype.updateTodo = function () {};
+Todo.prototype.updateTodo = function ({ content, complete, category, tags }) {
+  this.content = content;
+  this.complete = complete;
+  this.category = category;
+  this.tags = tags;
+};
