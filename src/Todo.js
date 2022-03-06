@@ -21,7 +21,9 @@ class Todo {
    */
   constructor(id, content) {
     this.#data.id = id;
+    this.#data.isDone = false;
     this.#data.content = content;
+    this.#data.labels = [];
   }
 
   /**
@@ -36,23 +38,31 @@ class Todo {
    * (setter) 할 일의 content(내용) 값을 갱신합니다.
    * @param {string} value
    */
-  set content(value) {}
+  set content(value) {
+    this.#data.content = value;
+  }
 
   /**
    * (setter) 할 일의 isDone(완료 여부) 값을 갱신합니다.
    * @param {boolean} value
    */
-  set isDone(value) {}
+  set isDone(value) {
+    this.#data.isDone = value;
+  }
 
   /**
    * (setter) 할 일의 ㅎ(중요도) 값을 갱신합니다.
    * @param {('LOW' | 'MIDDLE' | 'HIGH')} value
    */
-  set priority(value) {}
+  set priority(value) {
+    this.#data.priority = value;
+  }
 
   /**
    * (setter) 할 일의 labels 값을 갱신합니다.
    * @param {Label[]} value
    */
-  set labels(value) {}
+  set labels(value) {
+    this.#data.labels = value;
+  }
 }
