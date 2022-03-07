@@ -1,3 +1,5 @@
+import { v1 as uuid } from "uuid";
+
 /**
  * @description Tag 클래스입니다.
  * @class
@@ -10,7 +12,11 @@ class Tag {
    * @param {number} id - 태그 uniq id
    * @param {string} name - 태그 이름
    */
-  constructor(name) {}
+  constructor(name) {
+    this.id = uuid();
+    this.name = name;
+  }
+  //parameter로 id를 받지 않으나, jsdoc에는 있는 상태
 
   /**
    * update Tag name value.
@@ -18,5 +24,8 @@ class Tag {
    * @return {boolean} 결과
    * @description name을 받아 태그를 업데이트 한다.
    */
-  update(name) {}
+  update(name) {
+    this.name = name;
+    return true;
+  }
 }
