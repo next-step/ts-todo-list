@@ -22,6 +22,7 @@ const Todoitem = {};
  * @returns {{}}
  */
 const createItem = (id, content, completed, category, tags) => {
+  if (!content) return {};
   const newItem = {
     id,
     content,
