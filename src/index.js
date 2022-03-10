@@ -3,8 +3,8 @@
  * @author tiaz0128(주환석)
  */
 
-const TodoCollection = require('./TodoCollection.js')
-const TodoItem = require('./Todo.js')
+import TodoCollection from './TodoCollection'
+import TodoItem from './Todo'
 
 const todoCollection = new TodoCollection()
 

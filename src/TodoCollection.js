@@ -3,23 +3,25 @@
  * @author tiaz0128(주환석)
  */
 
+/// <reference path="../@types/todos/index.d.ts" />
+
 /**
  * TodoCollection TodoItem 을 Map 형태로 관리하는 클래스
  * @class
  * @constructor
  * @public
  */
-class TodoCollection {
+export default class TodoCollection {
   /**
    * @member {TodoListType}
    * */
-  todoList
+  todoList;
 
   /**
    * @member {number}
    * @default 1
    */
-  nextId
+  nextId;
 
   /**
    * @constructs
@@ -29,8 +31,8 @@ class TodoCollection {
    * @see {@link TodoCollectionType}
    */
   constructor() {
-    this.todoList = new Map()
-    this.nextId = 1
+    this.todoList = new Map();
+    this.nextId = 1;
   }
 
   /**
@@ -44,9 +46,9 @@ class TodoCollection {
    * @see {@link TodoItem} 참고
    */
   createTodo(todoItem) {
-    if (!todoItem.content) return
-    this.todoList.set(this.nextId, todoItem)
-    this.nextId++
+    if (!todoItem.content) return -1;
+    this.todoList.set(this.nextId, todoItem);
+    return this.nextId++;
   }
 
   /**
@@ -59,10 +61,10 @@ class TodoCollection {
    */
   readTodos() {
     if (!this.todoList.size) {
-      console.log('할 일  없음')
-      return
+      console.log("할 일  없음");
+      return;
     }
-    this.todoList.forEach((todoItem) => todoItem.printTodo())
+    this.todoList.forEach((todoItem) => todoItem.printTodo());
   }
 
   /**
@@ -74,12 +76,12 @@ class TodoCollection {
    * @see {@link TodoItem} printTodo 로 TodoItem 내용을 출력
    */
   readTodo(id) {
-    const todoItem = this.todoList.get(id)
+    const todoItem = this.todoList.get(id);
     if (!todoItem) {
-      console.log('해당하는 할 일 없음')
-      return
+      console.log("해당하는 할 일 없음");
+      return;
     }
-    todoItem.printTodo()
+    todoItem.printTodo();
   }
 
   /**
@@ -92,10 +94,10 @@ class TodoCollection {
    */
   updateTodo(id, todoItem) {
     if (!this.todoList.has(id)) {
-      return null
+      return null;
     }
-    this.todoList.set(id, todoItem)
-    return todoItem
+    this.todoList.set(id, todoItem);
+    return todoItem;
   }
 
   /**
@@ -109,16 +111,17 @@ class TodoCollection {
    * @todo 해당 태그가 없는 경우 실패
    */
   updateTag(id, targetTag, newTag) {
-    const todoItem = this.todoList.get(id)
+    const todoItem = this.todoList.get(id);
     if (!todoItem) {
-      return false
+      return false;
     }
-    const targetTagIndex = todoItem.tags.indexOf(targetTag)
-    const hasTargetTag = targetTagIndex !== -1
+    const targetTagIndex = todoItem.tags.indexOf(targetTag);
+    const hasTargetTag = targetTagIndex !== -1;
     if (!hasTargetTag) {
-      return false
+      return false;
     }
-    todoItem.tags[targetTagIndex] = newTag
+    todoItem.tags[targetTagIndex] = newTag;
+    return true;
   }
 
   /**
@@ -127,7 +130,7 @@ class TodoCollection {
    * @return {void}
    */
   deleteTodos() {
-    this.todoList = new Map()
+    this.todoList = new Map();
   }
 
   /**
@@ -137,10 +140,10 @@ class TodoCollection {
    */
   deleteTodo(id) {
     if (!this.todoList.has(id)) {
-      return -1
+      return -1;
     }
-    this.todoList.delete(id)
-    return id
+    this.todoList.delete(id);
+    return id;
   }
 
   /**
@@ -151,12 +154,12 @@ class TodoCollection {
    * @todo 해당 아이디가 없는 경우 '해당하는 할 일 없음' 을 출력한다.
    */
   deleteTags(id) {
-    const todoItem = this.todoList.get(id)
+    const todoItem = this.todoList.get(id);
     if (!todoItem) {
-      console.log('해당하는 할 일 없음')
-      return
+      console.log("해당하는 할 일 없음");
+      return;
     }
-    todoItem.tags = []
+    todoItem.tags = [];
   }
 
   /**
@@ -169,18 +172,16 @@ class TodoCollection {
    * @todo 해당 태그가 없는 경우 실패
    */
   deleteTag(id, tag) {
-    const todoItem = this.todoList.get(id)
+    const todoItem = this.todoList.get(id);
     if (!todoItem) {
-      return null
+      return null;
     }
-    const targetTagIndex = todoItem.tags.indexOf(tag)
-    const hasTargetTag = targetTagIndex !== -1
+    const targetTagIndex = todoItem.tags.indexOf(tag);
+    const hasTargetTag = targetTagIndex !== -1;
     if (!hasTargetTag) {
-      return null
+      return null;
     }
-    todoItem.tags.splice(targetTagIndex, 1)
-    return todoItem
+    todoItem.tags.splice(targetTagIndex, 1);
+    return todoItem;
   }
 }
-
-module.exports = TodoCollection

@@ -3,33 +3,35 @@
  * @author tiaz0128(주환석)
  */
 
+/// <reference path="../@types/todos/index.d.ts" />
+
 /**
  * TodoItem 클래스
  * @class
  * @constructor
  * @public
  */
-class TodoItem {
+export default class TodoItem {
   /** @member {string} */
-  content
+  content;
 
   /**
    * @member {boolean}
    * @default false
    * */
-  complete
+  complete;
 
   /**
    * @member {string}
    * @default "etc"
    * */
-  category
+  category;
 
   /**
    * @member {string[]}
    * @default [ ]
    * */
-  tags
+  tags;
 
   /**
    * @constructs
@@ -39,11 +41,11 @@ class TodoItem {
    * @see {@link initTodoItemType} 참고
    */
   constructor(initState) {
-    const { content, complete, category, tags } = initState
-    this.content = content
-    this.complete = complete || false
-    this.category = category || 'etc'
-    this.tags = tags || []
+    const { content, complete, category, tags } = initState;
+    this.content = content;
+    this.complete = complete || false;
+    this.category = category || "etc";
+    this.tags = tags || [];
   }
 
   /**
@@ -53,8 +55,6 @@ class TodoItem {
    * @todo  콘솔에 TodoItem 의 정보를 출력한다.
    */
   printTodo() {
-    console.dir(this)
+    console.dir(this);
   }
 }
-
-module.exports = TodoItem
