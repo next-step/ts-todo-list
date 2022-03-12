@@ -14,7 +14,7 @@
  * @property {TodoType[]} todos - 생성된 todo를 관리하는 배열
  */
 
-class Todo {
+class TodoApplication {
   /**
    * @member {StateType}
    */
@@ -78,3 +78,4 @@ class Todo {
     );
   }
 }
+
