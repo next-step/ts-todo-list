@@ -1,5 +1,5 @@
 import Todo from "./todo.js";
-import Category from "./category";
+import Category from "./category.js";
 import Tag from "./tag.js";
 import { isDuplicated } from "../utils.js";
 
@@ -13,10 +13,27 @@ export default class Todos {
   }
 
   /**
+   * 업데이트가 된 할일 리스트를 화면에 그려준다.
+   * @param {object} [renderItem=undefined] - 초기의 todoList
+   */
+  render(renderItem) {
+    renderItem
+      ? console.table(renderItem)
+      : this.todos?.length
+      ? console.table(this.getAllTodos())
+      : console.log("할일이 비어있습니다.");
+  }
+
+  /**
    * 새로운 할 일을 추가한다.
-   * @param {string} newTitle - 새로 추가할 todo의 내용
+   * @param {string} newTitle - 새로 추가할 todo의 내용, 내용이 꼭 있어야 한다.
    */
   addTodo(newTitle) {
+    if (!newTitle.trim()) {
+      console.log("내용을 입력해주세요.");
+      return;
+    }
+
     const isDuplicatedName = isDuplicated(
       newTitle,
       this.todos?.map((todo) => todo.title)
@@ -33,6 +50,8 @@ export default class Todos {
         tags: [],
       }),
     ];
+
+    this.render();
   }
 
   /**
@@ -49,7 +68,10 @@ export default class Todos {
    * @returns {Todo} - 해당 id에 해당하는 todo 항목을 반환한다.
    */
   getTodo(id) {
-    return this.todos.find((todo) => todo.id === id);
+    const targetTodo = this.todos.find((todo) => todo.id === id);
+    this.render(targetTodo);
+
+    return targetTodo;
   }
 
   /**
@@ -61,6 +83,7 @@ export default class Todos {
     const targetTodo = this.todos.find((todo) => todo.id === id);
 
     targetTodo.updateTitle(updatedTitle);
+    this.render();
   }
 
   /**
@@ -72,7 +95,7 @@ export default class Todos {
     const targetTodo = this.todos.find((todo) => todo.id === id);
 
     // Todo class는 category 객체를 받고 있는데, 여기서는 이름만 넘겨주고 있음..
-    targetTodo.updateCategory(categoryName);
+    // targetTodo.updateCategory(categoryName);
   }
 
   /**
@@ -85,7 +108,7 @@ export default class Todos {
 
     // Todo class는 tags 객체를 받고 있는데, 여기서는 이름만 넘겨주고 있음..
     // 어떤 태그를 바꾸고 싶은지에 대한 것도 없음
-    targetTodo.updateTags(tagName);
+    // targetTodo.updateTags(tagName);
   }
 
   /**
@@ -96,6 +119,7 @@ export default class Todos {
     const targetTodoIndex = this.todos.findIndex((todo) => todo.id === deleteTargetId);
 
     this.todos = [...this.todos.slice(0, targetTodoIndex), ...this.todos.slice(targetTodoIndex + 1)];
+    this.render();
   }
 
   /**
@@ -103,6 +127,7 @@ export default class Todos {
    */
   deleteAllTodos() {
     this.todos = [];
+    this.render();
   }
 
   /**
@@ -123,7 +148,9 @@ export default class Todos {
    */
   toggleTodoFinished(id) {
     const targetTodo = this.todos.find((todo) => todo.id === id);
-    targetTodo.isFinished();
+    targetTodo.toggleIsFinished();
+
+    this.render();
   }
 
   /**
@@ -143,7 +170,9 @@ export default class Todos {
    * @param {number} todoId - 타겟 todo id
    */
   removeAllTags(todoId) {
-    const targetTodo = this.todos.find((todo) => todo.id === id);
+    const targetTodo = this.todos.find((todo) => todo.id === todoId);
     targetTodo.tags = [];
+
+    this.render();
   }
 }
