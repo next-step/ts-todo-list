@@ -1,5 +1,7 @@
 /// <reference path="./todo.d.ts" />
 /// <reference path="./tag.d.ts" />
+// import { Todo } from './todo.d';
+// import { Tag } from './tag.d';
 
 declare const todos:Todo[];
 declare const tags:Tag[];

@@ -5,7 +5,7 @@ export type Todo = {
   tags?: Tag[];
 };
 
-export declare class Todo {
+declare class Todo {
   id: number;
   contents: string;
   isComplete: string;
