@@ -81,18 +81,6 @@ function updateTodo({ id, content }) {
 }
 
 /**
- * @param {string} id - 업데이트할 Todo id
- * @param {string} content - 업데이트할 Todo 내용
- */
-function updateTodoContent({ id, content }) {
-  todos = todos.map((todo) =>
-    todo.id === id ? { ...todo, content: content } : todo
-  );
-  console.log(`id:${id} todo 수정 완료`);
-  console.table(todos);
-}
-
-/**
  * @param {number} todoId - 업데이트할 Todo id
  * @param {number} tagId - 업데이트할 Tag id
  * @param {string} name - 업데이트할 Tag 내용
