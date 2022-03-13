@@ -2,7 +2,7 @@
  * Todoitem를 가지는 배열 객체
  * @type {Todoitem[]}
  */
-const Todoitems = [];
+const Todolist = [];
 
 /**
  * Todoitem 객체
@@ -31,21 +31,21 @@ const createItem = (id, content, completed, category, tags) => {
     tags: tags?.length ? tags : undefined,
   };
 
-  Todoitems.push(newItem);
+  Todolist.push(newItem);
   /** 본래 return 은 {}으로,
    * 만들어진 Item객체를 리턴만 하는 것으로 이해했었으나,
-   * 전역으로 다뤄야하는 Todoitems에 넣는 method가 없어서 여기에 push를 구현함.
+   * 전역으로 다뤄야하는 Todolist에 넣는 method가 없어서 여기에 push를 구현함.
    */
   return newItem;
 };
 
 /**
  * 모든 할 일을 조회할 수 있다.
- * Todoitems를 반환한다.
+ * Todolist를 반환한다.
  * @returns {Todoitem[]}
  */
 const readItems = () => {
-  return Todoitems;
+  return Todolist;
 };
 
 /**
@@ -55,7 +55,7 @@ const readItems = () => {
  * @returns {{}}
  */
 const readItem = (id) => {
-  const targetItem = Todoitems.find((item) => item.id === id);
+  const targetItem = Todolist.find((item) => item.id === id);
   return targetItem ? targetItem : {};
 };
 
@@ -71,11 +71,11 @@ const readItem = (id) => {
  * @returns {boolean}
  */
 const updateItem = (id, content, completed, category, tags) => {
-  const targetItemIdx = Todoitems.findIndex((item) => item.id === id);
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
-  Todoitems[targetItemIdx] = {
-    ...Todoitems[targetItemIdx],
+  Todolist[targetItemIdx] = {
+    ...Todolist[targetItemIdx],
     content,
     completed,
     category,
@@ -93,14 +93,14 @@ const updateItem = (id, content, completed, category, tags) => {
  * @returns {boolean}
  */
 const updateTag = (id, property, tobe) => {
-  const targetItemIdx = Todoitems.findIndex((item) => item.id === id);
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
-  const targetTagIdx = Todoitems[targetItemIdx].tags.findIndex(
+  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
     (tag) => tag === property
   );
   if (targetTagIdx === -1) return false;
-  Todoitems[targetItemIdx].tags[targetTagIdx] = tobe;
+  Todolist[targetItemIdx].tags[targetTagIdx] = tobe;
 
   return true;
 };
@@ -112,10 +112,10 @@ const updateTag = (id, property, tobe) => {
  * @returns {boolean}
  */
 const deleteItem = (id) => {
-  const targetItemIdx = Todoitems.findIndex((item) => item.id === id);
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
-  Todoitems.splice(targetItemIdx, 1);
+  Todolist.splice(targetItemIdx, 1);
   return true;
 };
 
@@ -124,7 +124,7 @@ const deleteItem = (id) => {
  * @returns {boolean}
  */
 const deleteItems = () => {
-  Todoitems = [];
+  Todolist = [];
   return true;
 };
 
@@ -135,14 +135,14 @@ const deleteItems = () => {
  * @returns {boolean}
  */
 const deleteTag = (id, tag) => {
-  const targetItemIdx = Todoitems.findIndex((item) => item.id === id);
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
-  const targetTagIdx = Todoitems[targetItemIdx].tags.findIndex(
+  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
     (eachTag) => eachTag === tag
   );
   if (targetTagIdx === -1) return false;
-  Todoitems[targetItemIdx].tags.splice(targetTagIdx, 1);
+  Todolist[targetItemIdx].tags.splice(targetTagIdx, 1);
 
   return true;
 };
@@ -153,10 +153,10 @@ const deleteTag = (id, tag) => {
  * @returns {boolean}
  */
 const deleteTags = (id) => {
-  const targetItemIdx = Todoitems.findIndex((item) => item.id === id);
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
-  Todoitems[targetItemIdx].tags = [];
+  Todolist[targetItemIdx].tags = [];
   return true;
 };
 
@@ -186,7 +186,7 @@ const item3 = {
   createItem(item.id, item.content, item.completed, item.category, item.tags)
 );
 console.log("===== createItem =====");
-console.log(Todoitems);
+console.log(Todolist);
 console.log("===== readItems =====");
 console.log(readItems());
 console.log("===== updateItem =====");
