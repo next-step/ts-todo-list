@@ -36,3 +36,33 @@ declare class Todo {
   set labels(value: Label);
 }
 
+/** TodoApp */
+declare class TodoApp {
+  todoList: Todo[];
+
+  createUniqueId(): TodoData["id"];
+
+  addTodo(todo: Todo): TodoData["id"] | -1;
+
+  deleteTodoById(todoId: TodoData["id"]): TodoData["id"] | -1;
+
+  clearTodoList(): boolean;
+
+  mutateTodoContentById(
+    idToMutateTodo: TodoData["id"],
+    newContent: TodoData["id"]
+  ): TodoData["id"] | -1;
+
+  mutateTodoStatus(idToMutateTodo: TodoData["id"]): TodoData["id"] | -1;
+
+  addTodoLabelByTodoId(
+    targetTodoId: TodoData["id"],
+    newLabelContent: TodoData["content"]
+  ): TodoData["id"] | -1;
+
+  deleteTodoLabelByLabelId(
+    targetTodoId: LabelData["id"],
+    idToDeleteLabel: LabelData["content"]
+  ): LabelData["id"] | -1;
+}
+
