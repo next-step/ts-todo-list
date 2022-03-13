@@ -4,7 +4,7 @@
  */
 
 /** 
- * @typedef {object} initTodoItemType TodoItem
+ * @typedef {object} InitTodoItemType TodoItem
   * @property {string} content 내용
   * @property {boolean} [complete] 완료여부
   * @property {string} [category] 카테고리
@@ -12,7 +12,7 @@
 */
 
 /**
- * @typedef {class} TodoItemType TodoItem 클래스
+ * @typedef {object} TodoItem TodoItem 클래스
  * 
   * @property {string} content 내용
   * @property {boolean} complete=false 완료여부
@@ -28,7 +28,7 @@
  */
 
 /**
- * @typedef {class} TodoCollectionType TodoItem 을 Map 형태로 관리하는 클래스
+ * @typedef {object} TodoCollectionType TodoItem 을 Map 형태로 관리하는 클래스
  * 
   * @property {TodoListType} todoList TodoItem 목록
   * @property {number} nextId=1 다음 아이디값

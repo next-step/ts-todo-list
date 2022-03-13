@@ -18,6 +18,7 @@
 	},
 	"homepage": "https://github.com/next-step/ts-todo-list#readme",
 	"devDependencies": {
+		"@types/node": "^17.0.21",
 		"jsdoc": "^3.6.10"
 	}
 }
