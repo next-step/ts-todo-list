@@ -53,7 +53,7 @@ class TodoList {
    * @param {Todo[]} [initTodoList=[]] - 초기값으로 설정할 할 일 목록
    */
   constructor(initTodoList) {
-    this.initTodoList = initTodoList;
+    this.todoList = initTodoList;
   }
 
   /**
@@ -61,8 +61,8 @@ class TodoList {
    * @returns {Todo[]}
    */
   getTodoList() {
-    console.log('getTodoList', this.initTodoList);
-    return this.initTodoList;
+    console.log('getTodoList', this.todoList);
+    return this.todoList;
   }
 
   /**
@@ -71,8 +71,11 @@ class TodoList {
    * @returns {Todo}
    */
   getTodoById(id) {
-    console.log('getTodoById', this.initTodoList.find(todo => todo.id === id));
-    return this.initTodoList.find(todo => todo.id === id);
+    console.log(
+      'getTodoById',
+      this.todoList.find((todo) => todo.id === id)
+    );
+    return this.todoList.find((todo) => todo.id === id);
   }
 
   /**
@@ -80,8 +83,8 @@ class TodoList {
    * @param {Todo} todo - 새로 추가할 할 일
    */
   addTodo(todo) {
-    this.initTodoList = [...this.initTodoList, todo];
-    console.log('addTodo', this.initTodoList);
+    this.todoList = [...this.todoList, todo];
+    console.log('addTodo', this.todoList);
   }
 
   /**
@@ -90,7 +93,11 @@ class TodoList {
    * @param {string} tag
    */
   tagTodo(id, tag) {
-    // Todo에 태그 상태가 존재하지 않음.
+    const selectedTodoIndex = this.todoList.findIndex((todo) => todo.id === id);
+    this.todoList[selectedTodoIndex].updateTagList([
+      ...this.todoList[selectedTodoIndex].tagList,
+      tag,
+    ]);
   }
 
   /**
@@ -99,7 +106,7 @@ class TodoList {
    * @param {string} text
    */
   updateTodoText(id, text) {
-    const selectedTodo = this.initTodoList.find(todo => todo.id === id);
+    const selectedTodo = this.todoList.find((todo) => todo.id === id);
     selectedTodo.updateText(text);
     console.log('updateTodoText', selectedTodo.text);
   }
@@ -118,7 +125,7 @@ class TodoList {
    * @param {string} category - 새로운 카테고리
    */
   updateTodoCategory(id, category) {
-    const selectedTodo = this.initTodoList.find(todo => todo.id === id);
+    const selectedTodo = this.todoList.find((todo) => todo.id === id);
     selectedTodo.updateCategory(category);
     console.log('updateTodoCategory', selectedTodo.category);
   }
@@ -129,7 +136,7 @@ class TodoList {
    * @param {string[]} tagList - 새로운 태그 목록
    */
   updateTodoTagList(id, tagList) {
-    const selectedTodo = this.initTodoList.find(todo => todo.id === id);
+    const selectedTodo = this.todoList.find((todo) => todo.id === id);
     selectedTodo.updateTagList(tagList);
     console.log('updateTodoTagList', selectedTodo.tagList);
   }
@@ -139,16 +146,16 @@ class TodoList {
    * @param {number} id - 삭제할 할 일의 id
    */
   removeTodo(id) {
-    this.initTodoList = this.initTodoList.filter(todo => todo.id !== id);
-    console.log('removeTodo', this.initTodoList);
+    this.todoList = this.todoList.filter((todo) => todo.id !== id);
+    console.log('removeTodo', this.todoList);
   }
 
   /**
    * 모든 할 일을 삭제한다.
    */
   removeAllTodo() {
-    this.initTodoList = [];
-    console.log('removeAllTodo', this.initTodoList);
+    this.todoList = [];
+    console.log('removeAllTodo', this.todoList);
   }
 
   /**
@@ -157,8 +164,8 @@ class TodoList {
    * @param {string} tag - 삭제할 태그의 텍스트
    */
   removeTodoTag(id, tag) {
-    const selectedTodo = this.initTodoList.find(todo => todo.id === id);
-    const newTagList = selectedTodo.tagList.filter(value => value === tag);
+    const selectedTodo = this.todoList.find((todo) => todo.id === id);
+    const newTagList = selectedTodo.tagList.filter((value) => value === tag);
     selectedTodo.updateTagList(newTagList);
     console.log('removeTodoTag', selectedTodo.tagList);
   }
@@ -168,7 +175,7 @@ class TodoList {
    * @param {number} id - 모든 태그를 삭제할 할 일의 id
    */
   removeTodoAllTag(id) {
-    const selectedTodo = this.initTodoList.find(todo => todo.id === id);
+    const selectedTodo = this.todoList.find((todo) => todo.id === id);
     selectedTodo.updateTagList([]);
     console.log('removeTodoAllTag', selectedTodo.tagList);
   }
@@ -200,4 +207,3 @@ todoList.removeAllTodo();
 // 구현이 안된 메서드
 // todoList.tagTodo();
 // todoList.toggleTodoCompleted();
-
