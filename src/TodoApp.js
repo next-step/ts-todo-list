@@ -62,9 +62,20 @@ class TodoApp {
   /**
    * todoList에 todo의 id 값을 이용해 todo의 content를 수정
    * @param {number} idToMutateTodo
+   * @param {string} newContent
    * @return {number} mutatedTodoId - mutate된 todo의 id 값
    */
-  mutateTodoContentById(idToMutateTodo) {}
+  mutateTodoContentById(idToMutateTodo, newContent) {
+    const targetIndex = this.todoList.findIndex(
+      (todo) => todo.info.id === idToMutateTodo
+    );
+
+    if (targetIndex === -1) return -1;
+
+    this.todoList[targetIndex].info.content = newContent;
+
+    return idToMutateTodo;
+  }
 
   /**
    * todoList에 todo의 id 값을 이용해 todo의 isDone 값을 변경(true or false)
