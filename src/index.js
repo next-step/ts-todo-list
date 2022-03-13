@@ -87,20 +87,20 @@ const updateItem = (id, content, completed, category, tags) => {
 /**
  * 특정 할 일의 특정 태그를 수정할 수 있다.
  * 수정 성공시 true 반환
- * @param id
- * @param property - 수정하려는 속성
- * @param tobe - 수정할 내용
+ * @param id {string}
+ * @param prev {string} - 수정하려는 태그
+ * @param next {string} - 수정할 내용
  * @returns {boolean}
  */
-const updateTag = (id, property, tobe) => {
+const updateTag = (id, prev, next) => {
   const targetItemIdx = Todolist.findIndex((item) => item.id === id);
   if (targetItemIdx === -1) return false;
 
   const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
-    (tag) => tag === property
+    (tag) => tag === prev
   );
   if (targetTagIdx === -1) return false;
-  Todolist[targetItemIdx].tags[targetTagIdx] = tobe;
+  Todolist[targetItemIdx].tags[targetTagIdx] = next;
 
   return true;
 };
