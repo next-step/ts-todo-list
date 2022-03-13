@@ -3,6 +3,8 @@
  * @author jeonyeonkyu(전연규)
  */
 
+/// <reference path="../@types/todo/index.d.ts" />
+
 /**
  * @typedef {object} Task - 하나의 할일 객체
  * @property {number} taskId - 유니크한 아이디 (태스크 생성시 1씩 증가)
@@ -20,7 +22,6 @@
 /**
  * @typedef {TodoItem[]} TodoList - 할일 목록 전체
  */
-
 
 /**
  * Todo 클래스
@@ -47,9 +48,9 @@ class Todo {
   nextCategoryId
 
   constructor() {
-    this.todoList = [];
-    this.nextTaskId = 0;
-    this.nextCategoryId = 0;
+    this.todoList = []
+    this.nextTaskId = 0
+    this.nextCategoryId = 0
   }
 
   /**
@@ -57,7 +58,7 @@ class Todo {
    * @returns {void}
    */
   setIncreasingTaskId() {
-    this.nextTaskId++;
+    this.nextTaskId++
   }
 
   /**
@@ -65,8 +66,8 @@ class Todo {
    * @returns {number}
    */
   getUniqueTaskId() {
-    this.setIncreasingTaskId();
-    return this.nextTaskId;
+    this.setIncreasingTaskId()
+    return this.nextTaskId
   }
 
   /**
@@ -76,11 +77,13 @@ class Todo {
    * @returns {void}
    */
   createTask(categoryId, task) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
     this.todoList[targetTodoItemIndex].tasks.push({
-      taskId: this.getUniqueTaskId(), 
-      task, 
-      isCompleted: false
+      taskId: this.getUniqueTaskId(),
+      task,
+      isCompleted: false,
     })
   }
 
@@ -92,11 +95,13 @@ class Todo {
    * @returns {void}
    */
   updateTask(categoryId, taskId, task) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
-    const tasks = this.todoList[targetTodoItemIndex].tasks;
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId);
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
+    const tasks = this.todoList[targetTodoItemIndex].tasks
+    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
 
-    tasks[targetTaskIndex].task = task;
+    tasks[targetTaskIndex].task = task
   }
 
   /**
@@ -106,9 +111,11 @@ class Todo {
    * @returns {void}
    */
   deleteTask(categoryId, taskId) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
-    const tasks = this.todoList[targetTodoItemIndex].tasks;
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId);
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
+    const tasks = this.todoList[targetTodoItemIndex].tasks
+    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
 
     tasks.splice(targetTaskIndex, targetTaskIndex + 1)
   }
@@ -120,11 +127,13 @@ class Todo {
    * @returns {void}
    */
   toggleCompleteTask(categoryId, taskId) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
-    const tasks = this.todoList[targetTodoItemIndex].tasks;
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId);
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
+    const tasks = this.todoList[targetTodoItemIndex].tasks
+    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
 
-    tasks[targetTaskIndex].isCompleted = !tasks[targetTaskIndex].isCompleted 
+    tasks[targetTaskIndex].isCompleted = !tasks[targetTaskIndex].isCompleted
   }
 
   /**
@@ -132,7 +141,7 @@ class Todo {
    * @returns {void}
    */
   setIncreasingCategoryId() {
-    this.nextCategoryId++;
+    this.nextCategoryId++
   }
 
   /**
@@ -140,8 +149,8 @@ class Todo {
    * @returns {number}
    */
   getUniqueCategoryId() {
-    this.setIncreasingCategoryId();
-    return this.nextCategoryId;
+    this.setIncreasingCategoryId()
+    return this.nextCategoryId
   }
 
   /**
@@ -151,10 +160,10 @@ class Todo {
    */
   createCategory(categoryName) {
     this.todoList.push({
-      categoryId : this.getUniqueCategoryId(),
+      categoryId: this.getUniqueCategoryId(),
       categoryName,
-      tasks: []
-      })
+      tasks: [],
+    })
   }
 
   /**
@@ -164,8 +173,10 @@ class Todo {
    * @returns {void}
    */
   updateCategoryName(categoryId, categoryName) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
-    this.todoList[targetTodoItemIndex].categoryName = categoryName;
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
+    this.todoList[targetTodoItemIndex].categoryName = categoryName
   }
 
   /**
@@ -174,7 +185,9 @@ class Todo {
    * @returns {void}
    */
   deleteCategory(categoryId) {
-    const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
+    const targetTodoItemIndex = this.todoList.findIndex(
+      (todoItem) => todoItem.categoryId === categoryId
+    )
     this.todoList.splice(targetTodoItemIndex, targetTodoItemIndex + 1)
   }
 
@@ -184,9 +197,9 @@ class Todo {
    * @returns {void}
    */
   readAllTodo(message) {
-    if(message) console.log('\n' + message)
+    if (message) console.log('\n' + message)
     console.log(JSON.stringify(this.todoList))
   }
 }
 
-exports.Todo = Todo;
+exports.Todo = Todo
