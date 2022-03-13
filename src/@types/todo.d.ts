@@ -1,15 +1,15 @@
-type Todo = {
+export type Todo = {
   id: number;
   contents: string;
   isComplete: string;
   tags?: Tag[];
 };
 
-class Todo {
+export declare class Todo {
   id: number;
   contents: string;
   isComplete: string;
-  tags: Tag[];
+  tags?: Tag[];
 
   constructor(todo: Todo);
 

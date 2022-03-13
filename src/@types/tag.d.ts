@@ -1,4 +1,9 @@
-class Tag {
+export type Tag = {
+  id: number;
+  name: string;
+};
+
+declare class Tag {
   id: number;
   name: string;
 
