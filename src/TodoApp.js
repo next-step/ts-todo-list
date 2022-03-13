@@ -13,7 +13,7 @@ class TodoApp {
    * @member - todo들이 모여있는 todoList
    * @type {Todo[]}
    */
-  todoList = [];
+  todoList;
 
   /**
    * unique id를 만드는 함수
