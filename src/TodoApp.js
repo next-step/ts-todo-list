@@ -13,7 +13,7 @@ class TodoApp {
    * @member - todo들이 모여있는 todoList
    * @type {Todo[]}
    */
-  todoList = [];
+  todoList;
 
   /**
    * unique id를 만드는 함수
@@ -62,16 +62,39 @@ class TodoApp {
   /**
    * todoList에 todo의 id 값을 이용해 todo의 content를 수정
    * @param {number} idToMutateTodo
+   * @param {string} newContent
    * @return {number} mutatedTodoId - mutate된 todo의 id 값
    */
-  mutateTodoContentById(idToMutateTodo) {}
+  mutateTodoContentById(idToMutateTodo, newContent) {
+    const targetIndex = this.todoList.findIndex(
+      (todo) => todo.info.id === idToMutateTodo
+    );
+
+    if (targetIndex === -1) return -1;
+
+    this.todoList[targetIndex].info.content = newContent;
+
+    return idToMutateTodo;
+  }
 
   /**
    * todoList에 todo의 id 값을 이용해 todo의 isDone 값을 변경(true or false)
-   * @param {boolean} todoStatus
+   * @param {number} idToMutateTodo
    * @return {number} idToMutatedTodo - isDone 값이 변경된 todo의 id 값
    */
-  mutateTodoStatus(todoStatus) {}
+  mutateTodoStatusById(idToMutateTodo) {
+    const targetIndex = this.todoList.findIndex(
+      (todo) => todo.info.id === idToMutateTodo
+    );
+
+    if (targetIndex === -1) return -1;
+
+    const prevStatus = this.todoList[targetIndex].info.isDone;
+
+    this.todoList[targetIndex].info.isDone = !prevStatus;
+
+    return idToMutateTodo;
+  }
 
   /**
    * todo의 id 값을 이용해 todo에 label을 추가
