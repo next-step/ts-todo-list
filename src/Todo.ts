@@ -2,8 +2,8 @@
  * @file Todo 클래스 파일
  * @author jeonyeonkyu(전연규)
  */
-
-/// <reference path="../@types/todo/index.d.ts" />
+/// <reference lib="es2015" />
+import { Task, TodoItem, TodoList } from '../@types/todo'
 
 /**
  * @typedef {object} Task - 하나의 할일 객체
@@ -29,23 +29,23 @@
  * @constructor
  * @public
  */
-class Todo {
+class TodoApp {
   /**
    * @member {TodoList}
    */
-  todoList
+  todoList: TodoList
 
   /**
    * @member {number}
    * @default 0
    */
-  nextTaskId
+  nextTaskId: number
 
   /**
    * @member {number}
    * @default 0
    */
-  nextCategoryId
+  nextCategoryId: number
 
   constructor() {
     this.todoList = []
@@ -76,9 +76,9 @@ class Todo {
    * @param {string} task
    * @returns {void}
    */
-  createTask(categoryId, task) {
+  createTask(categoryId: number, task: string) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     this.todoList[targetTodoItemIndex].tasks.push({
       taskId: this.getUniqueTaskId(),
@@ -94,12 +94,14 @@ class Todo {
    * @param {string} task
    * @returns {void}
    */
-  updateTask(categoryId, taskId, task) {
+  updateTask(categoryId: number, taskId: number, task: string) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     const tasks = this.todoList[targetTodoItemIndex].tasks
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
+    const targetTaskIndex = tasks.findIndex(
+      (task: Task) => task.taskId === taskId
+    )
 
     tasks[targetTaskIndex].task = task
   }
@@ -110,12 +112,14 @@ class Todo {
    * @param {number} taskId
    * @returns {void}
    */
-  deleteTask(categoryId, taskId) {
+  deleteTask(categoryId: number, taskId: number) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     const tasks = this.todoList[targetTodoItemIndex].tasks
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
+    const targetTaskIndex = tasks.findIndex(
+      (task: Task) => task.taskId === taskId
+    )
 
     tasks.splice(targetTaskIndex, targetTaskIndex + 1)
   }
@@ -126,12 +130,14 @@ class Todo {
    * @param {number} taskId
    * @returns {void}
    */
-  toggleCompleteTask(categoryId, taskId) {
+  toggleCompleteTask(categoryId: number, taskId: number) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     const tasks = this.todoList[targetTodoItemIndex].tasks
-    const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId)
+    const targetTaskIndex = tasks.findIndex(
+      (task: Task) => task.taskId === taskId
+    )
 
     tasks[targetTaskIndex].isCompleted = !tasks[targetTaskIndex].isCompleted
   }
@@ -158,7 +164,7 @@ class Todo {
    * @param {string} categoryName
    * @returns {void}
    */
-  createCategory(categoryName) {
+  createCategory(categoryName: string) {
     this.todoList.push({
       categoryId: this.getUniqueCategoryId(),
       categoryName,
@@ -172,9 +178,9 @@ class Todo {
    * @param {string} categoryName
    * @returns {void}
    */
-  updateCategoryName(categoryId, categoryName) {
+  updateCategoryName(categoryId: number, categoryName: string) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     this.todoList[targetTodoItemIndex].categoryName = categoryName
   }
@@ -184,9 +190,9 @@ class Todo {
    * @param {number} categoryId
    * @returns {void}
    */
-  deleteCategory(categoryId) {
+  deleteCategory(categoryId: number) {
     const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem) => todoItem.categoryId === categoryId
+      (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
     this.todoList.splice(targetTodoItemIndex, targetTodoItemIndex + 1)
   }
@@ -196,10 +202,10 @@ class Todo {
    * @param {string} [message]
    * @returns {void}
    */
-  readAllTodo(message) {
+  readAllTodo(message?: string) {
     if (message) console.log('\n' + message)
     console.log(JSON.stringify(this.todoList))
   }
 }
 
-exports.Todo = Todo
+export default TodoApp

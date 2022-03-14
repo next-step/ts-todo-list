@@ -1,6 +1,6 @@
-const { Todo } = require('./Todo')
+import TodoApp from './Todo'
 
-const todoApp = new Todo()
+const todoApp = new TodoApp()
 todoApp.readAllTodo('todo 객체 생성')
 
 todoApp.createCategory('TS')
