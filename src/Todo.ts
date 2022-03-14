@@ -3,7 +3,7 @@
  * @author jeonyeonkyu(전연규)
  */
 /// <reference lib="es2015" />
-import { Task, TodoItem, TodoList } from '../@types/todo'
+import { Task, TodoItem, TodoList, Todo } from '../@types/todo'
 
 /**
  * @typedef {object} Task - 하나의 할일 객체
@@ -29,7 +29,7 @@ import { Task, TodoItem, TodoList } from '../@types/todo'
  * @constructor
  * @public
  */
-class TodoApp {
+class TodoApp extends Todo {
   /**
    * @member {TodoList}
    */
@@ -48,6 +48,7 @@ class TodoApp {
   nextCategoryId: number
 
   constructor() {
+    super()
     this.todoList = []
     this.nextTaskId = 0
     this.nextCategoryId = 0
