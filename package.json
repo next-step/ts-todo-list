@@ -19,5 +19,8 @@
 	"homepage": "https://github.com/next-step/ts-todo-list#readme",
 	"devDependencies": {
 		"jsdoc": "^3.6.10"
+	},
+	"dependencies": {
+		"typescript": "^4.6.2"
 	}
 }
