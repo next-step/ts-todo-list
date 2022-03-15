@@ -73,8 +73,8 @@ let tagValue = "";
  * @param {?Array.<string>} tags - 입력 받은 태그 리스트
  */
 export function createTodo(id, content, finished, selectedCategory, tags) {
-	const todoItem = {id, content, finished, selectedCategory, tags}
-	todoList.push(todoItem)
+  const todoItem = { id, content, finished, selectedCategory, tags };
+  todoList.push(todoItem);
 }
 
 /**
@@ -82,7 +82,7 @@ export function createTodo(id, content, finished, selectedCategory, tags) {
  * @function
  */
 export function readTodoList() {
-	console.table(todoList)
+  console.table(todoList);
 }
 
 /**
@@ -91,9 +91,9 @@ export function readTodoList() {
  * @param {!number} id - 입력 받은 아이디
  */
 export function readTodoDetail(id) {
-	const targetItem = todoList.find(item => item.id === id)
+  const targetItem = todoList.find((item) => item.id === id);
 
-	console.table([targetItem])
+  console.table([targetItem]);
 }
 
 /**
@@ -106,12 +106,12 @@ export function readTodoDetail(id) {
  * @param {?Array.<string>} tags - 입력 받은 태그 리스트
  */
 export function updateTodo(id, content, finished, selectedCategory, tags) {
-	const targetItem = todoList.find(item => item.id === id)
+  const targetItem = todoList.find((item) => item.id === id);
 
-	if (content) targetItem.content = content
-	if (finished) targetItem.finished = finished
-	if (selectedCategory) targetItem.selectedCategory = selectedCategory
-	if (tags) targetItem.tags = tags
+  if (content) targetItem.content = content;
+  if (finished) targetItem.finished = finished;
+  if (selectedCategory) targetItem.selectedCategory = selectedCategory;
+  if (tags) targetItem.tags = tags;
 }
 
 /**
@@ -122,10 +122,12 @@ export function updateTodo(id, content, finished, selectedCategory, tags) {
  * @param {?string} tagValue - 새로 입력되는 태그 값
  */
 export function updateTodoTag(id, selectedTag, tagValue) {
-	const targetItem = todoList.find(item => item.id === id)
-	const targetTagIndex = targetItem.tags.findIndex(tag => tag === selectedTag)
+  const targetItem = todoList.find((item) => item.id === id);
+  const targetTagIndex = targetItem.tags.findIndex(
+    (tag) => tag === selectedTag
+  );
 
-	targetItem.tags.splice(targetTagIndex, 1, tagValue)
+  targetItem.tags.splice(targetTagIndex, 1, tagValue);
 }
 
 /**
@@ -134,9 +136,9 @@ export function updateTodoTag(id, selectedTag, tagValue) {
  * @param {!number} id - 입력 받은 아이디
  */
 export function deleteTodoDetail(id) {
-	const targetItemIndex = todoList.findIndex(item => item.id === id)
+  const targetItemIndex = todoList.findIndex((item) => item.id === id);
 
-	todoList.splice(targetItemIndex, 1)
+  todoList.splice(targetItemIndex, 1);
 }
 
 /**
@@ -144,7 +146,7 @@ export function deleteTodoDetail(id) {
  * @function
  */
 export function deleteTodoList() {
-	todoList.splice(0, todoList.length);
+  todoList.splice(0, todoList.length);
 }
 
 /**
@@ -154,10 +156,12 @@ export function deleteTodoList() {
  * @param {!string} selectedTag - 수정 대상 태그
  */
 export function deleteTodoTag(id, selectedTag) {
-	const targetItem = todoList.find(item => item.id === id)
-	const targetTagIndex = targetItem.tags.findIndex(tag => tag === selectedTag)
+  const targetItem = todoList.find((item) => item.id === id);
+  const targetTagIndex = targetItem.tags.findIndex(
+    (tag) => tag === selectedTag
+  );
 
-	targetItem.tags.splice(targetTagIndex, 1)
+  targetItem.tags.splice(targetTagIndex, 1);
 }
 
 /**
@@ -166,7 +170,7 @@ export function deleteTodoTag(id, selectedTag) {
  * @param {!number} id - 입력 받은 아이디
  */
 export function deleteTodoTagAll(id) {
-	const targetItem = todoList.find(item => item.id === id)
+  const targetItem = todoList.find((item) => item.id === id);
 
-	targetItem.tags.splice(0, todoList.length);
+  targetItem.tags.splice(0, todoList.length);
 }
