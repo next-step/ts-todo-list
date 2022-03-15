@@ -1,24 +1,26 @@
 {
-	"name": "ts-todo-list",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"type": "module",
-	"scripts": {
-		"docs": "jsdoc -c jsdoc.json"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/next-step/ts-todo-list.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/next-step/ts-todo-list/issues"
-	},
-	"homepage": "https://github.com/next-step/ts-todo-list#readme",
-	"devDependencies": {
-		"jsdoc": "^3.6.10"
-	}
+  "name": "ts-todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "docs": "jsdoc -c jsdoc.json",
+    "start": "npx tsc && node dist/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/next-step/ts-todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/next-step/ts-todo-list/issues"
+  },
+  "homepage": "https://github.com/next-step/ts-todo-list#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.10",
+    "typescript": "^4.6.2"
+  }
 }
