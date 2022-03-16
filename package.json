@@ -20,6 +20,7 @@
   "devDependencies": {
     "jsdoc": "^3.6.10",
     "prettier": "^2.5.1",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.2"
   }
 }
