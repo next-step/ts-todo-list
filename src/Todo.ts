@@ -29,7 +29,7 @@ import { Task, TodoItem, TodoList, Todo } from '../@types/todo'
  * @constructor
  * @public
  */
-class TodoApp extends Todo {
+class TodoApp implements Todo {
   /**
    * @member {TodoList}
    */
@@ -48,7 +48,6 @@ class TodoApp extends Todo {
   nextCategoryId: number
 
   constructor() {
-    super()
     this.todoList = []
     this.nextTaskId = 0
     this.nextCategoryId = 0

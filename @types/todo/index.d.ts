@@ -9,7 +9,7 @@ export type TodoItem = {
   tasks: Task[]
 }
 export type TodoList = TodoItem[]
-export class Todo {
+export interface Todo {
   todoList: TodoList
   nextTaskId: number
   nextCategoryId: number
