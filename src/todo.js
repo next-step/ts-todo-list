@@ -43,9 +43,8 @@ class Todo {
    * @returns {boolean} 태그 삭제 결과
    */
   removeTag(tagId) {
-    if(this.tags.find(tag => tag.id !== tagId) === undefined)
-      return false;
-    this.tags = this.tags.filter(tag => tag.id !== tagId)
+    if (this.tags.find((tag) => tag.id !== tagId) === undefined) return false;
+    this.tags = this.tags.filter((tag) => tag.id !== tagId);
   }
 
   /**

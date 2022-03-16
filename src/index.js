@@ -21,8 +21,8 @@ const tags = [];
  * @returns - {Todo[]} 모든 할일
  */
 function getTodos() {
-    console.log(todos)
-    return todos;
+  console.log(todos);
+  return todos;
 }
 
 /**
@@ -33,8 +33,8 @@ function getTodos() {
  */
 
 function getTodo(id) {
-    console.log(todos)
-    return todos.find(todo => todo.id === id) || null;
+  console.log(todos);
+  return todos.find((todo) => todo.id === id) || null;
 }
 
 /**
@@ -49,8 +49,8 @@ function getTodo(id) {
  */
 
 function addTodo(todo) {
-    todos.push(todo);
-    console.log(todos)
+  todos.push(todo);
+  console.log(todos);
 }
 
 /**
@@ -61,12 +61,12 @@ function addTodo(todo) {
  */
 
 function deleteTodo(id) {
-    const idx = todos.findIndex(todo => todo.id === id);
-    if(idx > -1) {
-        todos.splice(idx, 1);
-        console.log(todos)
-        return true;
-    }else return false;
+  const idx = todos.findIndex((todo) => todo.id === id);
+  if (idx > -1) {
+    todos.splice(idx, 1);
+    console.log(todos);
+    return true;
+  } else return false;
 }
 
 /**
@@ -76,8 +76,8 @@ function deleteTodo(id) {
  */
 
 function deleteTodos() {
-    todos.splice(0, todos.length);
-    console.log(todos)
+  todos.splice(0, todos.length);
+  console.log(todos);
 }
 
 /**
@@ -91,10 +91,10 @@ function deleteTodos() {
  */
 
 function updateTodo(todo) {
-    const idx = todos.findIndex(todo => todo.id === id);
-    todos[idx].isComplete = todo.isComplete;
-    todos[idx].contents = todo.contents;
-    console.log(todos)
+  const idx = todos.findIndex((todo) => todo.id === id);
+  todos[idx].isComplete = todo.isComplete;
+  todos[idx].contents = todo.contents;
+  console.log(todos);
 }
 
 /**
@@ -107,6 +107,6 @@ function updateTodo(todo) {
  */
 
 function updateTag(tag) {
-    const idx = tags.findIndex(tag => tag.id === id);
-    tags[idx].name = tag.name;
+  const idx = tags.findIndex((tag) => tag.id === id);
+  tags[idx].name = tag.name;
 }
