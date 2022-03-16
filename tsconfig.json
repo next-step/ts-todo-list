@@ -6,6 +6,7 @@
     "emitDeclarationOnly": true,
     "outDir": "dist",
     "strict": true,
-    "typeRoots": ["@types"]
+    "typeRoots": ["@types"],
+    "target": "ES2015"
   }
 }
