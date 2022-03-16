@@ -4,9 +4,9 @@
  * @see {@link https://github.com/dahye1013/ts-todo-list}
  */
 
-import Tag from "./Tag.js";
-import Todo from "./Todo.js";
-import Todos from "./Todos.js";
+import Tag from "./Tag";
+import Todo from "./Todo";
+import Todos from "./Todos";
 
 const todos = new Todos();
 
