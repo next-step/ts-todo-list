@@ -1,5 +1,5 @@
 import {
-    category,
+    CATEGORY,
     createTodo,
     deleteTodoDetail,
     deleteTodoList,
@@ -9,15 +9,15 @@ import {
     readTodoList,
     updateTodo,
     updateTodoTag
-} from "./index.js";
+} from "./index";
 
 console.log("To Do 미션 기능 구현 테스트")
 
 console.log("----------------------------------------------------------------------------")
 console.log("새로운 할 일 추가 및 전체 할 일 목록 조회")
-createTodo(0, 'TODO-1', false, category[0], ['next', 'step'])
-createTodo(1, 'TODO-2', false, category[1], ['java', 'script'])
-createTodo(2, 'TODO-3', false, category[2], ['poco', 'jang'])
+createTodo(0, 'TODO-1', false, CATEGORY.TODAY, ['next', 'step'])
+createTodo(1, 'TODO-2', false, CATEGORY.TOMORROW, ['java', 'script'])
+createTodo(2, 'TODO-3', false, CATEGORY.NEXT_WEEK, ['poco', 'jang'])
 readTodoList()
 
 console.log("----------------------------------------------------------------------------")
@@ -52,4 +52,4 @@ readTodoList()
 console.log("----------------------------------------------------------------------------")
 console.log("모든 할 일 제거")
 deleteTodoList()
-readTodoList()git
+readTodoList()
