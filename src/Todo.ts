@@ -6,6 +6,7 @@
 /// <reference path="../@types/todos/index.d.ts" />
 
 import { initTodoItemType, TodoItem as TodoItemType } from "todos";
+// import Todos = require("todos");
 
 /**
  * TodoItem 클래스
