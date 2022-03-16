@@ -33,7 +33,7 @@ declare class Todo {
   set content(value: TodoData["content"]);
   set isDone(value: TodoData["isDone"]);
   set priority(value: TodoData["priority"]);
-  set labels(value: Label);
+  set labels(value: Label[]);
 }
 
 /** TodoApp */
@@ -57,7 +57,7 @@ declare class TodoApp {
 
   addTodoLabelByTodoId(
     targetTodoId: TodoData["id"],
-    newLabelContent: TodoData["content"]
+    newLabel: Label
   ): TodoData["id"] | -1;
 
   deleteTodoLabelByLabelId(
