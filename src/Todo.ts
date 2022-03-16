@@ -57,7 +57,7 @@ class TodoApp implements Todo {
    * @description getUniqueTaskId함수를 호출하기전 nextTaskId를 증가시킵니다.
    * @returns {void}
    */
-  setIncreasingTaskId() {
+  setIncreasingTaskId(): void {
     this.nextTaskId++
   }
 
@@ -65,7 +65,7 @@ class TodoApp implements Todo {
    * @description setIncreasingTaskId함수를 호출 후 nextTaskId를 리턴합니다.
    * @returns {number}
    */
-  getUniqueTaskId() {
+  getUniqueTaskId(): number {
     this.setIncreasingTaskId()
     return this.nextTaskId
   }
@@ -76,7 +76,7 @@ class TodoApp implements Todo {
    * @param {string} task
    * @returns {void}
    */
-  createTask(categoryId: number, task: string) {
+  createTask(categoryId: number, task: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -94,7 +94,7 @@ class TodoApp implements Todo {
    * @param {string} task
    * @returns {void}
    */
-  updateTask(categoryId: number, taskId: number, task: string) {
+  updateTask(categoryId: number, taskId: number, task: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -112,7 +112,7 @@ class TodoApp implements Todo {
    * @param {number} taskId
    * @returns {void}
    */
-  deleteTask(categoryId: number, taskId: number) {
+  deleteTask(categoryId: number, taskId: number): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -130,7 +130,7 @@ class TodoApp implements Todo {
    * @param {number} taskId
    * @returns {void}
    */
-  toggleCompleteTask(categoryId: number, taskId: number) {
+  toggleCompleteTask(categoryId: number, taskId: number): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -146,7 +146,7 @@ class TodoApp implements Todo {
    * getUniqueCategoryId 호출하기전 nextCategoryId를 증가시킵니다.
    * @returns {void}
    */
-  setIncreasingCategoryId() {
+  setIncreasingCategoryId(): void {
     this.nextCategoryId++
   }
 
@@ -154,7 +154,7 @@ class TodoApp implements Todo {
    * @description setIncreasingCategoryId 함수를 호출 후 nextCategoryId를 리턴합니다.
    * @returns {number}
    */
-  getUniqueCategoryId() {
+  getUniqueCategoryId(): number {
     this.setIncreasingCategoryId()
     return this.nextCategoryId
   }
@@ -164,7 +164,7 @@ class TodoApp implements Todo {
    * @param {string} categoryName
    * @returns {void}
    */
-  createCategory(categoryName: string) {
+  createCategory(categoryName: string): void {
     this.todoList.push({
       categoryId: this.getUniqueCategoryId(),
       categoryName,
@@ -178,7 +178,7 @@ class TodoApp implements Todo {
    * @param {string} categoryName
    * @returns {void}
    */
-  updateCategoryName(categoryId: number, categoryName: string) {
+  updateCategoryName(categoryId: number, categoryName: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -190,7 +190,7 @@ class TodoApp implements Todo {
    * @param {number} categoryId
    * @returns {void}
    */
-  deleteCategory(categoryId: number) {
+  deleteCategory(categoryId: number): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     )
@@ -202,7 +202,7 @@ class TodoApp implements Todo {
    * @param {string} [message]
    * @returns {void}
    */
-  readAllTodo(message?: string) {
+  readAllTodo(message?: string): void {
     if (message) console.log('\n' + message)
     console.log(JSON.stringify(this.todoList))
   }
