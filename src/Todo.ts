@@ -5,33 +5,36 @@
 
 /// <reference path="../@types/todos/index.d.ts" />
 
+import { initTodoItemType, TodoItem as TodoItemType } from "todos";
+// import Todos = require("todos");
+
 /**
  * TodoItem 클래스
  * @class
  * @constructor
  * @public
  */
-export default class TodoItem {
+export default class TodoItem implements TodoItemType {
   /** @member {string} */
-  content;
+  content: string;
 
   /**
    * @member {boolean}
    * @default false
    * */
-  complete;
+  complete: boolean;
 
   /**
    * @member {string}
    * @default "etc"
    * */
-  category;
+  category: string;
 
   /**
    * @member {string[]}
    * @default [ ]
    * */
-  tags;
+  tags: string[];
 
   /**
    * @constructs
@@ -40,7 +43,7 @@ export default class TodoItem {
    *
    * @see {@link initTodoItemType} 참고
    */
-  constructor(initState) {
+  constructor(initState: initTodoItemType) {
     const { content, complete, category, tags } = initState;
     this.content = content;
     this.complete = complete || false;

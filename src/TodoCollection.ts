@@ -5,23 +5,29 @@
 
 /// <reference path="../@types/todos/index.d.ts" />
 
+import {
+  TodoItem,
+  TodoListType,
+  TodoCollection as TodoCollectionType,
+} from "todos";
+
 /**
  * TodoCollection TodoItem 을 Map 형태로 관리하는 클래스
  * @class
  * @constructor
  * @public
  */
-export default class TodoCollection {
+export default class TodoCollection implements TodoCollectionType {
   /**
    * @member {TodoListType}
    * */
-  todoList;
+  todoList: TodoListType;
 
   /**
    * @member {number}
    * @default 1
    */
-  nextId;
+  nextId: number;
 
   /**
    * @constructs
@@ -45,7 +51,7 @@ export default class TodoCollection {
    * @todo 내용이 없는 경우 실패
    * @see {@link TodoItem} 참고
    */
-  createTodo(todoItem) {
+  createTodo(todoItem: TodoItem) {
     if (!todoItem.content) return -1;
     this.todoList.set(this.nextId, todoItem);
     return this.nextId++;
@@ -75,7 +81,7 @@ export default class TodoCollection {
    * @todo 해당 아이디가 없는 경우 '해당하는 할 일 없음' 을 출력한다.
    * @see {@link TodoItem} printTodo 로 TodoItem 내용을 출력
    */
-  readTodo(id) {
+  readTodo(id: number) {
     const todoItem = this.todoList.get(id);
     if (!todoItem) {
       console.log("해당하는 할 일 없음");
@@ -92,7 +98,7 @@ export default class TodoCollection {
    *
    * @todo 해당 아이디가 없는 경우 실패
    */
-  updateTodo(id, todoItem) {
+  updateTodo(id: number, todoItem: TodoItem) {
     if (!this.todoList.has(id)) {
       return null;
     }
@@ -110,7 +116,7 @@ export default class TodoCollection {
    * @todo 해당 아이디가 없는 경우 실패
    * @todo 해당 태그가 없는 경우 실패
    */
-  updateTag(id, targetTag, newTag) {
+  updateTag(id: number, targetTag: string, newTag: string) {
     const todoItem = this.todoList.get(id);
     if (!todoItem) {
       return false;
@@ -138,7 +144,7 @@ export default class TodoCollection {
    * @param {number} id TodoItem 아이디
    * @return {number} 성공시 삭제한 TodoItem 아이디를 리턴, 실패시 -1 을 리턴
    */
-  deleteTodo(id) {
+  deleteTodo(id: number) {
     if (!this.todoList.has(id)) {
       return -1;
     }
@@ -153,7 +159,7 @@ export default class TodoCollection {
    *
    * @todo 해당 아이디가 없는 경우 '해당하는 할 일 없음' 을 출력한다.
    */
-  deleteTags(id) {
+  deleteTags(id: number) {
     const todoItem = this.todoList.get(id);
     if (!todoItem) {
       console.log("해당하는 할 일 없음");
@@ -171,7 +177,7 @@ export default class TodoCollection {
    * @todo 해당 아이디가 없는 경우 실패
    * @todo 해당 태그가 없는 경우 실패
    */
-  deleteTag(id, tag) {
+  deleteTag(id: number, tag: string) {
     const todoItem = this.todoList.get(id);
     if (!todoItem) {
       return null;
