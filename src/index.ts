@@ -1,23 +1,24 @@
-import { Tag } from "./@types";
+import { Tag } from "./@types/tag";
+import { Todo } from "./@types/todo";
 
 /**
  * 할일 목록
  * @type {Todo[]}
  */
-const todos = [];
+const todos: Todo[] = [];
 
 /**
  * 태그 목록
  * @type {Tag[]}
  */
-const tags = [];
+const tags: Tag[] = [];
 
 /**
  * @function getTodos
  * @description 모든 할일을 반환한다.
  * @returns - {Todo[]} 모든 할일
  */
-function getTodos() {
+function getTodos(): Todo[] {
   console.log(todos);
   return todos;
 }
@@ -29,7 +30,7 @@ function getTodos() {
  * @returns - {Todo | null} id값과 매칭되는 할일 혹은 null
  */
 
-function getTodo(id) {
+function getTodo(id: number): Todo | null {
   console.log(todos);
   return todos.find((todo) => todo.id === id) || null;
 }
@@ -45,19 +46,24 @@ function getTodo(id) {
  * @returns {boolean} 추가 결과
  */
 
-function addTodo(todo) {
-  todos.push(todo);
-  console.log(todos);
+function addTodo(todo: Todo): boolean {
+  try {
+    todos.push(todo);
+    console.log(todos);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 /**
  * @function deleteTodo
- * @param {string} id - 삭제할 할일의 id
+ * @param {number} id - 삭제할 할일의 id
  * @description 같은 id의 할일 삭제
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodo(id) {
+function deleteTodo(id: number): boolean {
   const idx = todos.findIndex((todo) => todo.id === id);
   if (idx > -1) {
     todos.splice(idx, 1);
@@ -72,9 +78,14 @@ function deleteTodo(id) {
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodos() {
-  todos.splice(0, todos.length);
-  console.log(todos);
+function deleteTodos(): boolean {
+  try {
+    todos.splice(0, todos.length);
+    console.log(todos);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 /**
@@ -87,11 +98,16 @@ function deleteTodos() {
  * @returns {boolean} 수정 결과
  */
 
-function updateTodo(todo) {
-  const idx = todos.findIndex((todo) => todo.id === id);
-  todos[idx].isComplete = todo.isComplete;
-  todos[idx].contents = todo.contents;
-  console.log(todos);
+function updateTodo(inputTodo: Todo) {
+  try {
+    const idx = todos.findIndex((todo) => todo.id === inputTodo.id);
+    todos[idx].isComplete = inputTodo.isComplete;
+    todos[idx].contents = inputTodo.contents;
+    console.log(todos);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 /**
@@ -103,7 +119,12 @@ function updateTodo(todo) {
  * @returns {boolean} 수정 결과
  */
 
-function updateTag(tag) {
-  const idx = tags.findIndex((tag) => tag.id === id);
-  tags[idx].name = tag.name;
+function updateTag(inputTag: Tag): boolean {
+  try {
+    const idx = tags.findIndex((tag) => tag.id === inputTag.id);
+    tags[idx].name = inputTag.name;
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
