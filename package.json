@@ -4,7 +4,11 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"docs": "jsdoc -c jsdoc.json"
+		"docs": "jsdoc -c jsdoc.json",
+		"clean": "rm dist/bundle.js",
+		"start": "snowpack dev",
+		"build": "snowpack build",
+		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
@@ -18,6 +22,9 @@
 	},
 	"homepage": "https://github.com/next-step/ts-todo-list#readme",
 	"devDependencies": {
-		"jsdoc": "^3.6.10"
+		"jest": "^27.4.5",
+		"jsdoc": "^3.6.10",
+		"prettier": "^2.6.0",
+		"snowpack": "^3.8.8"
 	}
 }
