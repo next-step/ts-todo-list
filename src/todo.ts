@@ -1,3 +1,11 @@
+interface ITodo {
+  id: number;
+  text?: string;
+  done: boolean;
+  category: string;
+  tags?: string[];
+}
+
 /**
  * 할 일 데이터 내용(객체)
  * @type {{id:number, text: string, done:boolean, category:string, tags:string[]}}
@@ -10,7 +18,7 @@ let currentId = 1;
  * 할 일 목록
  * @type {todo[]}
  */
-let todos = [];
+let todos: ITodo[] = [];
 
 /**increase id
  * @function increaseId
@@ -18,7 +26,7 @@ let todos = [];
  * @return - +1 증가시킨 id 값
  */
 
-function increaseId() {
+function increaseId(): number {
   currentId += 1;
 
   return currentId;
@@ -31,7 +39,7 @@ function increaseId() {
  * @todo 내용이 없다면 할 일을 추가할 수 없다.
  * @todo 할 일을 추가하면 할 일의 id를 증가시킨다.
  */
-function createTodo(todo) {
+function createTodo(todo: ITodo): void {
   if (!todo) {
     return;
   }
@@ -46,7 +54,7 @@ function createTodo(todo) {
  * @description 모든 할 일을 조회할 수 있다.
  * @return - 전체 Todo[] 목록
  */
-function getTodos() {
+function getTodos(): ITodo[] {
   return todos;
 }
 
@@ -56,8 +64,8 @@ function getTodos() {
  * @param {number} id - 조회할 특정 할 일 id
  * @return - 조회한 Todo[]
  */
-function getTodo(id) {
-  return todos.find(todo => todo.id === id);
+function getTodo(id: number): ITodo | undefined {
+  return todos.find((todo) => todo.id === id);
 }
 
 /**update Todo
@@ -67,16 +75,16 @@ function getTodo(id) {
  * @return - 수정 후 Todo[] 목록
  */
 
-function updateTodo(id) {
+function updateTodo(id: number, changeText: string): ITodo[] {
   const newTodo = {
     id,
-    text: '변경한 TODO',
+    text: changeText,
     done: false,
-    category: '개인',
-    tags: ['tag1', 'tag2']
-  }
+    category: "개인",
+    tags: ["tag1", "tag2"],
+  };
 
-  todos = todos.map(todo => id === todo.id ? newTodo : todo);
+  todos = todos.map((todo) => (id === todo.id ? newTodo : todo));
 
   return todos;
 }
@@ -87,14 +95,20 @@ function updateTodo(id) {
  * @param {number} id - 수정할 태그의 특정 할 일 id
  * @param {string} tag - 수정할 태그
  */
-function updateTag(id, targetTag, changeTag) {
-  const targetTodo = todos.find(todo => todo.id === id);
-  const tags = targetTodo.tags.map(tag => tag === targetTag ? changeTag : targetTag);
+function updateTag(id: number, targetTag: string, changeTag: string): ITodo[] {
+  const targetTodo: ITodo | undefined = todos.find((todo) => todo.id === id);
+  const tags: string[] | undefined = targetTodo?.tags?.map((tag) =>
+    tag === targetTag ? changeTag : targetTag
+  );
 
-  todos = todos.map(todo => todo.id === id ? {
-    ...todo,
-    tags,
-  } : todo);
+  todos = todos.map((todo) =>
+    todo.id === id
+      ? {
+          ...todo,
+          tags,
+        }
+      : todo
+  );
 
   return todos;
 }
@@ -103,8 +117,10 @@ function updateTag(id, targetTag, changeTag) {
  * @function deleteAll
  * @description 모든 할 일을 제거할 수 있다.
  */
-function deleteAll() {
+function deleteAll(): ITodo[] {
   todos = [];
+
+  return todos;
 }
 
 /**
@@ -112,8 +128,8 @@ function deleteAll() {
  * @description ID를 기반으로 특정 할 일을 삭제할 수 있다.
  * @param {number} id - 삭제할 할 일 id
  */
-function deleteTodo(id) {
-  todos.filter(todo => todo.id !== id);
+function deleteTodo(id: number): void {
+  todos.filter((todo) => todo.id !== id);
 }
 
 /**
@@ -121,11 +137,15 @@ function deleteTodo(id) {
  * @description 특정 할 일의 모든 태그를 제거할 수 있다.
  * @param {number} id - 삭제할 태그의 특정 할 일 id
  */
-function deleteTags(id) {
-  todos = todos.map(todo => todo.id === id ? {
-    ...todo,
-    tags: [],
-  } : todo);
+function deleteTags(id: number): ITodo[] {
+  todos = todos.map((todo) =>
+    todo.id === id
+      ? {
+          ...todo,
+          tags: [],
+        }
+      : todo
+  );
 
   return todos;
 }
@@ -137,14 +157,20 @@ function deleteTags(id) {
  * @param {string} tag - 삭제할 태그
  *
  */
-function deleteTag(id, tag) {
-  const targetTodo = todos.find(todo => todo.id === id);
-  const tags = targetTodo.tags.filter(targetTag => targetTag !== tag);
+function deleteTag(id: number, tag: string): ITodo[] {
+  const targetTodo: ITodo | undefined = todos.find((todo) => todo.id === id);
+  const tags: string[] | undefined = targetTodo?.tags?.filter(
+    (targetTag) => targetTag !== tag
+  );
 
-  todos = todos.map(todo => todo.id === id ? {
-    ...todo,
-    tags,
-  } : todo);
+  todos = todos.map((todo) =>
+    todo.id === id
+      ? {
+          ...todo,
+          tags,
+        }
+      : todo
+  );
 
   return todos;
 }
@@ -154,28 +180,28 @@ console.log({ todos });
 
 createTodo({
   id: currentId,
-  text: '룰루',
+  text: "룰루",
   done: false,
-  category: '개인',
-  tags: ['tag1', 'tag2']
-})
+  category: "개인",
+  tags: ["tag1", "tag2"],
+});
 
 createTodo({
   id: currentId,
-  text: '룰루',
+  text: "룰루",
   done: false,
-  category: '회사',
-  tags: ['tag1', 'tag2']
-})
+  category: "회사",
+  tags: ["tag1", "tag2"],
+});
 
-console.log('getTodos ? ', getTodos());
-console.log('getTodo 1 ? ', getTodo(1));
+console.log("getTodos ? ", getTodos());
+console.log("getTodo 1 ? ", getTodo(1));
 
-console.log('updateTodo 1 ? ', updateTodo(1));
-console.log('updateTag 1 ? ', updateTag(1, 'tag1', '@@@변경한 태그 1'));
-console.log('updateTag 2 ? ', updateTag(2, 'tag2', '@@@변경한 태그 2'));
+console.log("updateTodo 1 ? ", updateTodo(1, "변경한 내용"));
+console.log("updateTag 1 ? ", updateTag(1, "tag1", "@@@변경한 태그 1"));
+console.log("updateTag 2 ? ", updateTag(2, "tag2", "@@@변경한 태그 2"));
 
-console.log('deleteTag ? ', deleteTag(2, '@@@변경한 태그 2'));
-console.log('deleteTags ? ', deleteTags(1));
+console.log("deleteTag ? ", deleteTag(2, "@@@변경한 태그 2"));
+console.log("deleteTags ? ", deleteTags(1));
 
 console.log(deleteAll());
