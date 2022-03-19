@@ -1,4 +1,4 @@
-export class TodoList {
+class TodoList {
   list: TodoItem[] = [];
 
   addItem(todoItem: TodoItem): void {
@@ -69,7 +69,7 @@ export class TodoList {
   }
 }
 
-export class TodoItem {
+class TodoItem {
   id: number = Math.round(Math.random() * 100);
   content: string;
   isFinished: boolean = false;
@@ -85,7 +85,7 @@ export class TodoItem {
   }
 }
 
-export class Tag {
+class Tag {
   id: number = Math.round(Math.random() * 100);
   content: string;
 
