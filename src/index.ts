@@ -30,8 +30,8 @@ class TodoApplication {
   /**
    * @member {StateType}
    */
-  _state: ITodo;
-  _todoList: ITodo[];
+  private _state: ITodo;
+  private _todoList: ITodo[];
 
   /**
    * @param {StateType} initialState - Todo 상태의 초기값
