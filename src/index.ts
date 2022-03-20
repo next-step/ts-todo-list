@@ -11,7 +11,7 @@ class TodoList {
   }
 
   readItemById(id: number): void {
-    console.table(this.list.find((item) => item.id === Number(id)));
+    console.table(this.list.find((item) => item.id === id));
   }
 
   updateItemById(
@@ -25,29 +25,27 @@ class TodoList {
     if (option.content) {
       console.log(id);
       console.log(option.content);
-      this.list.filter((item) => item.id === Number(id))[0].content =
-        option.content;
+      this.list.filter((item) => item.id === id)[0].content = option.content;
     }
     if (option.isFinished) {
-      this.list.filter((item) => item.id === Number(id))[0].isFinished =
+      this.list.filter((item) => item.id === id)[0].isFinished =
         option.isFinished;
     }
     if (option.category) {
-      this.list.filter((item) => item.id === Number(id))[0].category =
-        option.category;
+      this.list.filter((item) => item.id === id)[0].category = option.category;
     }
     this.readItemAll();
   }
 
   updateTagById(id: number, tagId: number, content: string): void {
     this.list
-      .filter((item) => item.id === Number(id))[0]
-      .tags.filter((tag) => tag.id === Number(tagId))[0].content = content;
+      .filter((item) => item.id === id)[0]
+      .tags.filter((tag) => tag.id === tagId)[0].content = content;
     this.readItemAll();
   }
 
   deleteItemById(id: number): void {
-    this.list = this.list.filter((item) => item.id !== Number(id));
+    this.list = this.list.filter((item) => item.id !== id);
     this.readItemAll();
   }
 
@@ -57,14 +55,14 @@ class TodoList {
   }
 
   deleteTagById(id: number, tagId: number): void {
-    this.list.filter((item) => item.id === Number(id))[0].tags = this.list
-      .filter((item) => item.id === Number(id))[0]
-      .tags.filter((tag) => tag.id !== Number(tagId));
+    this.list.filter((item) => item.id === id)[0].tags = this.list
+      .filter((item) => item.id === id)[0]
+      .tags.filter((tag) => tag.id !== tagId);
     this.readItemAll();
   }
 
   deleteTagAll(id: number): void {
-    this.list.filter((item) => item.id === Number(id))[0].tags = [];
+    this.list.filter((item) => item.id === id)[0].tags = [];
     this.readItemAll();
   }
 }
