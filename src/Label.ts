@@ -15,7 +15,6 @@ export class Label {
    * @type {{id: number, content: string}}
    */
   data: l.LabelData = {id: 0, content: ""};
-  //private data: l.LabelData = {id: 0, content: ""};
 
   /**
    * @constructor

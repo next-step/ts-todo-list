@@ -16,7 +16,6 @@ export class Todo {
    * @type {{id: number, isDone: boolean, content: string, labels: Label[]}}
    */
   data: t.TodoData = {id:0, isDone: false, content: "", priority: "LOW", labels: []};
-  //private data: t.TodoData = {id:0, isDone: false, content: "", priority: "LOW", labels: []};
 
   /**
    * @constructor
