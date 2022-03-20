@@ -8,37 +8,79 @@
     <title>To Do</title>
   </head>
   <body>
-    <button onclick="addItem()">할 일 추가</button>
-    <button onclick="todoList.readItemAll()">전체 할 일 조회</button>
-    <button onclick="todoList.readItemById(todoItem.id)">
-      특정 할 일 조회
-    </button>
-    <button
-      onclick="todoList.updateItemById(todoItem.id, {
-        content: '투 두',
-        isFinished: true,
-        category: '어제 한 일',
-        tags: [javascript, typescript],
-      })"
-    >
-      할 일 수정
-    </button>
-    <button
-      onclick="todoList.updateTagById(todoItemWithTags.id, javascript.id, 'jquery')"
-    >
-      태그 수정
-    </button>
-    <button onclick="todoList.deleteItemById(todoItem.id)">
-      특정 할 일 제거
-    </button>
-    <button
-      onclick="todoList.deleteTagById(todoItemWithTags.id, typescript.id)"
-    >
-      특정 태그 제거
-    </button>
-    <button onclick="todoList.deleteTagAll(todoItemWithTags.id)">
-      모든 태그 제거
-    </button>
-    <button onclick="todoList.deleteItemAll()">전체 할 일 제거</button>
+    <form>
+      <fieldset>
+        <legend>Create</legend>
+        내용 : <input id="content" /><br />
+        카테고리 : <input id="category" /><br />
+        태그들 : <input id="javascript" /><input id="typescript" /><input
+          id="react"
+        /><br />
+        <button onclick="addItem()">할 일 추가</button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Read</legend>
+        <button onclick="readItemAll()">전체 할 일 조회</button><br />
+        아이디 : <input type="number" id="id" />
+        <button onclick="readItemById(document.getElementById('id').value)">
+          특정 할 일 조회
+        </button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Update</legend>
+        아이디 : <input id="idUpdate" /><br />
+        내용 : <input id="contentUpdate" /><br />
+        완료 여부 :
+        <button onclick="setTrue()">true</button>
+        <button onclick="setFalse()">false</button><br />
+        카테고리 : <input id="categoryUpdate" /><br />
+        <button
+          onclick="updateItemById(document.getElementById('idUpdate').value, {
+          content: document.getElementById('contentUpdate').value,
+          isFinished: isFinished,
+          category: document.getElementById('categoryUpdate').value,
+        })"
+        >
+          할 일 수정</button
+        ><br />
+        아이디 : <input id="idTagUpdate" /><br />
+        태그 아이디 : <input id="tagIdUpdate" /><br />
+        태그 내용 : <input id="tagContent" /><br />
+        <button
+          onclick="updateTagById(document.getElementById('idTagUpdate').value, document.getElementById('tagIdUpdate').value, document.getElementById('tagContent').value)"
+        >
+          태그 수정
+        </button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Delete</legend>
+        아이디 : <input id="idDelete" /><br />
+        <button
+          onclick="deleteItemById(document.getElementById('idDelete').value)"
+        >
+          특정 할 일 제거</button
+        ><br />
+        아이디 : <input id="idTagDelete" /><br />
+        태그 아이디 : <input id="tagIdDelete" /><br />
+        <button
+          onclick="deleteTagById(document.getElementById('idTagDelete').value, document.getElementById('tagIdDelete').value)"
+        >
+          특정 태그 제거</button
+        ><br />
+        아이디 : <input id="idTagDeleteAll" /><br />
+        <button
+          onclick="deleteTagAll(document.getElementById('idTagDeleteAll').value)"
+        >
+          모든 태그 제거</button
+        ><br />
+        <button onclick="deleteItemAll()">전체 할 일 제거</button>
+      </fieldset>
+    </form>
   </body>
 </html>
