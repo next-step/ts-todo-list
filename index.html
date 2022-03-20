@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script src="./dist/src/index.js" type="module" defer></script>
+</head>
+<body>
+  <div>
+    <div>
+      <h2>UI</h2>
+      <select id="target">
+        <option>Category</option>
+        <option>Task</option>
+      </select>
+      <input type="text" id="userInput">
+      <button id="addBtn">Add</button>
+      <button id="editBtn">Edit</button>
+      <button id="delBtn">Delete</button>
+    </div>
+    <div>
+      <h2>Category</h2>
+      <select id="category">
+      </select>
+    </div>
+    <div>
+      <h2>Task</h2>
+      <main>
+        <ul class="task-list" style="list-style: none;"></ul>
+      </main>
+    </div>
+  </div>
+  
+</body>
+</html>
