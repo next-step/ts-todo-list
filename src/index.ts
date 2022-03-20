@@ -5,11 +5,11 @@
  */
 
 interface Todoitem {
-    id: string,
-    content: string,
-    completed: boolean,
-    category: string,
-    tags?: string[] | null
+  id: string;
+  content: string;
+  completed: boolean;
+  category: string;
+  tags?: string[] | null;
 }
 
 /**
@@ -17,10 +17,9 @@ interface Todoitem {
  * @type {Todoitem[]}
  */
 interface Todolist {
-    [index: number] : Array<Todoitem>;
+  [index: number]: Array<Todoitem>;
 }
 const Todolist = [];
-
 
 /**
  * @function createItem
@@ -31,22 +30,22 @@ const Todolist = [];
  * @param category {string} - required
  * @param tags {?string[]} - optional
  */
-const createItem = (id: string, content: string, completed: boolean, category: string, tags?: Array<string>) => {
-    const newItem = {
-        id,
-        content,
-        completed,
-        category,
-        tags: tags?.length ? tags : null,
-    };
-    Todolist.push(newItem);
-}
-
-console.log('-----createItem-----');
-createItem('1', '밥먹기', false, '의식주', ['아침']);
-console.log(Todolist);
-
-
+const createItem = (
+  id: string,
+  content: string,
+  completed: boolean,
+  category: string,
+  tags?: Array<string>
+) => {
+  const newItem = {
+    id,
+    content,
+    completed,
+    category,
+    tags: tags?.length ? tags : null,
+  };
+  Todolist.push(newItem);
+};
 
 /**
  * @function readItems
@@ -54,7 +53,7 @@ console.log(Todolist);
  * @returns Todolist
  */
 const readItems = (): Todolist => {
-    return Todolist;
+  return Todolist;
 };
 
 /**
@@ -64,8 +63,8 @@ const readItems = (): Todolist => {
  * @returns {{}}
  */
 const readItem = (id: string) => {
-    const targetItem = Todolist.find((item) => item.id === id);
-    return targetItem ? targetItem : {};
+  const targetItem = Todolist.find((item) => item.id === id);
+  return targetItem ? targetItem : {};
 };
 
 /**
@@ -79,18 +78,24 @@ const readItem = (id: string) => {
  * @returns {boolean}
  */
 
-const updateItem = (id: string, content: string, completed: boolean, category: string, tags?: Array<string>): boolean => {
-    const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-    if (targetItemIdx === -1) return false;
+const updateItem = (
+  id: string,
+  content: string,
+  completed: boolean,
+  category: string,
+  tags?: Array<string>
+): boolean => {
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
+  if (targetItemIdx === -1) return false;
 
-    Todolist[targetItemIdx] = {
-        ...Todolist[targetItemIdx],
-        content,
-        completed,
-        category,
-        tags: tags.length ? tags : undefined,
-    };
-    return true;
+  Todolist[targetItemIdx] = {
+    ...Todolist[targetItemIdx],
+    content,
+    completed,
+    category,
+    tags: tags.length ? tags : undefined,
+  };
+  return true;
 };
 
 /**
@@ -102,16 +107,14 @@ const updateItem = (id: string, content: string, completed: boolean, category: s
  * @returns {boolean}
  */
 const updateTag = (id: string, prev: string, next: string): boolean => {
-    const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-    if (targetItemIdx === -1) return false;
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
+  if (targetItemIdx === -1) return false;
 
-    const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
-        (tag) => tag === prev
-    );
-    if (targetTagIdx === -1) return false;
-    Todolist[targetItemIdx].tags[targetTagIdx] = next;
+  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex((tag) => tag === prev);
+  if (targetTagIdx === -1) return false;
+  Todolist[targetItemIdx].tags[targetTagIdx] = next;
 
-    return true;
+  return true;
 };
 
 /**
@@ -121,11 +124,11 @@ const updateTag = (id: string, prev: string, next: string): boolean => {
  * @returns {boolean}
  */
 const deleteItem = (id) => {
-    const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-    if (targetItemIdx === -1) return false;
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
+  if (targetItemIdx === -1) return false;
 
-    Todolist.splice(targetItemIdx, 1);
-    return true;
+  Todolist.splice(targetItemIdx, 1);
+  return true;
 };
 
 /**
@@ -133,7 +136,7 @@ const deleteItem = (id) => {
  * @description 모든 할 일을 제거할 수 있다.
  */
 const deleteItems = () => {
-    Todolist.splice(0, Todolist.length);
+  Todolist.splice(0, Todolist.length);
 };
 
 /**
@@ -143,16 +146,14 @@ const deleteItems = () => {
  * @returns {boolean}
  */
 const deleteTag = (id, tag) => {
-    const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-    if (targetItemIdx === -1) return false;
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
+  if (targetItemIdx === -1) return false;
 
-    const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
-        (eachTag) => eachTag === tag
-    );
-    if (targetTagIdx === -1) return false;
-    Todolist[targetItemIdx].tags.splice(targetTagIdx, 1);
+  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex((eachTag) => eachTag === tag);
+  if (targetTagIdx === -1) return false;
+  Todolist[targetItemIdx].tags.splice(targetTagIdx, 1);
 
-    return true;
+  return true;
 };
 
 /**
@@ -161,55 +162,41 @@ const deleteTag = (id, tag) => {
  * @param id
  */
 const deleteTags = (id: string) => {
-    const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-    if (targetItemIdx === -1) return false;
+  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
+  if (targetItemIdx === -1) return false;
 
-    Todolist[targetItemIdx].tags = [];
+  Todolist[targetItemIdx].tags = [];
 };
 
-// 테스트
-const item1 = {
-    id: '1',
-    content: "hello world",
-    completed: false,
-    category: "우선 순위1",
-};
-const item2 = {
-    id: '2',
-    content: "hi world",
-    completed: false,
-    category: "우선 순위2",
-    tags: ["하이"],
-};
-const item3 = {
-    id: '3',
-    content: "annyeong world",
-    completed: false,
-    category: "우선 순위3",
-    tags: ["긴급", "일반"],
+const template = ({ id, content, completed, category, tags }) => {
+  return `<li data-id=${id}>
+            <span>${id} | </span>
+            <span>${content} | </span>
+            <span>${category} | </span>
+            <span>${completed}</span>
+          </li>`;
 };
 
-[item1, item2, item3].forEach((item) =>
-    createItem(item.id, item.content, item.completed, item.category, item.tags)
-);
-console.log("===== createItem =====");
-console.log(Todolist);
-console.log("===== readItems =====");
-console.log(readItems());
-console.log("===== updateItem =====");
-console.log(updateItem('2', "ohayo world", true, "우선 순위1", []));
-console.log("===== readItem =====");
-console.log(readItem('2'));
-console.log("===== deleteItem =====");
-console.log(deleteItem('2'));
-console.log(readItems());
-console.log("===== updateTag =====");
-console.log(updateTag('3', "긴급", "안긴급"));
-console.log(readItem('3'));
-console.log("===== deleteTag =====");
-console.log(deleteTag('3', "안긴급"));
-console.log(readItem('3'));
-console.log("===== deleteTags =====");
-console.log(deleteTags('3'));
-console.log(readItem('3'));
+const App = () => {
+  const $form = document.querySelector("form");
+  const $ul = document.querySelector("ul");
 
+  const render = () => {
+    $ul.innerHTML = Todolist.map((todo) => template({ ...todo })).join("");
+  };
+
+  $form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const id = e.target["id"].value;
+    const content = e.target["content"].value;
+    const completed = e.target["completed"].value;
+    const category = e.target["category"].value;
+
+    createItem(id, content, completed, category, []);
+    render();
+  });
+};
+
+window.onload = () => {
+  App();
+};
