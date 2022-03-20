@@ -3,37 +3,32 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JS Clean TODO</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <title>TS TODO</title>
   </head>
   <body>
-    <div class="todoapp">
-      <h1>TODOS</h1>
-      <input
-        id="new-todo-title"
-        class="new-todo"
-        placeholder="할일을 추가해주세요"
-        autofocus
-      />
-      <main>
-        <input class="toggle-all" type="checkbox" />
-        <ul id="todo-list" class="todo-list"></ul>
-        <div class="count-container">
-          <span class="todo-count">총 <strong>0</strong> 개</span>
-          <ul class="filters">
-            <li>
-              <a class="all selected" href="#">전체보기</a>
-            </li>
-            <li>
-              <a class="active" href="#active">해야할 일</a>
-            </li>
-            <li>
-              <a class="completed" href="#completed">완료한 일</a>
-            </li>
-          </ul>
-        </div>
-      </main>
-    </div>
+    <form>
+      <label for="content">
+        content <input name="content" type="text" value="content"
+      /></label>
+      <label for="category">
+        category <input name="category" type="text" value="category"
+      /></label>
+      <label for="tags">
+        tags <input name="tags" type="text" value="tag"
+      /></label>
+      <button>등록</button>
+    </form>
+    <button class="remove-all">전체 삭제</button>
+    <ul>
+      <!-- <div>
+        <li>콘텐츠</li>
+        <span>카테고리: 123</span>
+        <span>태그: 123</span>
+        <button class="delete">삭제</button>
+        <button class="toggle">완료</button>
+      </div> -->
+    </ul>
+
     <script type="module" src="./src/index.ts"></script>
   </body>
 </html>
