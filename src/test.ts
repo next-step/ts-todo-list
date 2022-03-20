@@ -1,17 +1,17 @@
 // import { TodoItem, Tag, TodoList } from "./index.js";
 
-const javascript = new Tag("javascript");
-const typescript = new Tag("typesciprt");
-const react = new Tag("react");
+// const javascript = new Tag("javascript");
+// const typescript = new Tag("typesciprt");
+// const react = new Tag("react");
 
-const todoItem = new TodoItem("할 일", "오늘 할 일");
-const todoItemWithTags = new TodoItem("할 일", "내일 할 일", [
-  javascript,
-  typescript,
-  react,
-]);
+// const todoItem = new TodoItem("할 일", "오늘 할 일");
+// const todoItemWithTags = new TodoItem("할 일", "내일 할 일", [
+//   javascript,
+//   typescript,
+//   react,
+// ]);
 
-const todoList = new TodoList();
+// const todoList = new TodoList();
 
 console.log("To Do 미션 기능 구현 테스트");
 
