@@ -1,0 +1,11 @@
+{
+  "mount": {
+    "dist": "/",
+    "src": "/"
+  },
+  "optimize": {
+    "target": "es2018",
+    "bundle": true,
+    "minify": true
+  }
+}
