@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: model/tag.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,29 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: model/tag.js</h1>
 
     
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>export default class Tag {
+  /**
+   * @constructor
+   * @param {number} initTag.id - 태그의 아이디
+   * @param {string} initTag.name - 태그의 이름. 중복될 수 없다.
+   */
+  constructor(initTag) {
+    this.id = initTag.id;
+    this.name = initTag.name;
+  }
+}
+</code></pre>
+        </article>
+    </section>
 
 
 

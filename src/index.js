@@ -1,4 +1,4 @@
-import Todos from "./model/todos.js";
+import Todos from "./model/todoList.js";
 
 const BIG = "big";
 const MEDIUM = "medium";
