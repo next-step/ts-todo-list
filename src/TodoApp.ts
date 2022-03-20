@@ -3,8 +3,8 @@
  * @author guymoon(조기문)
  */
 
- import { Todo } from "./Todo.js";
-// import { Label } from "./Label.js";
+import * as t from "TodoModule";
+import * as l from "LabelModule";
 
 /**
  * Manage the list of todo
@@ -16,13 +16,13 @@ export class TodoApp {
    * @member - todo들이 모여있는 todoList
    * @type {Todo[]}
    */
-  todoList: Todo[] = [];
+  todoList: t.Todo[] = [];
 
   /**
    * unique id를 만드는 함수
    * @return {number} uniqueId
    */
-  createUniqueId(): TodoData["id"] {
+  createUniqueId(): t.TodoData["id"] {
     return this.todoList
                 .map(todo => todo.info.id)
                 .reduce((id1, id2) => Math.max(id1, id2), 0) + 1;
@@ -33,7 +33,7 @@ export class TodoApp {
    * @param {Todo} todo
    * @return {number} addedTodoId
    */
-  addTodo(todo: Todo): TodoData["id"] | -1{
+  addTodo(todo: t.Todo): t.TodoData["id"] | -1{
     if (todo.info.content === '') return -1;
     this.todoList = [...this.todoList, todo];
     return todo.info.id;
@@ -44,7 +44,7 @@ export class TodoApp {
    * @param {number} todoId
    * @return {number} deletedTodoId - 지워진 todo의 id값
    */
-  deleteTodoById(todoId: TodoData["id"]): TodoData["id"] | -1 {
+  deleteTodoById(todoId: t.TodoData["id"]): t.TodoData["id"] | -1 {
     const targetTodo = this.todoList.find(todo => todo.info.id === todoId);
     if (!targetTodo) return -1;
 
@@ -68,7 +68,7 @@ export class TodoApp {
    * @param {string} newContent
    * @return {number} mutatedTodoId - mutate된 todo의 id 값
    */
-  mutateTodoContentById(idToMutateTodo: TodoData["id"], newContent: TodoData["content"]): TodoData["id"] | -1 {
+  mutateTodoContentById(idToMutateTodo: t.TodoData["id"], newContent: t.TodoData["content"]): t.TodoData["id"] | -1 {
     const targetIndex = this.todoList.findIndex(
       (todo) => todo.info.id === idToMutateTodo
     );
@@ -85,7 +85,7 @@ export class TodoApp {
    * @param {number} idToMutateTodo
    * @return {number} idToMutatedTodo - isDone 값이 변경된 todo의 id 값
    */
-  mutateTodoStatusById(idToMutateTodo: TodoData["id"]): TodoData["id"] | -1 {
+  mutateTodoStatusById(idToMutateTodo: t.TodoData["id"]): t.TodoData["id"] | -1 {
     const targetIndex = this.todoList.findIndex(
       (todo) => todo.info.id === idToMutateTodo
     );
@@ -105,7 +105,7 @@ export class TodoApp {
    * @param {newLabel} newLabel - 새로 추가 할 label 내용
    * @return {number} deletedTodoId - 추가된 todo의 id 값
    */
-  addTodoLabelByTodoId(targetTodoId: TodoData["id"], newLabel: Label): TodoData["id"] | -1 {
+  addTodoLabelByTodoId(targetTodoId: t.TodoData["id"], newLabel: l.Label): t.TodoData["id"] | -1 {
     const targetTodo = this.todoList.find(todo => todo.info.id === targetTodoId);
     if (!targetTodo) return -1;
 
@@ -125,7 +125,7 @@ export class TodoApp {
    * @param {number} idToDeleteLabel - 삭제 할 label의 id 값
    * @return {number} deletedLabelId - 삭제된 label의 id 값
    */
-  deleteTodoLabelByLabelId(targetTodoId: LabelData["id"], idToDeleteLabel: LabelData["id"]): LabelData["id"] | -1 {
+  deleteTodoLabelByLabelId(targetTodoId: l.LabelData["id"], idToDeleteLabel: l.LabelData["id"]): l.LabelData["id"] | -1 {
     const targetTodo = this.todoList.find(todo => todo.info.id === targetTodoId);
     if (!targetTodo) return -1;
 
