@@ -32,7 +32,7 @@
     <form>
       <fieldset>
         <legend>Update</legend>
-        아이디 : <input id="idUpdate" /><br />
+        아이디 : <input type="number" id="idUpdate" /><br />
         내용 : <input id="contentUpdate" /><br />
         완료 여부 :
         <button onclick="setTrue()">true</button>
@@ -47,8 +47,8 @@
         >
           할 일 수정</button
         ><br />
-        아이디 : <input id="idTagUpdate" /><br />
-        태그 아이디 : <input id="tagIdUpdate" /><br />
+        아이디 : <input type="number" id="idTagUpdate" /><br />
+        태그 아이디 : <input type="number" id="tagIdUpdate" /><br />
         태그 내용 : <input id="tagContent" /><br />
         <button
           onclick="updateTagById(document.getElementById('idTagUpdate').value, document.getElementById('tagIdUpdate').value, document.getElementById('tagContent').value)"
@@ -60,20 +60,20 @@
     <form>
       <fieldset>
         <legend>Delete</legend>
-        아이디 : <input id="idDelete" /><br />
+        아이디 : <input type="number" id="idDelete" /><br />
         <button
           onclick="deleteItemById(document.getElementById('idDelete').value)"
         >
           특정 할 일 제거</button
         ><br />
-        아이디 : <input id="idTagDelete" /><br />
-        태그 아이디 : <input id="tagIdDelete" /><br />
+        아이디 : <input type="number" id="idTagDelete" /><br />
+        태그 아이디 : <input type="number" id="tagIdDelete" /><br />
         <button
           onclick="deleteTagById(document.getElementById('idTagDelete').value, document.getElementById('tagIdDelete').value)"
         >
           특정 태그 제거</button
         ><br />
-        아이디 : <input id="idTagDeleteAll" /><br />
+        아이디 : <input type="number" id="idTagDeleteAll" /><br />
         <button
           onclick="deleteTagAll(document.getElementById('idTagDeleteAll').value)"
         >
