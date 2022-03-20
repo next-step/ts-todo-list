@@ -24,6 +24,7 @@
     "doc": "docs"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.17.7",
     "docdash": "^1.2.0"
   }
 }

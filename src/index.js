@@ -1,68 +1,60 @@
 /**
- * Todoitem를 가지는 배열 객체
- * @type {Todoitem[]}
- */
-const Todolist = [];
-
-/**
  * Todoitem 객체
  * 순서대로 아이디, 내용, 완료여부, 카테고리, 태그들(문자열 타입의 태그를 담은 문자열 배열)
  * @type {{id: !string, content: !string, completed: !boolean, category: !string, tags: ?string[]}}
  */
-const Todoitem = {};
-
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var Todolist = [];
 /**
- * 할 일을 추가할 수 있다. 내용없이 추가할 수 없다.
- * Todoitem 객체를 생성한다.
+ * @function createItem
+ * @description 할 일을 추가할 수 있다. 내용없이 추가할 수 없다. Todoitem 객체를 생성한다.
  * @param id {string} - required
  * @param content {string} - required
  * @param completed {boolean} - required
  * @param category {string} - required
  * @param tags {?string[]} - optional
- * @returns {{}}
  */
-const createItem = (id, content, completed, category, tags) => {
-  if (!content) return {};
-  const newItem = {
-    id,
-    content,
-    completed,
-    category,
-    tags: tags?.length ? tags : undefined,
-  };
-
-  Todolist.push(newItem);
-  /** 본래 return 은 {}으로,
-   * 만들어진 Item객체를 리턴만 하는 것으로 이해했었으나,
-   * 전역으로 다뤄야하는 Todolist에 넣는 method가 없어서 여기에 push를 구현함.
-   */
-  return newItem;
+var createItem = function (id, content, completed, category, tags) {
+    var newItem = {
+        id: id,
+        content: content,
+        completed: completed,
+        category: category,
+        tags: (tags === null || tags === void 0 ? void 0 : tags.length) ? tags : null
+    };
+    Todolist.push(newItem);
 };
-
 /**
- * 모든 할 일을 조회할 수 있다.
- * Todolist를 반환한다.
- * @returns {Todoitem[]}
+ * @function readItems
+ * @description 모든 할 일을 조회할 수 있다.
+ * @returns Todolist
  */
-const readItems = () => {
-  return Todolist;
+var readItems = function () {
+    return Todolist;
 };
-
 /**
- * ID를 기반으로 특정 할 일을 조회할 수 있다.
- * 해당 ID를 가진 Todoitem 인스턴스를 반환한다.
+ * @function readItem
+ * @description ID를 기반으로 특정 할 일을 조회할 수 있다. 해당 ID를 가진 Todoitem 인스턴스를 반환한다.
  * @param id
  * @returns {{}}
  */
-const readItem = (id) => {
-  const targetItem = Todolist.find((item) => item.id === id);
-  return targetItem ? targetItem : {};
+var readItem = function (id) {
+    var targetItem = Todolist.find(function (item) { return item.id === id; });
+    return targetItem ? targetItem : {};
 };
-
 /**
- * ID를 제외한 모든 속성을 수정할 수 있다.
- * 수정 성공시 true 반환
- * undefined 입력시 해당 속성은 수정하지 않음
+ * @function updateItem
+ * @description ID를 제외한 모든 속성을 수정할 수 있다. undefined 입력시 해당 속성은 수정하지 않음
  * @param id {string} - required
  * @param content {string} - required
  * @param completed {boolean} - required
@@ -70,139 +62,128 @@ const readItem = (id) => {
  * @param tags {string[]} - optional
  * @returns {boolean}
  */
-const updateItem = (id, content, completed, category, tags) => {
-  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-  if (targetItemIdx === -1) return false;
-
-  Todolist[targetItemIdx] = {
-    ...Todolist[targetItemIdx],
-    content,
-    completed,
-    category,
-    tags: tags.length ? tags : undefined,
-  };
-  return true;
+var updateItem = function (id, content, completed, category, tags) {
+    var targetItemIdx = Todolist.findIndex(function (item) { return item.id === id; });
+    if (targetItemIdx === -1)
+        return false;
+    Todolist[targetItemIdx] = __assign(__assign({}, Todolist[targetItemIdx]), { content: content, completed: completed, category: category, tags: tags.length ? tags : undefined });
+    return true;
 };
-
 /**
- * 특정 할 일의 특정 태그를 수정할 수 있다.
- * 수정 성공시 true 반환
+ * @function updateTag
+ * @description 특정 할 일의 특정 태그를 수정할 수 있다.
  * @param id {string}
  * @param prev {string} - 수정하려는 태그
  * @param next {string} - 수정할 내용
  * @returns {boolean}
  */
-const updateTag = (id, prev, next) => {
-  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-  if (targetItemIdx === -1) return false;
-
-  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
-    (tag) => tag === prev
-  );
-  if (targetTagIdx === -1) return false;
-  Todolist[targetItemIdx].tags[targetTagIdx] = next;
-
-  return true;
+var updateTag = function (id, prev, next) {
+    var targetItemIdx = Todolist.findIndex(function (item) { return item.id === id; });
+    if (targetItemIdx === -1)
+        return false;
+    var targetTagIdx = Todolist[targetItemIdx].tags.findIndex(function (tag) { return tag === prev; });
+    if (targetTagIdx === -1)
+        return false;
+    Todolist[targetItemIdx].tags[targetTagIdx] = next;
+    return true;
 };
-
 /**
- * ID를 기반으로 특정 할 일을 삭제할 수 있다.
- * 삭제 성공시 true 반환
+ * @function deleteItem
+ * @description ID를 기반으로 특정 할 일을 삭제할 수 있다.
  * @param id
  * @returns {boolean}
  */
-const deleteItem = (id) => {
-  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-  if (targetItemIdx === -1) return false;
-
-  Todolist.splice(targetItemIdx, 1);
-  return true;
+var deleteItem = function (id) {
+    var targetItemIdx = Todolist.findIndex(function (item) { return item.id === id; });
+    if (targetItemIdx === -1)
+        return false;
+    Todolist.splice(targetItemIdx, 1);
+    return true;
 };
-
 /**
- * 모든 할 일을 제거할 수 있다.
- * @returns {boolean}
+ * @function deleteItems
+ * @description 모든 할 일을 제거할 수 있다.
  */
-const deleteItems = () => {
-  Todolist = [];
-  return true;
+var deleteItems = function () {
+    Todolist.splice(0, Todolist.length);
 };
-
 /**
  * 특정 할 일의 특정 태그를 삭제할 수 있다.
  * @param id
  * @param tag
  * @returns {boolean}
  */
-const deleteTag = (id, tag) => {
-  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-  if (targetItemIdx === -1) return false;
-
-  const targetTagIdx = Todolist[targetItemIdx].tags.findIndex(
-    (eachTag) => eachTag === tag
-  );
-  if (targetTagIdx === -1) return false;
-  Todolist[targetItemIdx].tags.splice(targetTagIdx, 1);
-
-  return true;
+var deleteTag = function (id, tag) {
+    var targetItemIdx = Todolist.findIndex(function (item) { return item.id === id; });
+    if (targetItemIdx === -1)
+        return false;
+    var targetTagIdx = Todolist[targetItemIdx].tags.findIndex(function (eachTag) { return eachTag === tag; });
+    if (targetTagIdx === -1)
+        return false;
+    Todolist[targetItemIdx].tags.splice(targetTagIdx, 1);
+    return true;
 };
-
 /**
- * 특정 할 일의 모든 태그를 제거할 수 있다.
+ * @function deleteTags
+ * @description 특정 할 일의 모든 태그를 제거할 수 있다.
  * @param id
- * @returns {boolean}
  */
-const deleteTags = (id) => {
-  const targetItemIdx = Todolist.findIndex((item) => item.id === id);
-  if (targetItemIdx === -1) return false;
-
-  Todolist[targetItemIdx].tags = [];
-  return true;
+var deleteTags = function (id) {
+    var targetItemIdx = Todolist.findIndex(function (item) { return item.id === id; });
+    if (targetItemIdx === -1)
+        return false;
+    Todolist[targetItemIdx].tags = [];
 };
-
-// 테스트
-const item1 = {
-  id: 1,
-  content: "hello world",
-  completed: false,
-  category: "우선 순위1",
+var template = function (_a) {
+    var id = _a.id, content = _a.content, completed = _a.completed, category = _a.category, tags = _a.tags;
+    return "<li data-id=".concat(id, ">\n            <span>").concat(id, " | </span>\n            <span>").concat(content, " | </span>\n            <span>").concat(category, " | </span>\n            <span>").concat(completed, "</span>\n          </li>");
 };
-const item2 = {
-  id: 2,
-  content: "hi world",
-  completed: false,
-  category: "우선 순위2",
-  tags: ["하이"],
+var App = function () {
+    var $form = document.querySelector("form");
+    var $ul = document.querySelector("ul");
+    // const $removeAll = document.querySelector(".remove-all");
+    var render = function () {
+        $ul.innerHTML = Todolist.map(function (todo) { return template(__assign({}, todo)); }).join("");
+    };
+    $form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var id = e.target["id"].value;
+        var content = e.target["content"].value;
+        var completed = e.target["completed"].value;
+        var category = e.target["category"].value;
+        // const tags = e.target["tags"].value
+        //   .split(",")
+        //   .map((tag) => tag.trim())
+        //   .filter((tag) => tag.length > 0);
+        createItem(id, content, completed, category, []);
+        render();
+    });
+    // $ul.addEventListener("click", ({ target }) => {
+    //   if (target instanceof Element) {
+    //     if (target.classList.contains("delete")) {
+    //       const todoId = target.parentElement.dataset.id;
+    //       app.removeTodoById(todoId);
+    //       render();
+    //     }
+    //     if (target.classList.contains("toggle")) {
+    //       const todoId = target.parentElement.dataset.id;
+    //       const todo = app.findTodoById(todoId)[0];
+    //       console.log(todo);
+    //       app.updateTodoById(
+    //         new Todo({
+    //           ...todo,
+    //           complete: !todo.complete,
+    //         })
+    //       );
+    //       render();
+    //     }
+    //   }
+    // });
+    // $removeAll.addEventListener("click", () => {
+    //   app.removeAllTodo();
+    //   render();
+    // });
 };
-const item3 = {
-  id: 3,
-  content: "annyeong world",
-  completed: false,
-  category: "우선 순위3",
-  tags: ["긴급", "일반"],
+window.onload = function () {
+    App();
 };
-
-[item1, item2, item3].forEach((item) =>
-  createItem(item.id, item.content, item.completed, item.category, item.tags)
-);
-console.log("===== createItem =====");
-console.log(Todolist);
-console.log("===== readItems =====");
-console.log(readItems());
-console.log("===== updateItem =====");
-console.log(updateItem(2, "ohayo world", true, "우선 순위1", []));
-console.log("===== readItem =====");
-console.log(readItem(2));
-console.log("===== deleteItem =====");
-console.log(deleteItem(2));
-console.log(readItems());
-console.log("===== updateTag =====");
-console.log(updateTag(3, "긴급", "안긴급"));
-console.log(readItem(3));
-console.log("===== deleteTag =====");
-console.log(deleteTag(3, "안긴급"));
-console.log(readItem(3));
-console.log("===== deleteTags =====");
-console.log(deleteTags(3));
-console.log(readItem(3));
-
