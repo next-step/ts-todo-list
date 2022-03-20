@@ -5,20 +5,20 @@ import { Todo } from "./@types/todo";
  * 할일 목록
  * @type {Todo[]}
  */
-const todos: Todo[] = [];
+export const todos: Todo[] = [];
 
 /**
  * 태그 목록
  * @type {Tag[]}
  */
-const tags: Tag[] = [];
+export const tags: Tag[] = [];
 
 /**
  * @function getTodos
  * @description 모든 할일을 반환한다.
  * @returns - {Todo[]} 모든 할일
  */
-function getTodos(): Todo[] {
+export function getTodos(): Todo[] {
   console.log(todos);
   return todos;
 }
@@ -30,7 +30,7 @@ function getTodos(): Todo[] {
  * @returns - {Todo | null} id값과 매칭되는 할일 혹은 null
  */
 
-function getTodo(id: number): Todo | null {
+export function getTodo(id: number): Todo | null {
   console.log(todos);
   return todos.find((todo) => todo.id === id) || null;
 }
@@ -46,7 +46,7 @@ function getTodo(id: number): Todo | null {
  * @returns {boolean} 추가 결과
  */
 
-function addTodo(todo: Todo): boolean {
+export function addTodo(todo: Todo): boolean {
   try {
     todos.push(todo);
     console.log(todos);
@@ -63,7 +63,7 @@ function addTodo(todo: Todo): boolean {
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodo(id: number): boolean {
+export function deleteTodo(id: number): boolean {
   const idx = todos.findIndex((todo) => todo.id === id);
   if (idx > -1) {
     todos.splice(idx, 1);
@@ -78,7 +78,7 @@ function deleteTodo(id: number): boolean {
  * @returns {boolean} 삭제 결과
  */
 
-function deleteTodos(): boolean {
+export function deleteTodos(): boolean {
   try {
     todos.splice(0, todos.length);
     console.log(todos);
@@ -98,7 +98,7 @@ function deleteTodos(): boolean {
  * @returns {boolean} 수정 결과
  */
 
-function updateTodo(inputTodo: Todo) {
+export function updateTodo(inputTodo: Todo) {
   try {
     const idx = todos.findIndex((todo) => todo.id === inputTodo.id);
     todos[idx].isComplete = inputTodo.isComplete;
@@ -119,7 +119,7 @@ function updateTodo(inputTodo: Todo) {
  * @returns {boolean} 수정 결과
  */
 
-function updateTag(inputTag: Tag): boolean {
+export function updateTag(inputTag: Tag): boolean {
   try {
     const idx = tags.findIndex((tag) => tag.id === inputTag.id);
     tags[idx].name = inputTag.name;
@@ -127,4 +127,14 @@ function updateTag(inputTag: Tag): boolean {
   } catch (e) {
     return false;
   }
+}
+
+export function createTag(inputTag: Tag): boolean {
+  try {
+    tags.push(inputTag);
+    return true;
+  } catch(e) {
+    return false;
+  }
+  
 }
