@@ -3,7 +3,7 @@
  * @author jeonyeonkyu(전연규)
  */
 /// <reference lib="es2015" />
-import { Task, TodoItem, TodoList, Todo } from '../@types/todo'
+import { Task, TodoItem, TodoList, Todo } from "../@types/todo/index";
 
 /**
  * @typedef {object} Task - 하나의 할일 객체
@@ -33,24 +33,24 @@ class TodoApp implements Todo {
   /**
    * @member {TodoList}
    */
-  todoList: TodoList
+  todoList: TodoList;
 
   /**
    * @member {number}
    * @default 0
    */
-  nextTaskId: number
+  nextTaskId: number;
 
   /**
    * @member {number}
    * @default 0
    */
-  nextCategoryId: number
+  nextCategoryId: number;
 
   constructor() {
-    this.todoList = []
-    this.nextTaskId = 0
-    this.nextCategoryId = 0
+    this.todoList = [];
+    this.nextTaskId = 0;
+    this.nextCategoryId = 0;
   }
 
   /**
@@ -58,7 +58,7 @@ class TodoApp implements Todo {
    * @returns {void}
    */
   setIncreasingTaskId(): void {
-    this.nextTaskId++
+    this.nextTaskId++;
   }
 
   /**
@@ -66,8 +66,8 @@ class TodoApp implements Todo {
    * @returns {number}
    */
   getUniqueTaskId(): number {
-    this.setIncreasingTaskId()
-    return this.nextTaskId
+    this.setIncreasingTaskId();
+    return this.nextTaskId;
   }
 
   /**
@@ -79,12 +79,12 @@ class TodoApp implements Todo {
   createTask(categoryId: number, task: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
+    );
     this.todoList[targetTodoItemIndex].tasks.push({
       taskId: this.getUniqueTaskId(),
       task,
       isCompleted: false,
-    })
+    });
   }
 
   /**
@@ -97,13 +97,13 @@ class TodoApp implements Todo {
   updateTask(categoryId: number, taskId: number, task: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
-    const tasks = this.todoList[targetTodoItemIndex].tasks
+    );
+    const tasks = this.todoList[targetTodoItemIndex].tasks;
     const targetTaskIndex = tasks.findIndex(
       (task: Task) => task.taskId === taskId
-    )
+    );
 
-    tasks[targetTaskIndex].task = task
+    tasks[targetTaskIndex].task = task;
   }
 
   /**
@@ -115,13 +115,12 @@ class TodoApp implements Todo {
   deleteTask(categoryId: number, taskId: number): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
-    const tasks = this.todoList[targetTodoItemIndex].tasks
-    const targetTaskIndex = tasks.findIndex(
-      (task: Task) => task.taskId === taskId
-    )
+    );
 
-    tasks.splice(targetTaskIndex, targetTaskIndex + 1)
+    const tasks = this.todoList[targetTodoItemIndex].tasks;
+    this.todoList[targetTodoItemIndex].tasks = tasks.filter(
+      (task: Task) => task.taskId !== taskId
+    );
   }
 
   /**
@@ -133,13 +132,13 @@ class TodoApp implements Todo {
   toggleCompleteTask(categoryId: number, taskId: number): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
-    const tasks = this.todoList[targetTodoItemIndex].tasks
+    );
+    const tasks = this.todoList[targetTodoItemIndex].tasks;
     const targetTaskIndex = tasks.findIndex(
       (task: Task) => task.taskId === taskId
-    )
+    );
 
-    tasks[targetTaskIndex].isCompleted = !tasks[targetTaskIndex].isCompleted
+    tasks[targetTaskIndex].isCompleted = !tasks[targetTaskIndex].isCompleted;
   }
 
   /**
@@ -147,7 +146,7 @@ class TodoApp implements Todo {
    * @returns {void}
    */
   setIncreasingCategoryId(): void {
-    this.nextCategoryId++
+    this.nextCategoryId++;
   }
 
   /**
@@ -155,8 +154,8 @@ class TodoApp implements Todo {
    * @returns {number}
    */
   getUniqueCategoryId(): number {
-    this.setIncreasingCategoryId()
-    return this.nextCategoryId
+    this.setIncreasingCategoryId();
+    return this.nextCategoryId;
   }
 
   /**
@@ -169,7 +168,7 @@ class TodoApp implements Todo {
       categoryId: this.getUniqueCategoryId(),
       categoryName,
       tasks: [],
-    })
+    });
   }
 
   /**
@@ -181,8 +180,8 @@ class TodoApp implements Todo {
   updateCategoryName(categoryId: number, categoryName: string): void {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
-    this.todoList[targetTodoItemIndex].categoryName = categoryName
+    );
+    this.todoList[targetTodoItemIndex].categoryName = categoryName;
   }
 
   /**
@@ -191,10 +190,9 @@ class TodoApp implements Todo {
    * @returns {void}
    */
   deleteCategory(categoryId: number): void {
-    const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem: TodoItem) => todoItem.categoryId === categoryId
-    )
-    this.todoList.splice(targetTodoItemIndex, targetTodoItemIndex + 1)
+    this.todoList = this.todoList.filter(
+      (todoItem: TodoItem) => todoItem.categoryId !== categoryId
+    );
   }
 
   /**
@@ -203,9 +201,9 @@ class TodoApp implements Todo {
    * @returns {void}
    */
   readAllTodo(message?: string): void {
-    if (message) console.log('\n' + message)
-    console.log(JSON.stringify(this.todoList))
+    if (message) console.log("\n" + message);
+    console.log(JSON.stringify(this.todoList));
   }
 }
 
-export default TodoApp
+export default TodoApp;
