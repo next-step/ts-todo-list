@@ -1,92 +1,108 @@
-/**
- * 하나의 Todo가 들고 있는 데이터
- * @typedef {Object} ITodo
- * @property {number} id
- * @property {string} task
- * @property {boolean} done
- */
+import TodoApplication from "./TodoApplication";
 
-/**
- * Todo 클래스에서 사용되는 상태
- * @typedef {Object} StateType
- * @property {number} newId - todo를 생성할 때 필요한 unique id
- * @property {string} task - todo를 생성할 때 필요한 할 일
- * @property {ITodo[]} todoList - 생성된 todo를 관리하는 배열
- */
-
-interface ITodo {
-  id: number;
-  task: string;
-  done: boolean;
+interface IComponent {
+  render: () => void;
+  bindEvent: () => void;
 }
 
-interface TodoApplicationState {
-  newId: number;
-  task: string;
-  todoList: ITodo[];
+class Component implements IComponent {
+  $element: HTMLElement;
+
+  todoApplication: TodoApplication;
+
+  constructor($element: HTMLElement, todoApplication: TodoApplication) {
+    this.$element = $element;
+
+    this.todoApplication = todoApplication;
+
+    this.render();
+    this.bindEvent();
+  }
+
+  render() {}
+  bindEvent(){}
 }
 
-class TodoApplication {
-  /**
-   * @member {StateType}
-   */
-  private _state: ITodo;
-  private _todoList: ITodo[];
 
-  /**
-   * @param {StateType} initialState - Todo 상태의 초기값
-   */
-  constructor(initialState: TodoApplicationState) {
-    this._state = {
-      id: initialState.newId,
-      task: initialState.task,
-      done: false,
-    };
-    this._todoList = initialState.todoList;
+class App extends Component {
+  constructor($element: HTMLElement, todoApplication: TodoApplication) {
+    super($element, todoApplication);
   }
 
-  /**
-   * @returns {ITodo[]}
-   */
-  get todoList(): ITodo[] {
-    return this._todoList;
+  rerender() {
+    this.render();
+    this.bindEvent();
   }
 
-  /**
-   * @param {string} newTask - 변경할 task 값
-   */
-  changeTask(newTask: string) {
-    this._state.task = newTask;
+  bindEvent() {
+    const $form = document.querySelector('.todo-form') as HTMLFormElement;
+    const $input = document.querySelector('#todo-input') as HTMLInputElement;
+    const $list = document.querySelector('.todo-list') as HTMLUListElement;
+
+    $form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      this.todoApplication.addTodo();
+
+      this.rerender();
+    })
+
+    $input.addEventListener('input',(event) => {
+      this.todoApplication.changeTask((event.target as HTMLInputElement).value);
+    })
+
+    $list.addEventListener('click', (event) => {
+      const target = event.target as Element;
+
+      if(target.nodeName === 'SPAN' || target.nodeName === 'S') {
+        this.todoApplication.checkTodo((Number(target.closest('li')?.dataset.id)));
+
+        this.rerender();
+      }
+
+      if(target.nodeName === 'BUTTON') {
+        this.todoApplication.deleteToto(Number(target.closest('li')?.dataset.id));
+
+        this.rerender();
+      }
+    })
   }
 
-  addTodo() {
-    this._todoList = [...this._todoList, this._state];
-    this._state = { id: this._state.id + 1, task: '', done: false };
-  }
+  render() {
+    this.$element.innerHTML = `
+      <form class="todo-form">
+        <div>
+          <label for="todo-input">할 일</label>
+          <input id="todo-input" type="text" />
+        </div>
+        <button type="submit" class="todo-add-button">추가</button>
+      </form>
+      <ul class="todo-list">
+        ${this.todoApplication.todoList.map(({ id, task, done }) => 
+          done? 
+            `<li data-id=${id}>
+              <s>
+                <span>${task}</span>
+              </s>
+              <button type="button" class="todo-delete-button">삭제</button>
+             </li>` : 
+            `<li data-id=${id}>
+              <span>${task}</span>
+              <button type="button" class="todo-delete-button">삭제</button>
+             </li>`
+        ).join('')}
+      </ul>
+    `;
 
-  /**
-   * @param {number} id - 삭제할 todo id 값
-   */
-  deleteToto(id: number) {
-    this._todoList = this._todoList.filter((todo) => todo.id !== id);
-  }
-
-  /**
-   * @param {number} id - 변경할 todo id 값
-   * @param {string} changedTask - 변경할 todo task 값
-   */
-  changeTodo({ id, changedTask }: { id: number; changedTask: string }) {
-    this._todoList = this._todoList.map((todo) =>
-      todo.id === id ? { ...todo, task: changedTask } : todo
-    );
-  }
-
-  /**
-   * @param {number} id - 변경할 todo id 값
-   */
-  checkTodo(id: number) {
-    this._todoList = this._todoList.map((todo) =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo
-    );
   }
 }
+
+new App(
+  document.querySelector('#root') as HTMLDivElement,
+  new TodoApplication({
+    newId: 0,
+    task: '',
+    todoList: [],
+  })
+);
+
