@@ -1,3 +1,4 @@
+// import { Task } from "./../@types/todo/index";
 import TodoApp from "./Todo.js";
 const todoApp = new TodoApp();
 function getTargetValue() {
@@ -16,25 +17,19 @@ function findIndex(categoryId) {
         return todo.categoryId === categoryId;
     });
 }
-function categoryRender() {
-    const category = document.querySelector("#category");
-    category.innerHTML = "";
-    todoApp.todoList.map((todo) => {
-        const option = document.createElement("option");
-        option.value = String(todo.categoryId);
-        option.text = todo.categoryName;
-        category.insertAdjacentElement("beforeend", option);
-    });
-}
 function taskRender() {
     const categoryId = getCategory();
     const taskList = document.querySelector(".task-list");
     taskList.innerHTML = "";
-    todoApp.todoList[findIndex(categoryId)].tasks.map((task) => {
+    if (!categoryId)
+        return;
+    todoApp.todoList[findIndex(categoryId)].tasks.forEach((task) => {
         const template = document.createElement("template");
         template.innerHTML = `<li>
                             <input type="checkbox"/>
                             <span></span>
+                            <span class="task-edit-btn">&#9997;</span>
+                            <span class="task-del-btn">&#10060;</span>
                           </li>`;
         const taskItem = template.content.firstChild;
         taskItem.querySelector("span").textContent = task.task;
@@ -43,8 +38,52 @@ function taskRender() {
         taskItem.querySelector("input").onclick = () => {
             todoApp.toggleCompleteTask(categoryId, Number(taskItem.dataset.taskId));
         };
+        taskItem.querySelector(".task-edit-btn").onclick = () => {
+            const value = getUserInputValue();
+            if (!value)
+                return;
+            todoApp.updateTask(categoryId, Number(taskItem.dataset.taskId), value);
+            taskRender();
+        };
+        taskItem.querySelector(".task-del-btn").onclick = () => {
+            todoApp.deleteTask(categoryId, Number(taskItem.dataset.taskId));
+            taskRender();
+        };
         taskList.insertAdjacentElement("beforeend", taskItem);
     });
+}
+function categoryRender() {
+    const category = document.querySelector("#category");
+    category.innerHTML = "";
+    if (todoApp.todoList.length === 0) {
+        category.nextElementSibling.remove();
+        return;
+    }
+    todoApp.todoList.forEach((todo) => {
+        const option = document.createElement("option");
+        option.value = String(todo.categoryId);
+        option.text = todo.categoryName;
+        category.insertAdjacentElement("beforeend", option);
+    });
+    if (todoApp.todoList.length > 0 && !category.nextElementSibling) {
+        category.insertAdjacentHTML("afterend", `<span>
+        <span class="category-edit-btn">&#9997;</span>
+        <span class="category-del-btn">&#10060;</span>
+       </span>`);
+        category.parentElement.querySelector(".category-edit-btn").onclick = () => {
+            const value = getUserInputValue();
+            if (!value)
+                return;
+            todoApp.updateCategoryName(getCategory(), getUserInputValue());
+            categoryRender();
+            taskRender();
+        };
+        category.parentElement.querySelector(".category-del-btn").onclick = () => {
+            todoApp.deleteCategory(getCategory());
+            categoryRender();
+            taskRender();
+        };
+    }
 }
 document.querySelector("#category").addEventListener("change", () => {
     taskRender();
@@ -59,24 +98,9 @@ document.querySelector("#addBtn").addEventListener("click", () => {
     }
     else {
         const category = getCategory();
-        category && todoApp.createTask(category, text);
-        category && taskRender();
+        if (!category)
+            return;
+        todoApp.createTask(category, text);
+        taskRender();
     }
 });
-// todoApp.readAllTodo('todo 객체 생성')
-// todoApp.createCategory('TS')
-// todoApp.readAllTodo('TS 카테고리 추가')
-// todoApp.createTask(1, 'step 1: JSDoc 추상화하기')
-// todoApp.readAllTodo('TS 카테고리 - task 1 추가')
-// todoApp.createTask(1, 'step 2: TS 로 변환하기')
-// todoApp.readAllTodo('TS 카테고리 - task 2 추가')
-// todoApp.updateTask(1, 2, 'step 2: JSDoc 구현하기')
-// todoApp.readAllTodo('TS 카테고리 - task 2 변경')
-// todoApp.toggleCompleteTask(1, 2)
-// todoApp.readAllTodo('TS 카테고리 - task 2 isComplete 토글하기')
-// todoApp.deleteTask(1, 2)
-// todoApp.readAllTodo('TS 카테고리 - task 2 삭제하기')
-// todoApp.updateCategoryName(1, 'TypeScript')
-// todoApp.readAllTodo('TS -> TypeScript 로 카테고리 명칭 변경하기')
-// todoApp.deleteCategory(1)
-// todoApp.readAllTodo('TypeScript 카테고리 삭제하기')

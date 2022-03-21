@@ -116,12 +116,11 @@ class TodoApp implements Todo {
     const targetTodoItemIndex = this.todoList.findIndex(
       (todoItem: TodoItem) => todoItem.categoryId === categoryId
     );
-    const tasks = this.todoList[targetTodoItemIndex].tasks;
-    const targetTaskIndex = tasks.findIndex(
-      (task: Task) => task.taskId === taskId
-    );
 
-    tasks.splice(targetTaskIndex, targetTaskIndex + 1);
+    const tasks = this.todoList[targetTodoItemIndex].tasks;
+    this.todoList[targetTodoItemIndex].tasks = tasks.filter(
+      (task: Task) => task.taskId !== taskId
+    );
   }
 
   /**
@@ -191,10 +190,9 @@ class TodoApp implements Todo {
    * @returns {void}
    */
   deleteCategory(categoryId: number): void {
-    const targetTodoItemIndex = this.todoList.findIndex(
-      (todoItem: TodoItem) => todoItem.categoryId === categoryId
+    this.todoList = this.todoList.filter(
+      (todoItem: TodoItem) => todoItem.categoryId !== categoryId
     );
-    this.todoList.splice(targetTodoItemIndex, targetTodoItemIndex + 1);
   }
 
   /**

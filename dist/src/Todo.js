@@ -76,8 +76,7 @@ class TodoApp {
     deleteTask(categoryId, taskId) {
         const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
         const tasks = this.todoList[targetTodoItemIndex].tasks;
-        const targetTaskIndex = tasks.findIndex((task) => task.taskId === taskId);
-        tasks.splice(targetTaskIndex, targetTaskIndex + 1);
+        this.todoList[targetTodoItemIndex].tasks = tasks.filter((task) => task.taskId !== taskId);
     }
     /**
      * @description Task객체의 isCompleted 속성이 true이면 false, false면 true로 수정합니다.
@@ -134,8 +133,7 @@ class TodoApp {
      * @returns {void}
      */
     deleteCategory(categoryId) {
-        const targetTodoItemIndex = this.todoList.findIndex((todoItem) => todoItem.categoryId === categoryId);
-        this.todoList.splice(targetTodoItemIndex, targetTodoItemIndex + 1);
+        this.todoList = this.todoList.filter((todoItem) => todoItem.categoryId !== categoryId);
     }
     /**
      * @description todoList를 콘솔에 출력합니다. (optional로 메시지 출력가능)
