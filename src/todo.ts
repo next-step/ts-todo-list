@@ -1,11 +1,11 @@
-import { v4 } from 'uuid';
 import { Todo } from '../@types/todo';
+import { uid } from './utils.js';
 
 export const todoList: Todo[] = [];
 
 export function createTodo(properties: Partial<Omit<Todo, 'id'>>): Todo {
   const defaultTodo: Todo = {
-    id: v4(),
+    id: uid(),
     content: '할 일 기본 값',
     isClear: false,
     category: '카테고리 기본 값',
