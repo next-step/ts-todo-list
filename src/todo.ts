@@ -41,6 +41,7 @@ export function addTodoAfterValidation(todo: Todo, validationFn: (todo: Todo) =>
   if (!validationFn(todo)) return false;
   todoList.push(todo);
   getTodoList();
+  return true;
 }
 
 export function getTodoList(): Todo[] {
@@ -125,62 +126,62 @@ export function deleteTags(todoId: string): boolean {
   return true;
 }
 
-// createTodo(properties: object): Todo;
-const tmpTodo = createTodo({ content: 'hello', tags: ['redux', 'react', 'TS'] });
-console.log(tmpTodo);
+// // createTodo(properties: object): Todo;
+// const tmpTodo = createTodo({ content: 'hello', tags: ['redux', 'react', 'TS'] });
+// console.log(tmpTodo);
 
-// addTodo(todo: Todo): boolean;
-console.log(todoList.length);
-console.log(addTodo(tmpTodo));
-console.log(todoList.length);
-
-// hasContent(todo: Todo): boolean;
-console.log(hasContent(tmpTodo));
-console.log(hasContent({ ...tmpTodo, content: '' }));
-
-// addTodoAfterValidation(todo: Todo, validationFn: (todo: Todo) => boolean): boolean;
-const invalidTodo = { ...tmpTodo, content: '' };
-
-console.log(todoList.length);
-console.log(addTodoAfterValidation(tmpTodo, addTodo));
-console.log(todoList.length);
-
-console.log(addTodoAfterValidation(invalidTodo, addTodo));
-console.log(todoList.length);
-
-// getTodoList(): Todo[];
-console.log(getTodoList());
-
-// updateTodo(todoId: string, updateProperty: object): boolean;
-console.log(updateTodo(tmpTodo.id, { content: '새로운 할 일' }));
-console.log(todoList[0]);
-
-// updateTag(todoId: string, targetTag: string, updateTag: string): boolean;
-console.log(todoList[0].tags);
-console.log(updateTag(tmpTodo.id, 'redux', 'mobX'));
-console.log(todoList[0].tags);
-
-// deleteTodo(todoId: string): boolean;
-console.log(todoList.length);
-console.log(deleteTodo(tmpTodo.id));
-console.log(todoList.length);
-
-// deleteTodoAll(): void;
-addTodoAfterValidation(tmpTodo, addTodo);
-console.log(todoList.length);
-
-deleteTodoAll();
-console.log(todoList.length);
-
-// deleteTag(todoId: string, targetTag: string): boolean;
-addTodoAfterValidation(tmpTodo, addTodo);
-console.log(todoList[0].tags);
-
-console.log(deleteTag(tmpTodo.id, 'mobX'));
-console.log(deleteTag(tmpTodo.id, '리액트'));
-console.log(todoList[0].tags);
-
-// deleteTags(todoId: string): boolean;
-console.log(todoList[0].tags);
-deleteTags(tmpTodo.id);
-console.log(todoList[0].tags);
+// // addTodo(todo: Todo): boolean;
+// console.log(todoList.length);
+// console.log(addTodo(tmpTodo));
+// console.log(todoList.length);
+//
+// // hasContent(todo: Todo): boolean;
+// console.log(hasContent(tmpTodo));
+// console.log(hasContent({ ...tmpTodo, content: '' }));
+//
+// // addTodoAfterValidation(todo: Todo, validationFn: (todo: Todo) => boolean): boolean;
+// const invalidTodo = { ...tmpTodo, content: '' };
+//
+// console.log(todoList.length);
+// console.log(addTodoAfterValidation(tmpTodo, addTodo));
+// console.log(todoList.length);
+//
+// console.log(addTodoAfterValidation(invalidTodo, addTodo));
+// console.log(todoList.length);
+//
+// // getTodoList(): Todo[];
+// console.log(getTodoList());
+//
+// // updateTodo(todoId: string, updateProperty: object): boolean;
+// console.log(updateTodo(tmpTodo.id, { content: '새로운 할 일' }));
+// console.log(todoList[0]);
+//
+// // updateTag(todoId: string, targetTag: string, updateTag: string): boolean;
+// console.log(todoList[0].tags);
+// console.log(updateTag(tmpTodo.id, 'redux', 'mobX'));
+// console.log(todoList[0].tags);
+//
+// // deleteTodo(todoId: string): boolean;
+// console.log(todoList.length);
+// console.log(deleteTodo(tmpTodo.id));
+// console.log(todoList.length);
+//
+// // deleteTodoAll(): void;
+// addTodoAfterValidation(tmpTodo, addTodo);
+// console.log(todoList.length);
+//
+// deleteTodoAll();
+// console.log(todoList.length);
+//
+// // deleteTag(todoId: string, targetTag: string): boolean;
+// addTodoAfterValidation(tmpTodo, addTodo);
+// console.log(todoList[0].tags);
+//
+// console.log(deleteTag(tmpTodo.id, 'mobX'));
+// console.log(deleteTag(tmpTodo.id, '리액트'));
+// console.log(todoList[0].tags);
+//
+// // deleteTags(todoId: string): boolean;
+// console.log(todoList[0].tags);
+// deleteTags(tmpTodo.id);
+// console.log(todoList[0].tags);
