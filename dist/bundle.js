@@ -211,9 +211,17 @@ class TodoView {
     constructor(todoComponents, TodoCollection) {
         this.handleClickTodoList = (event) => {
             const target = event.target;
-            this.handleClickDeleteTodo(target);
-            this.handleClickDeleteTags(target);
-            this.handleClickDeleteTag(target);
+            const eventArguments = [
+                { target, className: 'updateTodo', fn: this.updateTodo },
+                { target, className: 'updateTag', fn: this.updateTag },
+                { target, className: 'deleteTodo', fn: this.deleteTodo },
+                { target, className: 'tag', fn: this.deleteTag },
+                { target, className: 'deleteTags', fn: this.deleteTags },
+            ];
+            eventArguments.forEach((item) => {
+                this.handleClickListDelegationEvent(item);
+            });
+            this.handleClickCancel(target);
         };
         this.handleClickCreateTodo = () => {
             const content = this.todoComponents.$nameInput.value;
@@ -223,49 +231,86 @@ class TodoView {
                 return;
             }
             const tagsValue = this.todoComponents.$tagInput.value;
-            const tags = tagsValue ? tagsValue.split(' ') : [];
+            const tags = tagsValue ? Array.from(new Set(tagsValue.split(' '))) : [];
             const initTodoItem = { content, category, tags };
             this.TodoCollection.createTodo(new Todo_1.default(initTodoItem));
             this.render();
             this.resetInputs();
         };
-        this.handleClickDeleteTodo = (target) => {
-            const isRemoveButton = target.className === 'deleteTodo';
-            if (!isRemoveButton)
-                return;
-            const todoElement = target.closest('.todoItem');
-            if (!todoElement)
-                return;
-            this.TodoCollection.deleteTodo(Number(todoElement.dataset.id));
-            todoElement.remove();
-        };
         this.handleClickDeleteTodos = () => {
             this.TodoCollection.deleteTodos();
             this.render();
         };
-        this.handleClickUpdateEnd = (target) => { };
-        this.handleClickDeleteTag = (target) => {
-            const isTag = target.className === 'tag';
-            if (!isTag)
-                return;
-            const todoElement = target.closest('.todoItem');
-            if (!todoElement)
-                return;
-            const todoItemId = Number(todoElement.dataset.id);
+        this.deleteTodo = (target, todoItemId, todoElement) => {
+            this.TodoCollection.deleteTodo(Number(todoItemId));
+            todoElement.remove();
+        };
+        this.deleteTag = (target, todoItemId) => {
             const tagName = target.innerText.trim().replace('#', '');
             this.TodoCollection.deleteTag(todoItemId, tagName);
             target.remove();
         };
-        this.handleClickDeleteTags = (target) => {
-            const isRemoveTagsButton = target.className === 'deleteTags';
+        this.deleteTags = (target, todoItemId) => {
+            this.TodoCollection.deleteTags(todoItemId);
+            this.render();
+        };
+        this.updateTodo = (target, todoItemId, todoElement) => {
+            const contentInputName = 'updateContentInput';
+            const categoryInputName = 'updateCategoryInput';
+            const tagsInputName = 'updateTagsInput';
+            if (target.dataset.isEdit) {
+                const content = todoElement.querySelector(`.${contentInputName}`).value;
+                const category = todoElement.querySelector(`.${categoryInputName}`).value;
+                if (!content || !category) {
+                    alert('할일과 카테고리 이름은 필수입니다.');
+                    return;
+                }
+                const tagsValue = todoElement.querySelector(`.${tagsInputName}`).value;
+                const tags = tagsValue ? Array.from(new Set(tagsValue.split(' '))) : [];
+                this.TodoCollection.updateTodo(todoItemId, new Todo_1.default({ content, category, tags }));
+                this.render();
+                return;
+            }
+            const inputTemplate = `<input type="text" class="${contentInputName}" placeholder="할일"/>
+                        <input type="text" class="${categoryInputName}" placeholder="카테고리"/>
+                        <input type="text" class="${tagsInputName}" placeholder="태그(띄어쓰기로 구분)"/>
+                        <button class="cancel">취소</button>`;
+            const parent = target.parentElement;
+            parent.insertAdjacentHTML('afterbegin', inputTemplate);
+            target.dataset.isEdit = 'true';
+        };
+        this.updateTag = (target, todoItemId, todoElement) => {
+            const targetTagInputName = 'targetTagInput';
+            const newTagInputName = 'newTagInput';
+            if (target.dataset.isEdit) {
+                const targetTagValue = todoElement.querySelector(`.${targetTagInputName}`).value;
+                const newTagValue = todoElement.querySelector(`.${newTagInputName}`).value;
+                this.TodoCollection.updateTag(todoItemId, targetTagValue, newTagValue);
+                this.render();
+                return;
+            }
+            const inputTemplate = `<input type="text" class="${targetTagInputName}" placeholder="변경할 태그이름"/>
+                        <input type="text" class="${newTagInputName}" placeholder="새로운 태그이름"/>
+                        <button class="cancel">취소</button>`;
+            const parent = target.parentElement;
+            parent.insertAdjacentHTML('afterbegin', inputTemplate);
+            target.dataset.isEdit = 'true';
+        };
+        this.handleClickCancel = (target) => {
+            const isRemoveTagsButton = target.className === 'cancel';
             if (!isRemoveTagsButton)
+                return;
+            this.render();
+        };
+        this.handleClickListDelegationEvent = ({ className, target, fn, }) => {
+            const isMatchElement = target.className === className;
+            if (!isMatchElement)
                 return;
             const todoElement = target.closest('.todoItem');
             if (!todoElement)
                 return;
             const todoItemId = Number(todoElement.dataset.id);
-            this.TodoCollection.deleteTags(todoItemId);
-            this.render();
+            fn(target, todoItemId, todoElement);
         };
         this.todoComponents = todoComponents;
         this.TodoCollection = TodoCollection;
@@ -300,9 +345,11 @@ class TodoView {
                  #${v}
                 </span>`)
                 .join(' ')}
-        <button class="deleteTags">태그 전체 삭제</button>
         <div>
-          <button class="deleteTodo">할일 삭제</button>
+         <button class="updateTag">태그 수정</button><button class="deleteTags">태그 전체 삭제</button>
+        </div>
+        <div>
+         <button class="updateTodo">할일 수정</button> <button class="deleteTodo">할일 삭제</button>
         </div>
       </li>`;
         return template;
