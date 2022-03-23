@@ -1,4 +1,4 @@
-import { TodoList } from "todoModule";
+import { TodoList, SingleTodo } from "./@types";
 
 /**
  * 하나의 SingleTodo 객체가 가지는 Property들 입니다.
@@ -21,7 +21,7 @@ const todoList: TodoList = [];
  * @param {SingleTodoType} newTodo
  * @description CRUD에서 C에 해당하는 함수입니다. todoList 배열에 새로운 newTodo 객체를 추가합니다. 리턴값은 없습니다.
  */
-function addTodo(newTodo) {
+function addTodo(newTodo: SingleTodo): void {
   todoList.push(newTodo);
   console.log("=== [CREATE] 새로운 할 일이 추가되었습니다. ===");
   console.log(`👇 현재 Todo list 모두 보기 (총 ${todoList.length}개)`);
@@ -35,9 +35,15 @@ function addTodo(newTodo) {
  * @description CRUD에서 R에 해당하는 함수입니다. param id가 있을 경우 id에 해당하는 특정 todo를 찾아 반환합니다. param id가 없을 경우 모든 할일 목록을 반환합니다.
  * @returns SingleTodoType[] | SingleTodo
  */
-function readTodo(id) {
+function readTodo(id?: number): SingleTodo | TodoList {
   if (id) {
     const targetTodo = todoList.find((todo) => todo.id === id);
+
+    if (!targetTodo) {
+      alert("선택한 할 일을 찾을 수 없습니다.");
+      return todoList;
+    }
+
     console.log(`=== [READ] ID가 ${id}인 할 일을 읽습니다. ===`);
     console.log(`👇 ID가 ${id}인 할 일`);
     console.log(targetTodo);
@@ -62,9 +68,21 @@ function readTodo(id) {
  * @param {string[]=} tags
  * @description CRUD에서 U에 해당하는 함수입니다. 수정하고자 하는 todo의 id와 수정하고자 하는 내용을 optional로 받아 전체 todoList에서 해당 todo의 특정 필드만 수정합니다. 리턴값은 없습니다.
  */
-function editTodo(id, content, category, isCompleted, tags) {
+function editTodo(
+  id: number,
+  content?: string,
+  category?: string,
+  isCompleted?: boolean,
+  tags?: string[]
+) {
   const targetTodo = todoList.find((todo) => todo.id === id);
   const targetTodoIndex = todoList.findIndex((todo) => todo.id === id);
+
+  if (!targetTodo || targetTodoIndex === -1) {
+    alert("수정할 대상을 찾을 수 없습니다.");
+    return;
+  }
+
   const paramObj = { id, content, category, isCompleted, tags };
   const willUpdateFields = {};
 
@@ -88,7 +106,7 @@ function editTodo(id, content, category, isCompleted, tags) {
  * @param {number} id
  * @description CRUD에서 D에 해당하는 함수입니다. 삭제하고자 하는 todo의 id를 받아, todoList에서 그 todo를 삭제합니다. 리턴값은 없습니다.
  */
-function deleteTodo(id) {
+function deleteTodo(id: number): void {
   const targetTodoIndex = todoList.findIndex((todo) => todo.id === id);
   const temp = [];
 
@@ -126,14 +144,6 @@ addTodo({
   isCompleted: false,
   tags: ["태그1", "태그2"],
 });
-
-readTodo(1);
-readTodo(); // 파라미터 없이 호출하면 모든 투두리스트 읽기
-
-editTodo(1, "수정할 내용", "수정할 카테고리", true);
-
-deleteTodo(1);
-
 addTodo({
   id: 3,
   content: "치킨",
@@ -142,4 +152,11 @@ addTodo({
   tags: ["태그1", "태그2"],
 });
 
-editTodo(3, "", "", false, ["태그를 바꿀 때는 통째로 갈아끼워야 한다."]);
+readTodo(1);
+readTodo(); // 파라미터 없이 호출하면 모든 투두리스트 읽기
+
+editTodo(1, "수정할 내용", "수정할 카테고리", true);
+editTodo(2, "", "", true);
+editTodo(3, "", "", true, ["태그를 바꿀 때는 통째로 갈아끼워야 한다."]);
+
+deleteTodo(1);
