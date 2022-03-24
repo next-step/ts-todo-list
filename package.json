@@ -1,24 +1,30 @@
 {
-	"name": "ts-todo-list",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"docs": "jsdoc -c jsdoc.json"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/next-step/ts-todo-list.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/next-step/ts-todo-list/issues"
-	},
-	"homepage": "https://github.com/next-step/ts-todo-list#readme",
-	"devDependencies": {
-		"jsdoc": "^3.6.10",
-		"typescript": "^4.6.2"
-	}
+  "name": "ts-todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "true",
+  "scripts": {
+    "docs": "jsdoc -c jsdoc.json",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/next-step/ts-todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/next-step/ts-todo-list/issues"
+  },
+  "homepage": "https://github.com/next-step/ts-todo-list#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.10",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
 }
