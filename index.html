@@ -11,7 +11,31 @@
     <description>Typing Typescript 1기 To Do 미션입니다.</description>
   </head>
   <body>
-    <div id="#root"></div>
+    <div id="#root">
+      <h1>Todo App</h1>
+      <form>
+        <label for="id">
+          No.
+          <input id="id" type="number" placeholder="할 일의 번호" />
+        </label>
+        <label for="content">
+          Todo:
+          <input id="content" type="text" placeholder="할 일" />
+        </label>
+        <label for="category">
+          Category:
+          <input id="category" type="text" placeholder="카테고리 이름" />
+        </label>
+        <label for="tags">
+          Tags:
+          <input id="tags" type="text" placeholder="ex.태그1, 태그2" />
+        </label>
+        <button name="create" type="submit">할 일 생성</button>
+        <button name="edit" type="submit">할 일 수정</button>
+        <button id="remove-button" type="button">할 일 모두 제거</button>
+      </form>
+      <ul></ul>
+    </div>
     <script src="src/index.ts"></script>
   </body>
 </html>
