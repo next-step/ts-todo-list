@@ -1,4 +1,4 @@
-import { SingleTodo, TodoList } from "./@types";
+import { SingleTodo } from "./@types";
 
 const $resultSection = document.querySelector("ul");
 let todoList: SingleTodo[] = [];
