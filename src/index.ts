@@ -4,56 +4,92 @@
  * @see {@link https://github.com/dahye1013/ts-todo-list}
  */
 
-import Tag from "./Tag";
-import Todo from "./Todo";
-import Todos from "./Todos";
+import Tag from './Tag';
+import Todo from './Todo';
+import Todos from './Todos';
 
-const todos = new Todos();
+import {
+  getTagTemplate,
+  getTodoTemplate,
+  initialTemplate,
+} from './view/Template';
 
-console.log("🚀🚀🚀 TODO 동작 테스트 🚀🚀🚀");
+const $ = (selector: string): HTMLElement | null =>
+  document.querySelector(selector);
+const $$ = (selector: string): NodeListOf<Element> | null =>
+  document.querySelectorAll(selector);
 
-todos.addTodo(
-  new Todo({
-    id: 1,
-    content: "첫번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [
-      new Tag({ id: 1, name: "태그1" }),
-      new Tag({ id: 2, name: "태그2" }),
-      new Tag({ id: 3, name: "태그3" }),
-    ],
-  })
-);
+function App() {
+  const todos = new Todos();
 
-todos.addTodo(
-  new Todo({
-    id: 2,
-    content: "두번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [],
-  })
-);
+  const addTag = () => {
+    const tagName: string | null = $('#new-todo-tag')?.value;
+    const newTag = new Tag({ id: Date.now(), name: tagName });
 
-todos.addTodo(
-  new Todo({
-    id: 3,
-    content: "세번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [],
-  })
-);
+    if (!newTag) {
+      $('#new-todo-tag')?.focus();
+      return;
+    }
 
-todos.findAllTodos();
+    const $tagLi = document.createElement('li');
+    $tagLi.innerHTML = getTagTemplate(newTag);
+    $('#new-todo-tags')?.append($tagLi);
+    $('#new-todo-tag')?.value = '';
+    $('#new-todo-tag')?.focus();
+  };
 
-todos.findTodoById(1);
+  const clearTodo = () => {
+    $('#new-todo-content').value = '';
+    $('#new-todo-category').value = '';
+    $('#new-todo-tag').value = '';
+  };
 
-todos.removeTagByTodoIdAndTagId(1, 1);
+  const clearTag = () => {
+    $('#new-todo-tags').innerHTML = '';
+  };
 
-todos.removeAllTagByTodoId(1);
+  const addTodo = () => {
+    const newTags: typeof Tag[] = [];
+    $('#new-todo-tags')?.childNodes.forEach($tagEl => {
+      newTags.push(
+        new Tag({ id: Date.now(), name: $tagEl.textContent.trim() })
+      );
+    });
 
-todos.removeTodoById(1);
+    const newTodo = new Todo({
+      id: Date.now(),
+      content: $('#new-todo-content').value,
+      complete: false,
+      category: $('#new-todo-category').value,
+      tags: newTags,
+    });
 
-todos.removeAllTodo();
+    todos.addTodo(newTodo);
+    const $todoLi = document.createElement('li');
+    $todoLi.dataset.todoId = newTodo.id;
+    $todoLi.innerHTML = getTodoTemplate(newTodo);
+    $('.todos')?.append($todoLi);
+    clearTodo();
+    clearTag();
+  };
+
+  const init = () => {
+    $('#app').innerHTML = initialTemplate;
+  };
+
+  const addEventListeners = () => {
+    $('#addTodo')?.addEventListener('click', e => {
+      e.preventDefault();
+      addTodo();
+    });
+    $('#addTag')?.addEventListener('click', e => {
+      e.preventDefault();
+      addTag();
+    });
+  };
+
+  init();
+  addEventListeners();
+}
+
+App();
