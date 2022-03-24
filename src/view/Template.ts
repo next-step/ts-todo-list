@@ -14,9 +14,10 @@ export const getTodoTemplate = (todo: typeof Todo): string =>
                     <input class="toggle" type="checkbox">
                     <label class="todo__name">[${todo.category || 'NONE'}]
                     ${todo.content}</label>
-                    ${todo.tags
-                      .map(tag => `${getTagTemplate(tag)}`)
-                      .join('')}               
+                    ${
+                      todo.tags &&
+                      todo.tags.map(tag => `${getTagTemplate(tag)}`).join('')
+                    }               
                     <button class="todo__delete">
                         <i class="fas fa-trash-alt"></i>
                     </button>
@@ -54,7 +55,7 @@ export const initialTemplate: string = `<section class="list">
           </div>
 
           <ul id="new-todo-tags" class="footer__text"></ul>
-          <button type="submit" id="addTodo" class="footer__button">
+          <button type="submit" id="addTodoBtn" class="footer__button">
             ADD TODO
           </button>
         </footer>
