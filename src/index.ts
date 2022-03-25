@@ -18,6 +18,7 @@ import {
   getTodo,
   deleteTodo,
 } from "./todo.ts";
+
 function handleAddTodo(): void {
   const newTodo = todoInput.value;
   const newCategory = categoryInput.value;
@@ -36,6 +37,30 @@ function handleAddTodo(): void {
 
   render();
 }
+function handleSearchTodo(): void {
+  const searchId = Number(searchInput.value);
+  const resultTodo = getTodo(searchId);
+
+  todoList.innerHTML = "";
+
+  todoList.insertAdjacentHTML(
+    "beforeend",
+    `<li>
+      <span id="todo-id">${resultTodo.id}</span>
+      <span id="todo-text">${resultTodo.text}</span>
+      <span id="done-element">${resultTodo.done} | </span>
+      <span id="category-element">${resultTodo.category} | </span>
+      <span id="tags-element">${[...resultTodo.tags]}</span>
+      <button
+        type="button"
+        id="todo-remove-button"
+      >
+        삭제
+      </button>
+    </li>`
+  );
+}
+
 function render(): void {
   todoList.innerHTML = "";
 
