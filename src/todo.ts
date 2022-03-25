@@ -1,8 +1,8 @@
 interface ITodo {
   id: number;
-  text?: string;
+  text: string;
   done: boolean;
-  category: string;
+  category?: string;
   tags?: string[];
 }
 
@@ -59,7 +59,7 @@ function getTodos(): ITodo[] {
 }
 
 /**
- * @function getTodos
+ * @function getTodo
  * @description ID를 기반으로 특정 할 일을 조회할 수 있다.
  * @param {number} id - 조회할 특정 할 일 id
  * @return - 조회한 Todo[]
@@ -129,7 +129,7 @@ function deleteAll(): ITodo[] {
  * @param {number} id - 삭제할 할 일 id
  */
 function deleteTodo(id: number): void {
-  todos.filter((todo) => todo.id !== id);
+  todos = todos.filter((todo) => todo.id !== id);
 }
 
 /**
@@ -175,33 +175,16 @@ function deleteTag(id: number, tag: string): ITodo[] {
   return todos;
 }
 
-// test
-console.log({ todos });
-
-createTodo({
-  id: currentId,
-  text: "룰루",
-  done: false,
-  category: "개인",
-  tags: ["tag1", "tag2"],
-});
-
-createTodo({
-  id: currentId,
-  text: "룰루",
-  done: false,
-  category: "회사",
-  tags: ["tag1", "tag2"],
-});
-
-console.log("getTodos ? ", getTodos());
-console.log("getTodo 1 ? ", getTodo(1));
-
-console.log("updateTodo 1 ? ", updateTodo(1, "변경한 내용"));
-console.log("updateTag 1 ? ", updateTag(1, "tag1", "@@@변경한 태그 1"));
-console.log("updateTag 2 ? ", updateTag(2, "tag2", "@@@변경한 태그 2"));
-
-console.log("deleteTag ? ", deleteTag(2, "@@@변경한 태그 2"));
-console.log("deleteTags ? ", deleteTags(1));
-
-console.log(deleteAll());
+export {
+  todos,
+  currentId,
+  createTodo,
+  getTodos,
+  getTodo,
+  updateTodo,
+  updateTag,
+  deleteAll,
+  deleteTodo,
+  deleteTags,
+  deleteTag,
+};

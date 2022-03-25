@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TodoList</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="heading">
+        <h2>TodoList</h2>
+      </div>
+      <form id="todo-form">
+        <label for="text">할 일</label>
+        <input
+          type="text"
+          id="todo-input"
+          name="todo"
+          placeholder="할 일을 입력"
+        />
+        <label for="category">카테고리</label>
+        <input
+          type="text"
+          id="category-input"
+          name="category"
+          placeholder="category"
+        /><label for="tags">태그들</label>
+        <input
+          type="text"
+          id="tags-input"
+          name="tags"
+          placeholder="tag1, tag2..."
+        />
+
+        <button type="button" name="submit" id="todo-create-button">
+          추가
+        </button>
+        <button type="button" id="remove-all-button">전체 삭제</button>
+      </form>
+      <label for="search">할 일 조회</label>
+      <input
+        type="number"
+        id="search-input"
+        name="search"
+        placeholder="ID를 이용해 조회"
+      />
+
+      <button type="button" id="search-button">조회</button>
+      <button type="button" id="search-all-button">전체 조회</button>
+      <ul id="todo-list"></ul>
+    </div>
+    <script src="src/index.ts"></script>
+  </body>
+</html>
