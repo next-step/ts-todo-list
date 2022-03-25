@@ -1,7 +1,7 @@
 import Tag from './Tag';
 
 type TodoObj = {
-  id?: number | undefined;
+  id: number;
   content: string;
   complete: boolean;
   category: string;
@@ -9,6 +9,7 @@ type TodoObj = {
 };
 
 interface TodoInterface {
+  id: number;
   content: string;
   complete: boolean;
   category: string;
@@ -17,14 +18,14 @@ interface TodoInterface {
 }
 
 export default class Todo implements TodoInterface {
-  public id: number | undefined;
+  public readonly id: number;
   public content: string;
   public complete: boolean;
   public category: string;
   public tags: typeof Tag[];
 
   constructor({ content, complete, category, tags }: TodoObj) {
-    this.id = Number(Date.now());
+    this.id = Date.now();
     this.content = content;
     this.complete = complete;
     this.category = category;

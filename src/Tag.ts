@@ -1,14 +1,14 @@
 type TagObj = {
-  id?: number | undefined;
+  id: number;
   name: string;
 };
 
 export default class Tag {
-  public id: number | undefined;
+  public readonly id: number;
   public name: string;
 
-  constructor({ id, name }: TagObj) {
-    this.id = id;
+  constructor({ name }: TagObj) {
+    this.id = Date.now();
     this.name = name;
   }
   updateTag(name: string) {
