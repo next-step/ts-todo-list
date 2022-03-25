@@ -1,8 +1,8 @@
 interface ITodo {
   id: number;
-  text?: string;
+  text: string;
   done: boolean;
-  category: string;
+  category?: string;
   tags?: string[];
 }
 
@@ -205,3 +205,16 @@ console.log("deleteTag ? ", deleteTag(2, "@@@변경한 태그 2"));
 console.log("deleteTags ? ", deleteTags(1));
 
 console.log(deleteAll());
+export {
+  todos,
+  currentId,
+  createTodo,
+  getTodos,
+  getTodo,
+  updateTodo,
+  updateTag,
+  deleteAll,
+  deleteTodo,
+  deleteTags,
+  deleteTag,
+};
