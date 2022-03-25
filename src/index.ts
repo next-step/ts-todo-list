@@ -68,6 +68,16 @@ function handleSearchTodo(): void {
   );
 }
 
+function handleRemoveTodo(e: MouseEvent): void {
+  const clickedTodoId = e.target
+    .closest("li")
+    .querySelector("#todo-id").innerText;
+
+  deleteTodo(Number(clickedTodoId));
+
+  render();
+}
+
 function render(): void {
   todoList.innerHTML = "";
 
