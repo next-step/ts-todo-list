@@ -57,9 +57,9 @@ function App() {
 
     const newTodo = new Todo({
       id: Date.now(),
-      content: $('#new-todo-content').value,
+      content: $('#new-todo-content').value || '',
       complete: false,
-      category: $('#new-todo-category').value,
+      category: $('#new-todo-category').value || '',
       tags: newTags,
     });
 
@@ -82,7 +82,7 @@ function App() {
       );
     });
 
-    const updatedTodo: typeof Todo = new Todo({
+    const newTodo = new Todo({
       id: Number(todoId),
       content: $('#new-todo-content').value,
       complete: false,
@@ -90,10 +90,10 @@ function App() {
       tags: newTags,
     });
 
-    todos.updateTodoById(updatedTodo);
+    todos.updateTodoById(newTodo);
     const $todoLi = document.createElement('li');
-    $todoLi.dataset.todoId = updatedTodo.id;
-    $todoLi.innerHTML = getTodoTemplate(updatedTodo);
+    $todoLi.dataset.todoId = String(newTodo.id);
+    $todoLi.innerHTML = getTodoTemplate(newTodo);
     $todo?.replaceWith($todoLi);
     clearTodo();
   };
@@ -106,7 +106,7 @@ function App() {
     $('#addTodoBtn')?.addEventListener('click', (e: Event) => {
       e.preventDefault();
 
-      const todoId: string = $('#new-todo-content').dataset.todoId;
+      const todoId: string | undefined = $('#new-todo-content').dataset.todoId;
 
       if (todoId) {
         updateTodo(todoId);
@@ -121,7 +121,10 @@ function App() {
     });
 
     $('.todos')?.addEventListener('click', (e: Event) => {
-      const $todo = e.target.closest('li');
+      const target: EventTarget | null = e.target;
+      if (!target) return;
+
+      const $todo = target.closest('li');
       const id = $todo.dataset.todoId;
       const todo: typeof Todo = todos.findTodoById(Number(id));
 
