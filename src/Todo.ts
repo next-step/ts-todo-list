@@ -5,7 +5,7 @@ type TodoObj = {
   content: string;
   complete: boolean;
   category: string;
-  tags?: typeof Tag[];
+  tags?: Tag[];
 };
 
 interface TodoInterface {
@@ -13,7 +13,7 @@ interface TodoInterface {
   content: string;
   complete: boolean;
   category: string;
-  tags?: typeof Tag[];
+  tags?: Tag[];
   updateTodo: Function;
 }
 
@@ -22,7 +22,7 @@ export default class Todo implements TodoInterface {
   public content: string;
   public complete: boolean;
   public category: string;
-  public tags: typeof Tag[];
+  public tags: Tag[];
 
   constructor({ content, complete, category, tags }: TodoObj) {
     this.id = Date.now();

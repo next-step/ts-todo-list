@@ -48,7 +48,7 @@ function App() {
   };
 
   const addTodo = () => {
-    const newTags: typeof Tag[] = [];
+    const newTags: Tag[] = [];
     $('#new-todo-tags')?.childNodes.forEach($tagEl => {
       newTags.push(
         new Tag({ id: Date.now(), name: $tagEl.textContent.trim() })
@@ -75,7 +75,7 @@ function App() {
   const updateTodo = (todoId: string): void => {
     const $todo = $(`li[data-todo-id="${todoId}"]`);
 
-    const newTags: typeof Tag[] = [];
+    const newTags: Tag[] = [];
     $('#new-todo-tags')?.childNodes.forEach($tagEl => {
       newTags.push(
         new Tag({ id: Date.now(), name: $tagEl.textContent.trim() })
@@ -126,7 +126,7 @@ function App() {
 
       const $todo = target.closest('li');
       const id = $todo.dataset.todoId;
-      const todo: typeof Todo = todos.findTodoById(Number(id));
+      const todo: Todo = todos.findTodoById(Number(id));
 
       if (e.target.classList.contains('toggle')) {
         todo.complete = !todo.complete;

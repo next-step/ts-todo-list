@@ -15,9 +15,9 @@ interface TodoInterface {
 }
 
 export default class Todos implements TodoInterface {
-  public todos: typeof Todo[] = [];
+  public todos: Todo[] = [];
 
-  addTodo(todo: typeof Todo) {
+  addTodo(todo: Todo) {
     this.todos.push(todo);
 
     console.log('새로운 Todo 추가 완료');
@@ -34,9 +34,7 @@ export default class Todos implements TodoInterface {
   }
 
   findTodoById(todoId: number) {
-    const targetTodo = this.todos.find(
-      (aTodo: typeof Todo) => aTodo.id === todoId
-    );
+    const targetTodo = this.todos.find((aTodo: Todo) => aTodo.id === todoId);
 
     console.log(`ID: ${todoId}, Todo 찾기 완료`);
     this.logger();
@@ -44,10 +42,8 @@ export default class Todos implements TodoInterface {
     return targetTodo;
   }
 
-  updateTodoById(todo: typeof Todo) {
-    this.todos = this.todos.filter(
-      (aTodo: typeof Todo) => aTodo.id !== todo.id
-    );
+  updateTodoById(todo: Todo) {
+    this.todos = this.todos.filter((aTodo: Todo) => aTodo.id !== todo.id);
     this.todos = [...this.todos, todo];
 
     console.log(`ID: ${todo.id}, Todo 수정 완료`);
