@@ -37,6 +37,13 @@ function handleAddTodo(): void {
 
   render();
 }
+
+function handleRemoveAll(): void {
+  deleteAll();
+
+  render();
+}
+
 function handleSearchTodo(): void {
   const searchId = Number(searchInput.value);
   const resultTodo = getTodo(searchId);
