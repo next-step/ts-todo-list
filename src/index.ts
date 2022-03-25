@@ -14,7 +14,7 @@ import {
   initialTemplate,
 } from './view/Template';
 
-const $ = (selector: string): HTMLElement => document.querySelector(selector);
+const $ = (selector: string) => document.querySelector(selector) as HTMLElement;
 const $$ = (selector: string): NodeListOf<Element> | null =>
   document.querySelectorAll(selector);
 
@@ -28,11 +28,11 @@ function App() {
       return;
     }
     const newTag = new Tag({ id: Date.now(), name: tagName });
-    const $tagLi = document.createElement('li');
+    const $tagLi: string = document.createElement('li');
     $tagLi.innerHTML = getTagTemplate(newTag);
-    $('#new-todo-tags')?.append($tagLi);
-    $('#new-todo-tag')?.value = '';
-    $('#new-todo-tag')?.focus();
+    $('#new-todo-tags').append($tagLi);
+    $('#new-todo-tag').value = '';
+    $('#new-todo-tag').focus();
   };
 
   const clearTodo = () => {
@@ -40,7 +40,7 @@ function App() {
     $('#new-todo-content').dataset.todoId = '';
     $('#new-todo-category').value = '';
     $('#new-todo-tag').value = '';
-    $('#new-todo-tags')?.innerHTML = '';
+    $('#new-todo-tags').innerHTML = '';
   };
 
   const clearTag = () => {
@@ -65,7 +65,7 @@ function App() {
 
     todos.addTodo(newTodo);
     const $todoLi = document.createElement('li');
-    $todoLi.dataset.todoId = newTodo.id;
+    $todoLi.dataset.todoId = String(newTodo.id);
     $todoLi.innerHTML = getTodoTemplate(newTodo);
     $('.todos')?.append($todoLi);
     clearTodo();
@@ -103,7 +103,7 @@ function App() {
   };
 
   const addEventListeners = () => {
-    $('#addTodoBtn')?.addEventListener('click', (e: Event) => {
+    $('#addTodoBtn').addEventListener('click', (e: Event) => {
       e.preventDefault();
 
       const todoId: string | undefined = $('#new-todo-content').dataset.todoId;
@@ -116,27 +116,53 @@ function App() {
       addTodo();
     });
 
-    $('#addTag')?.addEventListener('click', () => {
+    $('#addTag').addEventListener('click', () => {
       addTag();
     });
 
-    $('.todos')?.addEventListener('click', (e: Event) => {
-      const target: EventTarget | null = e.target;
-      if (!target) return;
+    $('.todos').addEventListener('click', (e: Event) => {
+      const target = e.target as HTMLTextAreaElement;
+      const $li: HTMLElement | null = target.closest('li');
 
-      const $todo = target.closest('li');
-      const id = $todo.dataset.todoId;
-      const todo: Todo = todos.findTodoById(Number(id));
+      if (!$li) return;
 
-      if (e.target.classList.contains('toggle')) {
+      if (target.classList.contains('toggle')) {
+        const todoId = Number($li.dataset.todoId);
+        const todo: Todo | undefined = todos.findTodoById(todoId);
         todo.complete = !todo.complete;
       }
 
-      if (e.target.classList.contains('todo__name')) {
+      if (target.classList.contains('todo__name')) {
         $('#new-todo-content').value = todo.content;
         $('#new-todo-category').value = todo.category;
         $('#new-todo-content').dataset.todoId = todo.id;
       }
+
+      if (target.classList.contains('toggle')) {
+        const todoId = Number($li.dataset.todoId);
+        const todo: Todo | undefined = todos.findTodoById(todoId);
+
+        if (!todo) return;
+        todo.complete = !todo.complete;
+      }
+
+      if (target.classList.contains('fa-trash-alt')) {
+        const todoId = Number($li.dataset.todoId);
+        todos.removeTodoById(todoId);
+        $li.remove();
+      }
+
+      if (target.classList.contains('fa-minus')) {
+        const tagId = $li.dataset.tagId;
+        const todoId = $li.parentElement?.dataset.todoId;
+        todos.removeTagByTodoIdAndTagId(todoId, tagId);
+        $li.remove();
+      }
+    });
+
+    $('#delete-all-todo')?.addEventListener('click', () => {
+      todos.removeAllTodo();
+      $('.todos').innerHTML = '';
     });
   };
 

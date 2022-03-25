@@ -34,6 +34,7 @@ button {
   background: #74c0fc;
   border-radius: 20px 20px 0 0;
   color: white;
+  position: relative;
 }
 
 .items {
@@ -105,6 +106,7 @@ button {
 .todos-tag {
   display: inline-block;
   flex-wrap: wrap;
+  margin: 0 0.3rem;
   border: 0.1rem solid;
   border-color: #fff;
   border-radius: 10%;
@@ -124,4 +126,17 @@ button {
 
 .todo__tag--delete::before {
   content: 'X';
+}
+
+.delete-btn {
+    position: absolute;
+    right: 0;
+    padding: 0.3rem;
+    margin: 0 0.3rem;
+    border-radius: 10rem;
+    color: #74c0fc;
+    background-color: #fff;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
