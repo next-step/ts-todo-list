@@ -1,20 +1,41 @@
-export default function Todo({
-  id = Date.now(),
-  content,
-  complete,
-  category,
-  tags = [],
-}) {
-  this.id = id;
-  this.content = content;
-  this.complete = complete;
-  this.category = category;
-  this.tags = tags;
+import Tag from './Tag';
+
+type TodoObj = {
+  id: number;
+  content: string;
+  complete: boolean;
+  category: string;
+  tags?: Tag[];
+};
+
+interface TodoInterface {
+  id: number;
+  content: string;
+  complete: boolean;
+  category: string;
+  tags?: Tag[];
+  updateTodo: Function;
 }
 
-Todo.prototype.updateTodo = function ({ content, complete, category, tags }) {
-  this.content = content;
-  this.complete = complete;
-  this.category = category;
-  this.tags = tags;
-};
+export default class Todo implements TodoInterface {
+  public readonly id: number;
+  public content: string;
+  public complete: boolean;
+  public category: string;
+  public tags: Tag[];
+
+  constructor({ content, complete, category, tags }: TodoObj) {
+    this.id = Date.now();
+    this.content = content;
+    this.complete = complete;
+    this.category = category;
+    this.tags = tags || [];
+  }
+
+  updateTodo({ content, complete, category, tags }: TodoObj): void {
+    this.content = content;
+    this.complete = complete;
+    this.category = category;
+    this.tags = tags || [];
+  }
+}

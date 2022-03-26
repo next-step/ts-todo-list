@@ -1,8 +1,17 @@
-export default function Tag({ id, name }) {
-  this.id = id;
-  this.name = name;
-}
-
-Tag.prototype.updateTag = function (name) {
-  this.name = name;
+type TagObj = {
+  id: number;
+  name: string;
 };
+
+export default class Tag {
+  public readonly id: number;
+  public name: string;
+
+  constructor({ name }: TagObj) {
+    this.id = Date.now();
+    this.name = name;
+  }
+  updateTag(name: string) {
+    this.name = name;
+  }
+}
