@@ -10,11 +10,33 @@ import { SingleTodo, TodoList } from "todoModule";
  * @property {string[]=} tags - todo를 설명하는 tag들입니다. category 혹은 중요도 등을 포함할 수 있습니다.
  */
 
+const $ = {
+  inputId: document.querySelector('.input-id') as HTMLInputElement,
+  inputContent: document.querySelector('.input-content'),
+  inputCategory: document.querySelector('.input-category'),
+  inputTags: document.querySelector('.input-tags'),
+  addButton: document.querySelector('.add-button'),
+  readButton: document.querySelector('.read-button'),
+  editButton: document.querySelector('.edit-button'),
+  deleteButton: document.querySelector('.delete-button'),
+  todoList: document.querySelector('.todo-list'),
+}
+
+$.readButton!.addEventListener('click', () => readTodo(Number($.inputId!.value)));
+
 /**
  * SingleTodo들을 담은 todoList 배열입니다.
  * @property {SingleTodoType[]} todoList
  */
-let todoList: TodoList = [];
+let todoList: TodoList = [
+  {
+    id: 1,
+    content: '내용',
+    category: '카테',
+    isCompleted: false,
+    tags: ['태그1', '태그2'],
+  }
+];
 
 /**
  * @function addTodo
@@ -44,13 +66,23 @@ function readTodo(id?: number) {
     console.log(targetTodo);
     console.log("");
 
+    if(targetTodo) {
+      $.todoList!.innerHTML = '';
+      $.todoList!.insertAdjacentHTML('beforeend', `<li>id: ${id} | content: ${targetTodo.content} | category: ${targetTodo.category} | tags: ${targetTodo.tags.join(', ')} | isCompleted: ${targetTodo.isCompleted}</li>`)
+    } else {
+      alert('입력한 id에 맞는 할 일이 없습니다.')
+    }
     return targetTodo;
   }
   console.log("=== [READ] 모든 할 일을 읽습니다. ===");
   console.log(`👇 모든 할 일 (총 ${todoList.length}개)`);
   console.log(JSON.stringify(todoList, null, 2));
   console.log("");
+  const todos = todoList.reduce((acc, curr) => {
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags.join(', ')}</li>`
+  }, '')
 
+  $.todoList!.innerHTML = todos;
   return todoList;
 }
 
@@ -88,7 +120,6 @@ function editTodo(paramObj: EditTodoParams) {
  * @description CRUD에서 D에 해당하는 함수입니다. 삭제하고자 하는 todo의 id를 받아, todoList에서 그 todo를 삭제합니다. 리턴값은 없습니다.
  */
 function deleteTodo(id: number) {
-  const targetTodoIndex = todoList.findIndex((todo) => todo.id === id);
   todoList = todoList.filter(todo => todo.id !== id);
 
   console.log(`=== [DELETE] ID ${id}인 할 일을 삭제합니다. ===`);
@@ -112,10 +143,6 @@ addTodo({
   isCompleted: false,
   tags: ["태그1", "태그2"],
 });
-
-readTodo(1);
-
-readTodo(); // 파라미터 없이 호출하면 모든 투두리스트 읽기
 
 editTodo({
   id: 1,

@@ -11,7 +11,36 @@
     <description>Typing Typescript 1기 To Do 미션입니다.</description>
   </head>
   <body>
-    <div id="#root"></div>
+    <div id="#root">
+      <label>
+        ID
+        <input type="text" placeholder="ID" class="input-id"/>
+      </label>
+      <label>
+        content
+        <input type="text" placeholder="할 일 내용" class="input-content"/>
+      </label>
+      <label>
+        category
+        <input type="text" placeholder="카테고리" class="input-category"/>
+      </label>
+      <label>
+        tags
+        <input type="text" placeholder="태그" class="input-tags"/>
+      </label>
+      <label>
+        isCompleted
+        <select name="isCompleted">
+          <option value="true">true</option>
+          <option value="false" selected>false</option>
+        </select>
+      </label>
+      <button type="button" class="add-button">추가</button>
+      <button type="button" class="read-button">조회</button>
+      <button type="button" class="edit-button">수정</button>
+      <button type="button" class="delete-button">삭제</button>
+      <ul class="todo-list"></ul>
+    </div>
     <script src="dist/src/index.js"></script>
   </body>
 </html>
