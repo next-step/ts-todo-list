@@ -33,6 +33,7 @@ $.addButton!.addEventListener('click', () => {
   }
   addTodo(todo);
 })
+$.deleteButton!.addEventListener('click', () => deleteTodo(Number($.inputId!.value)))
 
 /**
  * SingleTodo들을 담은 todoList 배열입니다.
@@ -135,7 +136,21 @@ function editTodo(paramObj: EditTodoParams) {
  * @description CRUD에서 D에 해당하는 함수입니다. 삭제하고자 하는 todo의 id를 받아, todoList에서 그 todo를 삭제합니다. 리턴값은 없습니다.
  */
 function deleteTodo(id: number) {
-  todoList = todoList.filter(todo => todo.id !== id);
+  const targetTodo = todoList.find((todo) => todo.id === id);
+
+  if (!targetTodo) {
+    alert('입력한 id에 해당하는 할 일이 없습니다.');
+  }
+
+  if (targetTodo) {
+    todoList = todoList.filter(todo => todo.id !== id);
+
+    $.todoList!.innerHTML = todoList.reduce((acc, curr) => {
+      return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
+    }, '');
+  }
+
+  resetAllInput();
 
   console.log(`=== [DELETE] ID ${id}인 할 일을 삭제합니다. ===`);
   console.log(`👇 삭제 후 Todo list (총 ${todoList.length}개)`);
