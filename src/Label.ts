@@ -3,6 +3,8 @@
  * @author guymoon(조기문)
  */
 
+import * as l from "LabelModule";
+
 /**
  * Create a new label
  * @class
@@ -12,14 +14,14 @@ export class Label {
   /**
    * @type {{id: number, content: string}}
    */
-  private data: LabelData = {id: 0, content: ""};
+  data: l.LabelData = {id: 0, content: ""};
 
   /**
    * @constructor
    * @param {number} id
    * @param {string} content
    */
-  constructor(id: LabelData["id"], content: LabelData["content"]) {
+  constructor(id: l.LabelData["id"], content: l.LabelData["content"]) {
     this.data.id = id;
     this.data.content = content;
   }
@@ -28,7 +30,7 @@ export class Label {
    * (getter)label의 data를 get
    * @return {{id: number, content: string}}
    */
-  get info(): LabelData {
+  get info(): l.LabelData {
     return this.data;
   }
 
@@ -36,7 +38,7 @@ export class Label {
    * (setter)label의 data를 set
    * @param {string} value
    */
-  set content(value: LabelData["content"]) {
+  set content(value: l.LabelData["content"]) {
     this.data.content = value;
   }
 }

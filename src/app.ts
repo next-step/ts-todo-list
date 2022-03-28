@@ -1,6 +1,6 @@
-import { TodoApp } from "./TodoApp.js"
-import { Todo } from "./Todo.js"
-import { Label } from "./Label.js"
+import { TodoApp } from "./TodoApp";
+import { Todo } from "./Todo";
+import { Label } from "./Label";
 
 console.log("====================");
 console.log("=== TodoApp 생성 ===");
@@ -21,10 +21,10 @@ const [firstTodo, secondTodo] = todoApp.todoList;
 console.log(todoApp.todoList);
 
 console.log("=== 라벨 등록 (addTodoLabelByTodoId) ===");
-// console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(secondTodo.info.id, new Label(1, '두번째 테스트라벨내용1')));
-// console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(secondTodo.info.id, new Label(2, '두번째 테스트라벨내용2')));
-// console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(firstTodo.info.id, new Label(1, '첫번째 테스트라벨내용1')));
-// todoApp.addTodoLabelByTodoId(-1, new Label(1, '첫번째 테스트라벨내용1'));
+console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(secondTodo.info.id, new Label(1, '두번째 테스트라벨내용1')));
+console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(secondTodo.info.id, new Label(2, '두번째 테스트라벨내용2')));
+console.log(" Todo ID: " + todoApp.addTodoLabelByTodoId(firstTodo.info.id, new Label(1, '첫번째 테스트라벨내용1')));
+todoApp.addTodoLabelByTodoId(-1, new Label(1, '첫번째 테스트라벨내용1'));
 console.log(todoApp.todoList);
 
 console.log("==============");
@@ -57,4 +57,3 @@ console.log(todoApp.todoList);
 console.log("=== 모든 할 일을 제거할 수 있다. (clearTodoList) ===");
 todoApp.clearTodoList();
 console.log(todoApp.todoList);
-

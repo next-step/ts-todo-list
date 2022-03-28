@@ -1,68 +1,139 @@
-/** Label */
-declare interface LabelData {
-  id: number;
-  content: string;
+declare module "LabelModule" {
+  export interface LabelData {
+    id: number;
+    content: string;
+  }
+
+  export class Label {
+    data: LabelData;
+    //private data: LabelData;
+
+    constructor(id: LabelData["id"], content: LabelData["content"]);
+
+    get info(): LabelData;
+
+    set content(value: LabelData["content"]);
+  }
 }
 
-declare class Label {
-  private data: LabelData;
+declare module "TodoModule" {
+  export interface TodoData {
+    id: number;
+    isDone: boolean;
+    content: string;
+    labels: Label[];
+    priority: "LOW" | "MIDDLE" | "HIGH";
+  }
 
-  constructor(id: LabelData["id"], content: LabelData["content"]);
+  export class Todo {
+    data: TodoData;
+    //private data: TodoData;
 
-  get info(): LabelData;
+    constructor(id: TodoData["id"], content: TodoData["content"]);
 
-  set content(value: LabelData["content"]);
+    get info(): TodoData;
+
+    set content(value: TodoData["content"]);
+    set isDone(value: TodoData["isDone"]);
+    set priority(value: TodoData["priority"]);
+    set labels(value: Label[]);
+  }
 }
 
-/** Todo */
-declare interface TodoData {
-  id: number;
-  isDone: boolean;
-  content: string;
-  labels: Label[];
-  priority: "LOW" | "MIDDLE" | "HIGH";
+declare module "TodoAppModule" {
+  export class TodoApp {
+    todoList: Todo[];
+
+    createUniqueId(): TodoData["id"];
+
+    addTodo(todo: Todo): TodoData["id"] | -1;
+
+    deleteTodoById(todoId: TodoData["id"]): TodoData["id"] | -1;
+
+    clearTodoList(): boolean;
+
+    mutateTodoContentById(
+      idToMutateTodo: TodoData["id"],
+      newContent: TodoData["id"]
+    ): TodoData["id"] | -1;
+
+    mutateTodoStatusById(idToMutateTodo: TodoData["id"]): TodoData["id"] | -1;
+
+    addTodoLabelByTodoId(
+      targetTodoId: TodoData["id"],
+      newLabel: Label
+    ): TodoData["id"] | -1;
+
+    deleteTodoLabelByLabelId(
+      targetTodoId: LabelData["id"],
+      idToDeleteLabel: LabelData["content"]
+    ): LabelData["id"] | -1;
+  }
 }
 
-declare class Todo {
-  private data: TodoData;
+// declare module "todo" {
+//   export interface LabelData {
+//     id: number;
+//     content: string;
+//   }
 
-  constructor(id: TodoData["id"], content: TodoData["content"]);
+//   export declare class Label {
+//     private data: LabelData;
 
-  get info(): TodoData;
+//     constructor(id: LabelData["id"], content: LabelData["content"]);
 
-  set content(value: TodoData["content"]);
-  set isDone(value: TodoData["isDone"]);
-  set priority(value: TodoData["priority"]);
-  set labels(value: Label[]);
-}
+//     get info(): LabelData;
 
-/** TodoApp */
-declare class TodoApp {
-  todoList: Todo[];
+//     set content(value: LabelData["content"]);
+//   }
 
-  createUniqueId(): TodoData["id"];
+//   export interface TodoData {
+//     id: number;
+//     isDone: boolean;
+//     content: string;
+//     labels: Label[];
+//     priority: "LOW" | "MIDDLE" | "HIGH";
+//   }
 
-  addTodo(todo: Todo): TodoData["id"] | -1;
+//   export class Todo {
+//     private data: TodoData;
 
-  deleteTodoById(todoId: TodoData["id"]): TodoData["id"] | -1;
+//     constructor(id: TodoData["id"], content: TodoData["content"]);
 
-  clearTodoList(): boolean;
+//     get info(): TodoData;
 
-  mutateTodoContentById(
-    idToMutateTodo: TodoData["id"],
-    newContent: TodoData["id"]
-  ): TodoData["id"] | -1;
+//     set content(value: TodoData["content"]);
+//     set isDone(value: TodoData["isDone"]);
+//     set priority(value: TodoData["priority"]);
+//     set labels(value: Label[]);
+//   }
 
-  mutateTodoStatus(idToMutateTodo: TodoData["id"]): TodoData["id"] | -1;
+//   export class TodoApp {
+//     todoList: Todo[];
 
-  addTodoLabelByTodoId(
-    targetTodoId: TodoData["id"],
-    newLabel: Label
-  ): TodoData["id"] | -1;
+//     createUniqueId(): TodoData["id"];
 
-  deleteTodoLabelByLabelId(
-    targetTodoId: LabelData["id"],
-    idToDeleteLabel: LabelData["content"]
-  ): LabelData["id"] | -1;
-}
+//     addTodo(todo: Todo): TodoData["id"] | -1;
 
+//     deleteTodoById(todoId: TodoData["id"]): TodoData["id"] | -1;
+
+//     clearTodoList(): boolean;
+
+//     mutateTodoContentById(
+//       idToMutateTodo: TodoData["id"],
+//       newContent: TodoData["id"]
+//     ): TodoData["id"] | -1;
+
+//     mutateTodoStatusById(idToMutateTodo: TodoData["id"]): TodoData["id"] | -1;
+
+//     addTodoLabelByTodoId(
+//       targetTodoId: TodoData["id"],
+//       newLabel: Label
+//     ): TodoData["id"] | -1;
+
+//     deleteTodoLabelByLabelId(
+//       targetTodoId: LabelData["id"],
+//       idToDeleteLabel: LabelData["content"]
+//     ): LabelData["id"] | -1;
+//   }
+// }

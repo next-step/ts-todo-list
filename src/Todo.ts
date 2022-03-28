@@ -3,6 +3,9 @@
  * @author guymoon(조기문)
  */
 
+import * as t from "TodoModule";
+import * as l from "LabelModule";
+
 /**
  * Create a new todo
  * @class
@@ -12,14 +15,14 @@ export class Todo {
   /**
    * @type {{id: number, isDone: boolean, content: string, labels: Label[]}}
    */
-  private data: TodoData = {id:0, isDone: false, content: "", priority: "LOW", labels: []};
+  data: t.TodoData = {id:0, isDone: false, content: "", priority: "LOW", labels: []};
 
   /**
    * @constructor
    * @param {number} id - 할 일의 id
    * @param {string} content - 할 일의 내용
    */
-  constructor(id: TodoData["id"], content: TodoData["content"]) {
+  constructor(id: t.TodoData["id"], content: t.TodoData["content"]) {
     this.data.id = id;
     this.data.isDone = false;
     this.data.content = content;
@@ -31,7 +34,7 @@ export class Todo {
    * (getter) 할 일의 unique한 id를 만듭니다
    * @return {object} TodoDescription
    */
-  get info(): TodoData {
+  get info(): t.TodoData {
     return this.data;
   }
 
@@ -39,7 +42,7 @@ export class Todo {
    * (setter) 할 일의 content(내용) 값을 갱신합니다.
    * @param {string} value
    */
-  set content(value: TodoData["content"]) {
+  set content(value: t.TodoData["content"]) {
     this.data.content = value;
   }
 
@@ -47,7 +50,7 @@ export class Todo {
    * (setter) 할 일의 isDone(완료 여부) 값을 갱신합니다.
    * @param {boolean} value
    */
-  set isDone(value: TodoData["isDone"]) {
+  set isDone(value: t.TodoData["isDone"]) {
     this.data.isDone = value;
   }
 
@@ -55,7 +58,7 @@ export class Todo {
    * (setter) 할 일의 ㅎ(중요도) 값을 갱신합니다.
    * @param {('LOW' | 'MIDDLE' | 'HIGH')} value
    */
-  set priority(value: TodoData["priority"]) {
+  set priority(value: t.TodoData["priority"]) {
     this.data.priority = value;
   }
 
@@ -63,7 +66,7 @@ export class Todo {
    * (setter) 할 일의 labels 값을 갱신합니다.
    * @param {Label[]} value
    */
-  set labels(value: Label[]) {
+  set labels(value: l.Label[]) {
     this.data.labels = value;
   }
 }
