@@ -4,7 +4,7 @@ declare module "todoModule" {
     content: string;
     category: string;
     isCompleted: boolean;
-    tags: string[];
+    tags?: string[];
   }
 
   export type TodoList = SingleTodo[];
