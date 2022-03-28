@@ -12,9 +12,9 @@ import { SingleTodo, TodoList } from "todoModule";
 
 const $ = {
   inputId: document.querySelector('.input-id') as HTMLInputElement,
-  inputContent: document.querySelector('.input-content'),
-  inputCategory: document.querySelector('.input-category'),
-  inputTags: document.querySelector('.input-tags'),
+  inputContent: document.querySelector('.input-content') as HTMLInputElement,
+  inputCategory: document.querySelector('.input-category') as HTMLInputElement,
+  inputTags: document.querySelector('.input-tags') as HTMLInputElement,
   addButton: document.querySelector('.add-button'),
   readButton: document.querySelector('.read-button'),
   editButton: document.querySelector('.edit-button'),
@@ -23,6 +23,16 @@ const $ = {
 }
 
 $.readButton!.addEventListener('click', () => readTodo(Number($.inputId!.value)));
+$.addButton!.addEventListener('click', () => {
+  const todo: SingleTodo = {
+    id: Number($.inputId.value),
+    content: $.inputContent.value,
+    category: $.inputCategory.value,
+    tags: $.inputTags.value ? $.inputTags.value.split(',') : undefined,
+    isCompleted: false,
+  }
+  addTodo(todo);
+})
 
 /**
  * SingleTodo들을 담은 todoList 배열입니다.
@@ -46,6 +56,11 @@ let todoList: TodoList = [
 function addTodo(newTodo: SingleTodo) {
   todoList.push(newTodo);
 
+  $.todoList!.innerHTML = todoList.reduce((acc, curr) => {
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
+  }, '');
+
+  resetAllInput();
   console.log("=== [CREATE] 새로운 할 일이 추가되었습니다. ===");
   console.log(`👇 현재 Todo list 모두 보기 (총 ${todoList.length}개)`);
   console.log(JSON.stringify(todoList, null, 2));
@@ -68,7 +83,7 @@ function readTodo(id?: number) {
 
     if(targetTodo) {
       $.todoList!.innerHTML = '';
-      $.todoList!.insertAdjacentHTML('beforeend', `<li>id: ${id} | content: ${targetTodo.content} | category: ${targetTodo.category} | tags: ${targetTodo.tags.join(', ')} | isCompleted: ${targetTodo.isCompleted}</li>`)
+      $.todoList!.insertAdjacentHTML('beforeend', `<li>id: ${id} | content: ${targetTodo.content} | category: ${targetTodo.category} | tags: ${targetTodo.tags ? targetTodo.tags.join(', ') : ''} | isCompleted: ${targetTodo.isCompleted}</li>`)
     } else {
       alert('입력한 id에 맞는 할 일이 없습니다.')
     }
@@ -79,7 +94,7 @@ function readTodo(id?: number) {
   console.log(JSON.stringify(todoList, null, 2));
   console.log("");
   const todos = todoList.reduce((acc, curr) => {
-    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags.join(', ')}</li>`
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
   }, '')
 
   $.todoList!.innerHTML = todos;
@@ -126,6 +141,13 @@ function deleteTodo(id: number) {
   console.log(`👇 삭제 후 Todo list (총 ${todoList.length}개)`);
   console.log(JSON.stringify(todoList, null, 2));
   console.log("");
+}
+
+function resetAllInput() {
+  $.inputId.value = '';
+  $.inputContent.value = '';
+  $.inputCategory.value = '';
+  $.inputTags.value = '';
 }
 
 addTodo({
