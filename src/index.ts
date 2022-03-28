@@ -15,6 +15,7 @@ const $ = {
   inputContent: document.querySelector('.input-content') as HTMLInputElement,
   inputCategory: document.querySelector('.input-category') as HTMLInputElement,
   inputTags: document.querySelector('.input-tags') as HTMLInputElement,
+  selectCompleted: document.querySelector('.select-completed') as HTMLSelectElement,
   addButton: document.querySelector('.add-button'),
   readButton: document.querySelector('.read-button'),
   editButton: document.querySelector('.edit-button'),
@@ -34,6 +35,43 @@ $.addButton!.addEventListener('click', () => {
   addTodo(todo);
 })
 $.deleteButton!.addEventListener('click', () => deleteTodo(Number($.inputId!.value)))
+$.editButton!.addEventListener('click', () => {
+  const idString = $.inputId.value
+  const id = Number(idString)
+  if (idString === '') {
+    alert('수정할 할일의 id를 입력해주세요.')
+    return;
+  }
+  const targetTodo = todoList.find((todo) => todo.id === id);
+
+  if (!targetTodo) {
+    alert('입력한 id에 맞는 할 일이 없습니다.')
+    return;
+  }
+
+  const paramObj: EditTodoParams = {
+    id,
+    isCompleted: $.selectCompleted.options[$.selectCompleted.selectedIndex].value === 'true',
+  }
+
+  if ($.inputContent.value) {
+    paramObj['content'] = $.inputContent.value
+  }
+  if ($.inputCategory.value) {
+    paramObj['category'] = $.inputCategory.value
+  }
+  if ($.inputTags.value) {
+    paramObj['tags'] = $.inputTags.value.split(',')
+  }
+
+  editTodo(paramObj);
+
+  $.todoList!.innerHTML = todoList.reduce((acc, curr) => {
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}  | isCompleted: ${curr.isCompleted}</li>`
+  }, '');
+
+  resetAllInput();
+})
 
 /**
  * SingleTodo들을 담은 todoList 배열입니다.
@@ -95,7 +133,7 @@ function readTodo(id?: number) {
   console.log(JSON.stringify(todoList, null, 2));
   console.log("");
   const todos = todoList.reduce((acc, curr) => {
-    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''} | isCompleted: ${curr.isCompleted}</li>`
   }, '')
 
   $.todoList!.innerHTML = todos;
@@ -146,7 +184,7 @@ function deleteTodo(id: number) {
     todoList = todoList.filter(todo => todo.id !== id);
 
     $.todoList!.innerHTML = todoList.reduce((acc, curr) => {
-      return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
+      return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}  | isCompleted: ${curr.isCompleted}</li>`
     }, '');
   }
 
@@ -164,36 +202,3 @@ function resetAllInput() {
   $.inputCategory.value = '';
   $.inputTags.value = '';
 }
-
-addTodo({
-  id: 1,
-  content: "todo 1",
-  category: "과제",
-  isCompleted: false,
-  tags: ["태그1", "태그2"],
-});
-
-addTodo({
-  id: 2,
-  content: "todo 2",
-  category: "과제",
-  isCompleted: false,
-  tags: ["태그1", "태그2"],
-});
-
-editTodo({
-  id: 1,
-  category: "카테고리만 수정",
-});
-
-deleteTodo(1);
-
-addTodo({
-  id: 3,
-  content: "치킨",
-  category: "음식",
-  isCompleted: false,
-  tags: ["태그1", "태그2"],
-});
-
-editTodo({ id: 3, tags: ["태그를 바꿀 때는 통째로 갈아끼워야 한다."] });
