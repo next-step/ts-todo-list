@@ -15,6 +15,18 @@ const $ = {
 
 $.readButton!.addEventListener('click', () => readTodo(Number($.inputId!.value)));
 $.addButton!.addEventListener('click', () => {
+  if (!$.inputId.value) {
+    alert('id를 입력해주세요');
+    return;
+  }
+  if (!$.inputContent.value) {
+    alert('content를 입력해주세요');
+    return;
+  }
+  if (!$.inputCategory.value) {
+    alert('category를 입력해주세요');
+    return;
+  }
   const todo: SingleTodo = {
     id: Number($.inputId.value),
     content: $.inputContent.value,
@@ -69,7 +81,7 @@ function addTodo(newTodo: SingleTodo) {
   todoList.push(newTodo);
 
   $.todoList!.innerHTML = todoList.reduce((acc, curr) => {
-    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''}</li>`
+    return acc + `<li>id: ${curr.id} | content: ${curr.content} | category: ${curr.category} | tags: ${curr.tags ? curr.tags.join(', '): ''} | isCompleted: ${curr.isCompleted}</li>`
   }, '');
 
   resetAllInput();
@@ -85,6 +97,7 @@ function readTodo(id?: number) {
     } else {
       alert('입력한 id에 맞는 할 일이 없습니다.')
     }
+    resetAllInput();
     return targetTodo;
   }
 
@@ -93,6 +106,7 @@ function readTodo(id?: number) {
   }, '')
 
   $.todoList!.innerHTML = todos;
+  resetAllInput();
   return todoList;
 }
 
