@@ -63,15 +63,7 @@ $.editButton!.addEventListener('click', () => {
   resetAllInput();
 })
 
-let todoList: TodoList = [
-  {
-    id: 1,
-    content: '내용',
-    category: '카테',
-    isCompleted: false,
-    tags: ['태그1', '태그2'],
-  }
-];
+let todoList: TodoList = [];
 
 function addTodo(newTodo: SingleTodo) {
   todoList.push(newTodo);
