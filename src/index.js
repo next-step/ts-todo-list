@@ -1,81 +1,74 @@
-/**
- * 하나의 Todo가 들고 있는 데이터
- * @typedef {Object} TodoType
- * @property {number} id
- * @property {string} task
- * @property {boolean} done
- */
-
-/**
- * Todo 클래스에서 사용되는 상태
- * @typedef {Object} StateType
- * @property {number} newId - todo를 생성할 때 필요한 unique id
- * @property {string} task - todo를 생성할 때 필요한 할 일
- * @property {TodoType[]} todos - 생성된 todo를 관리하는 배열
- */
-
-class TodoApplication {
-  /**
-   * @member {StateType}
-   */
-  state;
-
-  /**
-   * @param {StateType} initialState - Todo 상태의 초기값
-   */
-  constructor(initialState) {
-    this.newId = initialState.newId;
-    this.task = initialState.task;
-    this.todos = initialState.todos;
-  }
-
-  /**
-   * @returns {TodoType[]}
-   */
-  get todos() {
-    return this.todos;
-  }
-
-  /**
-   * @param {string} newTask - 변경할 task 값
-   */
-  changeTask(newTask) {
-    this.task = newTask;
-  }
-
-  addTodo() {
-    this.todos = [
-      ...this.todos,
-      { id: this.newId, task: this.task, done: false },
-    ];
-
-    this.newId += 1;
-  }
-
-  /**
-   * @param {number} id - 삭제할 todo id 값
-   */
-  deleteToto(id) {
-    this.todos = this.todos.filter((todo) => todo.id !== id);
-  }
-
-  /**
-   * @param {number} id - 변경할 todo id 값
-   * @param {string} changedTask - 변경할 todo task 값
-   */
-  changeTodo({ id, changedTask }) {
-    this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, task: changedTask } : todo
-    );
-  }
-
-  /**
-   * @param {number} id - 변경할 todo id 값
-   */
-  checkTodo(id) {
-    this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, done: !todo.done } : todo
-    );
-  }
+import TodoApplication from "./TodoApplication.js";
+class Component {
+    constructor($element, todoApplication) {
+        this.$element = $element;
+        this.todoApplication = todoApplication;
+        this.render();
+        this.bindEvent();
+    }
+    render() { }
+    bindEvent() { }
 }
-
+class App extends Component {
+    constructor($element, todoApplication) {
+        super($element, todoApplication);
+    }
+    rerender() {
+        this.render();
+        this.bindEvent();
+    }
+    bindEvent() {
+        const $form = document.querySelector('.todo-form');
+        const $input = document.querySelector('#todo-input');
+        const $list = document.querySelector('.todo-list');
+        $form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.todoApplication.addTodo();
+            this.rerender();
+        });
+        $input.addEventListener('input', (event) => {
+            this.todoApplication.changeTask(event.target.value);
+        });
+        $list.addEventListener('click', (event) => {
+            var _a, _b;
+            const target = event.target;
+            if (target.nodeName === 'SPAN' || target.nodeName === 'S') {
+                this.todoApplication.checkTodo((Number((_a = target.closest('li')) === null || _a === void 0 ? void 0 : _a.dataset.id)));
+                this.rerender();
+            }
+            if (target.nodeName === 'BUTTON') {
+                this.todoApplication.deleteToto(Number((_b = target.closest('li')) === null || _b === void 0 ? void 0 : _b.dataset.id));
+                this.rerender();
+            }
+        });
+    }
+    render() {
+        this.$element.innerHTML = `
+      <form class="todo-form">
+        <div>
+          <label for="todo-input">할 일</label>
+          <input id="todo-input" type="text" />
+        </div>
+        <button type="submit" class="todo-add-button">추가</button>
+      </form>
+      <ul class="todo-list">
+        ${this.todoApplication.todoList.map(({ id, task, done }) => done ?
+            `<li data-id=${id}>
+              <s>
+                <span>${task}</span>
+              </s>
+              <button type="button" class="todo-delete-button">삭제</button>
+             </li>` :
+            `<li data-id=${id}>
+              <span>${task}</span>
+              <button type="button" class="todo-delete-button">삭제</button>
+             </li>`).join('')}
+      </ul>
+    `;
+    }
+}
+new App(document.querySelector('#root'), new TodoApplication({
+    newId: 0,
+    task: '',
+    todoList: [],
+}));
