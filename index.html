@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./index.js"></script>
+    <title>To Do</title>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Create</legend>
+        내용 : <input id="content" /><br />
+        카테고리 : <input id="category" /><br />
+        태그들 : <input id="javascript" /><input id="typescript" /><input
+          id="react"
+        /><br />
+        <button onclick="addItem()">할 일 추가</button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Read</legend>
+        <button onclick="readItemAll()">전체 할 일 조회</button><br />
+        아이디 : <input type="number" id="id" />
+        <button
+          onclick="readItemById(Number(document.getElementById('id').value))"
+        >
+          특정 할 일 조회
+        </button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Update</legend>
+        아이디 : <input type="number" id="idUpdate" /><br />
+        내용 : <input id="contentUpdate" /><br />
+        완료 여부 :
+        <button onclick="setTrue()">true</button>
+        <button onclick="setFalse()">false</button><br />
+        카테고리 : <input id="categoryUpdate" /><br />
+        <button
+          onclick="updateItemById(Number(document.getElementById('idUpdate').value), {
+          content: document.getElementById('contentUpdate').value,
+          isFinished: isFinished,
+          category: document.getElementById('categoryUpdate').value,
+        })"
+        >
+          할 일 수정</button
+        ><br />
+        아이디 : <input type="number" id="idTagUpdate" /><br />
+        태그 아이디 : <input type="number" id="tagIdUpdate" /><br />
+        태그 내용 : <input id="tagContent" /><br />
+        <button
+          onclick="updateTagById(Number(document.getElementById('idTagUpdate').value), Number(document.getElementById('tagIdUpdate').value), document.getElementById('tagContent').value)"
+        >
+          태그 수정
+        </button>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Delete</legend>
+        아이디 : <input type="number" id="idDelete" /><br />
+        <button
+          onclick="deleteItemById(Number(document.getElementById('idDelete').value))"
+        >
+          특정 할 일 제거</button
+        ><br />
+        아이디 : <input type="number" id="idTagDelete" /><br />
+        태그 아이디 : <input type="number" id="tagIdDelete" /><br />
+        <button
+          onclick="deleteTagById(Number(document.getElementById('idTagDelete').value), Number(document.getElementById('tagIdDelete').value))"
+        >
+          특정 태그 제거</button
+        ><br />
+        아이디 : <input type="number" id="idTagDeleteAll" /><br />
+        <button
+          onclick="deleteTagAll(Number(document.getElementById('idTagDeleteAll').value))"
+        >
+          모든 태그 제거</button
+        ><br />
+        <button onclick="deleteItemAll()">전체 할 일 제거</button>
+      </fieldset>
+    </form>
+  </body>
+</html>
