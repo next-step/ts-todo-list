@@ -1,5 +1,34 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TS TODO</title>
+  </head>
   <body>
-    <script src="./src/index.ts"></script>
+    <form>
+      <label for="content">
+        content <input name="content" type="text" value="content"
+      /></label>
+      <label for="category">
+        category <input name="category" type="text" value="category"
+      /></label>
+      <label for="tags">
+        tags <input name="tags" type="text" value="tag"
+      /></label>
+      <button>등록</button>
+    </form>
+    <button class="remove-all">전체 삭제</button>
+    <ul>
+      <!-- <div>
+        <li>콘텐츠</li>
+        <span>카테고리: 123</span>
+        <span>태그: 123</span>
+        <button class="delete">삭제</button>
+        <button class="toggle">완료</button>
+      </div> -->
+    </ul>
+
+    <script type="module" src="./src/index.ts"></script>
   </body>
 </html>

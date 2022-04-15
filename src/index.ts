@@ -1,59 +1,72 @@
-/**
- * @file Todo를 구현하기 위한 문서입니다.
- * @author Dahye Shin
- * @see {@link https://github.com/dahye1013/ts-todo-list}
- */
-
-import Tag from "./Tag";
 import Todo from "./Todo";
 import Todos from "./Todos";
 
-const todos = new Todos();
+const template = ({ id, content, category, tags, complete }) => {
+  return `<li data-id=${id}>
+            <div>${content}</div>
+            <span>카테고리: ${category}</span>
+            <span>태그: ${tags.join(", ")}</span>
+            <button class="delete">삭제</button>
+            <button class="toggle">${complete ? "완료" : "미완료"}</button>
+          </li>`;
+};
 
-console.log("🚀🚀🚀 TODO 동작 테스트 🚀🚀🚀");
+const App = () => {
+  const $form = document.querySelector("form");
+  const $ul = document.querySelector("ul");
+  const $removeAll = document.querySelector(".remove-all");
 
-todos.addTodo(
-  new Todo({
-    id: 1,
-    content: "첫번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [
-      new Tag({ id: 1, name: "태그1" }),
-      new Tag({ id: 2, name: "태그2" }),
-      new Tag({ id: 3, name: "태그3" }),
-    ],
-  })
-);
+  const app = new Todos();
 
-todos.addTodo(
-  new Todo({
-    id: 2,
-    content: "두번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [],
-  })
-);
+  const render = () => {
+    console.log(app);
+    $ul.innerHTML = app.todos.map((todo) => template({ ...todo })).join("");
+  };
 
-todos.addTodo(
-  new Todo({
-    id: 3,
-    content: "세번째 Todo",
-    complete: false,
-    category: "카테고리1",
-    tags: [],
-  })
-);
+  $form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-todos.findAllTodos();
+    const content = e.target["content"].value;
+    const category = e.target["category"].value;
+    const tags = e.target["tags"].value
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
 
-todos.findTodoById(1);
+    app.addTodo(new Todo({ content, category, tags }));
 
-todos.removeTagByTodoIdAndTagId(1, 1);
+    render();
+  });
 
-todos.removeAllTagByTodoId(1);
+  $ul.addEventListener("click", ({ target }) => {
+    if (target instanceof Element) {
+      if (target.classList.contains("delete")) {
+        const todoId = target.parentElement.dataset.id;
+        app.removeTodoById(todoId);
+        render();
+      }
 
-todos.removeTodoById(1);
+      if (target.classList.contains("toggle")) {
+        const todoId = target.parentElement.dataset.id;
+        const todo = app.findTodoById(todoId)[0];
+        console.log(todo);
+        app.updateTodoById(
+          new Todo({
+            ...todo,
+            complete: !todo.complete,
+          })
+        );
+        render();
+      }
+    }
+  });
 
-todos.removeAllTodo();
+  $removeAll.addEventListener("click", () => {
+    app.removeAllTodo();
+    render();
+  });
+};
+
+window.onload = () => {
+  App();
+};

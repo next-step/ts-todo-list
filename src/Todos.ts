@@ -19,7 +19,7 @@ Todos.prototype.findAllTodos = function () {
 };
 
 Todos.prototype.findTodoById = function (todoId) {
-  const targetTodo = this.todos.filter(({ id }) => id === todoId);
+  const targetTodo = this.todos.filter(({ id }) => id === +todoId);
 
   console.log(`ID: ${todoId}, Todo 찾기 완료`);
   this.logger();
@@ -28,8 +28,8 @@ Todos.prototype.findTodoById = function (todoId) {
 };
 
 Todos.prototype.updateTodoById = function (Todo) {
-  this.todos = this.todos.filter(({ id }) => id !== Todo.id);
-  this.todos = [...this.todos, Todo];
+  this.todos = this.todos.filter(({ id }) => +id !== +Todo.id);
+  this.todos = [...this.todos, Todo].sort((a, b) => +a.id - +b.id);
 
   console.log(`ID: ${Todo.id}, Todo 수정 완료`);
   this.logger();
@@ -40,7 +40,7 @@ Todos.prototype.updateTodoById = function (Todo) {
 Todos.prototype.updateTagById = function (todoId, tagId) {};
 
 Todos.prototype.removeTodoById = function (todoId) {
-  this.todos = this.todos.filter((todo) => todo.id !== todoId);
+  this.todos = this.todos.filter((todo) => todo.id !== +todoId);
 
   console.log(`ID: ${todoId}, Todo 삭제 완료`);
   this.logger();

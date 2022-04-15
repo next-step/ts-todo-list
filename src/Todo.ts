@@ -1,7 +1,7 @@
 export default function Todo({
   id = Date.now(),
   content,
-  complete,
+  complete = false,
   category,
   tags = [],
 }) {
